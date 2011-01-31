@@ -1,0 +1,1 @@
+require 'lib/sci_ruby' # Just a redirect to the correct module

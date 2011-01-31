@@ -1,0 +1,10 @@
+.autotest
+History.txt
+Manifest.txt
+README.txt
+Rakefile
+bin/sciruby
+lib/sciruby.rb
+lib/sci_ruby.rb
+lib/sci_ruby/recommend.rb
+test/test_sci_ruby.rb

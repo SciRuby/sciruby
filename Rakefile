@@ -4,7 +4,7 @@
 $:.unshift(File.dirname(__FILE__)+'/lib/')
 
 require 'rubygems'
-require 'sci_ruby'
+require 'sciruby'
 require 'hoe'
 
 # Hoe.plugin :compiler
@@ -38,7 +38,7 @@ h = Hoe.spec 'sciruby' do
   self.version = SciRuby::VERSION
   self.developer('SciRuby Development Team', 'sciruby-dev@googlegroups.com')
   self.extra_deps = {'distribution' => "~> 0.3",
-                     'statsample' => "~> 1.0",
+                     # 'statsample' => "~> 0",
                      'gsl' => "~> 1.14.5"         }.to_a
 
   self.extra_dev_deps = {'hoe' => "~> 0",

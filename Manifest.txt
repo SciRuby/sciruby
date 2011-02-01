@@ -5,6 +5,5 @@ README.txt
 Rakefile
 bin/sciruby
 lib/sciruby.rb
-lib/sci_ruby.rb
-lib/sci_ruby/recommend.rb
-test/test_sci_ruby.rb
+lib/sciruby/recommend.rb
+test/test_recommend.rb

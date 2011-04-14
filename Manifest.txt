@@ -3,7 +3,8 @@ History.txt
 Manifest.txt
 README.txt
 Rakefile
-bin/sciruby
 lib/sciruby.rb
+lib/sciruby/validation.rb
 lib/sciruby/recommend.rb
 test/test_recommend.rb
+test/helpers_tests.rb

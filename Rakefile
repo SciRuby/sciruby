@@ -11,6 +11,7 @@ require 'hoe'
 # Hoe.plugin :cucumberfeatures
 # Hoe.plugin :gem_prelude_sucks
 Hoe.plugin :git
+Hoe.plugin :gemspec
 # Hoe.plugin :inline
 # Hoe.plugin :inline
 # Hoe.plugin :manifest
@@ -37,12 +38,14 @@ end
 h = Hoe.spec 'sciruby' do
   self.version = SciRuby::VERSION
   self.developer('SciRuby Development Team', 'sciruby-dev@googlegroups.com')
-  self.extra_deps = {'distribution' => "~> 0.3",
-                     # 'statsample' => "~> 0",
-                     'gsl' => "~> 1.14.5"         }.to_a
+  self.extra_deps = {'distribution' => "~> 0.4.0",
+                     'statsample' => "~> 1.0.1",
+                     'gsl' => "~> 1.14.5",
+                     'rubyvis' => '~> 0'        }.to_a
 
   self.extra_dev_deps = {'hoe' => "~> 0",
                          'shoulda' => "~> 0",
+                         'hoe-gemspec' => "~> 0",
                          'minitest' => "~> 2.0" }.to_a
 
   # self.rubyforge_name = 'scirubyx' # if different than 'sciruby'

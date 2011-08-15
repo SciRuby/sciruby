@@ -24,13 +24,15 @@ module SciRuby
         :bottom => 20,
         :right  => 10,
         :top    => 5,
-        :line_color => "#66abca"
+        :line_color => "#66abca",
+        :line_width => 2
       }
 
-      # Create a new confusion matrix, with +num_known+ as the number of items that are known to be correct.
-      # +max+ is the total number of items to be tested.
-      def initialize total, total_positives
-        @tp, @p, @tn, @n = [0], [0], [total - total_positives], [total]
+      # Create a new confusion matrix, with +total_positives+ as the number of items that are known to be correct.
+      # +initial_negatives+ is the total number of items to be tested as we push each prediction/set of predictions.
+      def initialize initial_negatives, total_positives
+        raise(ArgumentError, "total predictions should be greater or equal to total positives") unless initial_negatives >= total_positives
+        @tp, @p, @tn, @n = [0], [0], [initial_negatives - total_positives], [initial_negatives]
         @threshold = { 1.0 => 0 }
         @roc_area = 0.0
       end
@@ -74,6 +76,7 @@ module SciRuby
       end
 
       class << self
+
         # Generate an empty panel.
         def vis options = {}
           options.reverse_merge! DEFAULT_VIS_OPTIONS
@@ -110,8 +113,48 @@ module SciRuby
           v
         end
 
+        # Plot an array of curves, or a hash of real and control curves. Kind of cluttered.
+        def plot hsh_or_ary, type, options = {}
+          vis = begin
+            if hsh_or_ary.is_a?(OpenStruct)
+              plot_hash hsh_or_ary, type, options
+            elsif hsh_or_ary.is_a?(Array)
+              plot_array hsh_or_ary, type, options
+            end
+          end
+
+          vis.render()
+          f = File.new("output.svg", "w")
+          f.puts vis.to_svg
+          f.close
+
+          `inkscape output.svg`
+        end
+
+      protected
+        # Plot :real and :control arrays on the same panel. Not really very useful, as it gets too cluttered.
+        def plot_hash hsh, type, options = {}
+          options[:colors] ||= :category10
+          options[:line_width] ||= 2
+
+          colors = Rubyvis::Colors.send(options[:colors])
+          options[:panel] = vis(options) # set up panel and store it in the options hash
+          
+          hsh.real.each_index do |i|
+            options[:panel] = hsh.real[i].vis(type, options.merge({ :line_color => colors[i % colors.size] }))
+          end if hsh.respond_to?(:real) # may not have anything but controls
+
+          hsh.control.each_index do |i|
+            options[:panel] = hsh.control[i].vis(type, options.merge({ :line_color => colors[i % colors.size] }))
+          end if hsh.respond_to?(:control) # May not have a control set up
+
+          options[:panel]
+        end
+
+
         # Plot multiple Validation::Binary objects on the same panel.
         def plot_array ary, type, options = {}
+
           options[:colors] ||= :category10
           colors = Rubyvis::Colors.send(options[:colors])
 
@@ -120,13 +163,7 @@ module SciRuby
             options[:panel] = ary[i].vis(type, options.merge({:line_color => colors[i % colors.size]}))
           end
 
-          v = options[:panel]
-          v.render()
-          f = File.new("output.svg", "w")
-          f.puts v.to_svg
-          f.close
-
-          `inkscape output.svg`
+          options[:panel]
         end
       end
 
@@ -153,7 +190,7 @@ module SciRuby
 
         v.add(Rubyvis::Line).
             data(d).
-            line_width(2).
+            line_width(options[:line_width]).
             left(lambda { |dd| x.scale(dd[0])} ).
             bottom(lambda { |dd| y.scale(dd[1])} ).
             stroke_style(options[:line_color]).
@@ -213,6 +250,13 @@ module SciRuby
         delta_fpr = fpr(i) - fpr(last_i)
 
         @roc_area += (tpr(last_i) + 0.5 * delta_tpr) * delta_fpr
+      end
+
+      # Some methods you'd want to validate don't offer scores for each and every item. In that case, just call
+      # push_remainder in order to ensure the line gets drawn all the way to the right.
+      def push_remainder
+        # push all remaining negatives, none correct, score of 0.
+        push n.last, n.first - tn.first, 0.0
       end
 
       # Given some bin +i+, what is the true positive rate / sensitivity / recall

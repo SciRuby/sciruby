@@ -88,4 +88,12 @@ task :publish_docs => [:clean, :docs] do
   sh %{rsync #{h.rsync_args} #{local_dir}/ #{host}:#{remote_dir}}
 end
 
+require 'rspec/core/rake_task'
+namespace :spec do
+  desc "Run all specs"
+  RSpec::Core::RakeTask.new
+  # options in .rspec in package root
+end
+
+
 # vim: syntax=ruby

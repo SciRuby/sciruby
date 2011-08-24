@@ -12,6 +12,8 @@ end
 
 module SciRuby
   # Methods and classes for expert recommendation systems.
+  #
+  # This module is likely to go away soon.
   module Recommend
     # Set Distance functions: determine distances between sets.
     #

@@ -12,7 +12,9 @@ end
 #
 # Methods for quantifying the predictive abilities of binary classifier systems (i.e., true positives, false positives,
 # etc.)
-
+#
+# This module is likely to go away soon, or to change significantly.
+#
 module SciRuby
   module Validation
     # Binary confusion matrix for generating Receiver Operating Characteristic (ROC) and Precision-Recall curves.

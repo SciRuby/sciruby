@@ -1,6 +1,8 @@
 = SciRuby
 
+* http://www.sciruby.com
 * http://github.com/sciruby/sciruby
+* http://twitter.com/sciruby
 
 == DESCRIPTION:
 

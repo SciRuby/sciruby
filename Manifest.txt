@@ -1,10 +1,11 @@
 .autotest
 History.txt
 Manifest.txt
-README.txt
+readme.md
 Rakefile
 lib/sciruby.rb
 lib/sciruby/validation.rb
 lib/sciruby/recommend.rb
+lib/sciruby/plotter.rb
 test/test_recommend.rb
 test/helpers_tests.rb

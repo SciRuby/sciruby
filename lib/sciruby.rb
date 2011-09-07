@@ -27,6 +27,21 @@
 module SciRuby
   VERSION = '0.1.2'
 
+  class << self
+    def plot svg # &panel
+      svg = File.read(svg)
+      #vis = yield(panel)
+      #vis.render
+      #svg = vis.to_svg
+      img = Magick::Image.from_blob(svg).first
+      scaled_img = img.scale(250, 250)
+      Shoes.app(:width => 250, :height => 250) do
+        image scaled_img
+      end
+    end
+  end
+
+  autoload(:Plotter, 'sciruby/plotter')
   autoload(:Recommend, 'sciruby/recommend')
   autoload(:Validation, 'sciruby/validation')
 end

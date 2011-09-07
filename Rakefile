@@ -31,6 +31,12 @@ task :lint do
   }
 end
 
+desc "Open an irb session preloaded with sciruby"
+task :console do
+  sh "irb -rubygems -I lib -r sciruby.rb"
+end
+
+
 task :release do
   system %{git push origin master}
 end
@@ -39,8 +45,11 @@ h = Hoe.spec 'sciruby' do
   self.version = SciRuby::VERSION
   self.developer('SciRuby Development Team', 'sciruby-dev@googlegroups.com')
   self.extra_deps = {'distribution' => "~> 0.4.0",
+                     'green_shoes' => "~> 1.0",
                      'statsample' => "~> 1.0.1",
                      'gsl' => "~> 1.14.5",
+                     'gtksourceview2' => "~> 1.0.0",
+                     'rsvg2' => '~> 1.0.0',
                      'rubyvis' => '~> 0'        }.to_a
 
   self.extra_dev_deps = {'hoe' => "~> 0",

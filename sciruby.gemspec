@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   
   s.author = 'SciRuby'
   s.email = 'john.woods@marcottelab.org'
-  s.homepage = 'http://www.github.com/SciRuby/sciruby'
+  s.homepage = 'http://www.sciruby.com'
   s.rubyforge_project = 'sciruby'
   
   s.summary = 'Tools for scientific computation in Ruby'

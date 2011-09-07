@@ -7,7 +7,8 @@ require "rubyvis"
 class Shoes
   class App
 
-    # Display an already-loaded image.
+    # Display an already-loaded image. Note that neither :left nor :top works for image and buffered_image. This appears
+    # to be a green shoes problem.
     def buffered_image content, args={}
       args = basic_attributes args
       args[:full_width] = args[:full_height] = 0

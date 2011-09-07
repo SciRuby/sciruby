@@ -84,14 +84,14 @@ module SciRuby
     DEFAULT_HEIGHT  = 400
     DEFAULT_SRC     = <<SRC
 ::Rubyvis::Panel.new do
-  width 150
-  height 150
+  width 450
+  height 450
   bar do
     data [1, 1.2, 1.7, 1.5, 0.7, 0.3]
-    width 20
-    height { |d| d * 80 }
+    width 60
+    height { |d| d * 240 }
     bottom(0)
-    left { index * 25 }
+    left { index * 75 }
   end
 end
 SRC
@@ -101,7 +101,7 @@ SRC
       Shoes.app(:title => "Plotter - SciRuby", :width => DEFAULT_WIDTH, :height => DEFAULT_HEIGHT) do
         @s = stack do
           caption strong "enter rubyvis code:"
-          code = code_box :text => DEFAULT_SRC, :font => "Lucida Sans Typewriter", :width => self.width, :height => self.height - 100
+          code = code_box :text => DEFAULT_SRC, :font => "Lucida Sans Typewriter", :width => width, :height => height - 100
 
           button "Plot" do
             
@@ -118,10 +118,6 @@ SRC
               fill white
               r = rect 10, 10, svg_handle.width+2, svg_handle.height+2
               image = buffered_image(svg_handle).move(11, 11)
-
-              every(0.5) do
-                r.style :width => self.width - 20, :height => self.height - 18
-              end
             end
           end
 

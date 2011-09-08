@@ -12,12 +12,11 @@ require 'hoe'
 # Hoe.plugin :gem_prelude_sucks
 Hoe.plugin :git
 Hoe.plugin :gemspec
-# Hoe.plugin :inline
+Hoe.plugin :bundler
 # Hoe.plugin :inline
 # Hoe.plugin :manifest
 # Hoe.plugin :newgem
 # Hoe.plugin :racc
-# Hoe.plugin :rubyforge
 # Hoe.plugin :rubyforge
 # Hoe.plugin :website
 
@@ -31,6 +30,11 @@ task :lint do
   }
 end
 
+desc "Open an irb session preloaded with sciruby"
+task :console do
+  sh "irb -rubygems -I lib -r sciruby.rb"
+end
+
 task :release do
   system %{git push origin master}
 end
@@ -39,13 +43,14 @@ h = Hoe.spec 'sciruby' do
   self.version = SciRuby::VERSION
   self.developer('SciRuby Development Team', 'sciruby-dev@googlegroups.com')
   self.extra_deps = {'distribution' => "~> 0.4.0",
-                     'statsample' => "~> 1.0.1",
+                     'statsample' => "~> 1.1.0",
                      'gsl' => "~> 1.14.5",
-                     'rubyvis' => '~> 0'        }.to_a
+                     'rubyvis' => '~> 0.4.0'        }.to_a
 
-  self.extra_dev_deps = {'hoe' => "~> 0",
-                         'shoulda' => "~> 0",
-                         'hoe-gemspec' => "~> 0",
+  self.extra_dev_deps = {'hoe' => "~> 2.12",
+                         'shoulda' => "~> 2.11",
+                         'hoe-gemspec' => "~> 1.0",
+                         'hoe-bundler' => "~> 1.1",
                          'minitest' => "~> 2.0" }.to_a
 
   # self.rubyforge_name = 'scirubyx' # if different than 'sciruby'

@@ -35,6 +35,11 @@ task :console do
   sh "irb -rubygems -I lib -r sciruby.rb"
 end
 
+desc "Start the plotter without the console"
+task :plotter do
+  sh "ruby -rubygems -I lib -r sciruby.rb -e 'SciRuby::Plotter.new'"
+end
+
 task :release do
   system %{git push origin master}
 end

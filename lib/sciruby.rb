@@ -24,6 +24,9 @@
 # Specific notices will be placed where they are appropriate.
 #
 
+require "rubygems"
+require "bundler/setup"
+
 module SciRuby
   VERSION = '0.1.2'
 

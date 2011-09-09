@@ -7,5 +7,6 @@ lib/sciruby.rb
 lib/sciruby/validation.rb
 lib/sciruby/recommend.rb
 lib/sciruby/plotter.rb
+lib/sciruby/editor.rb
 test/test_recommend.rb
 test/helpers_tests.rb

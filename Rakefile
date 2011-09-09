@@ -36,8 +36,17 @@ task :console do
 end
 
 desc "Start the plotter without the console"
-task :plotter do
-  sh "ruby -rubygems -I lib -r sciruby.rb -e 'SciRuby::Plotter.new'"
+task :plotter, [:script] => [] do |t,args|
+  if args.script.empty?
+    raise ArgumentError, "Need a script, e.g.: rake plotter[script.rb]"
+  else
+    sh "ruby -rubygems -I lib -r sciruby.rb -e 'SciRuby::Plotter.new(\"#{args.script}\")'"
+  end
+end
+
+desc "Start the plotter without the console"
+task :editor do
+  sh "ruby -rubygems -I lib -r sciruby.rb -e 'SciRuby::Editor.new'"
 end
 
 task :release do

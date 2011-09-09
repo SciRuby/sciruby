@@ -45,6 +45,7 @@ module SciRuby
   end
 
   autoload(:Plotter, 'sciruby/plotter')
+  autoload(:Editor, 'sciruby/editor')
   autoload(:Recommend, 'sciruby/recommend')
   autoload(:Validation, 'sciruby/validation')
 end

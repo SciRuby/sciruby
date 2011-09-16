@@ -1,6 +1,7 @@
+require "rsvg2"
 require "rubyvis"
 require "green_shoes"
-require "rsvg2"
+require "irb/ruby-lex"
 
 module SciRuby
   class << self
@@ -10,15 +11,16 @@ module SciRuby
   end
 
   class Plotter
-
+    # Create a new plotter app.
     def initialize script_or_handle
+
       update = false
       handle = begin
         if script_or_handle.is_a?(RSVG::Handle)
           script_or_handle
         else
           update = File.mtime(script_or_handle)
-          SciRuby::Plotter.create_handle File.read(script_or_handle), script_or_handle
+          handle = SciRuby::Plotter.create_handle script_or_handle
         end
       end
 
@@ -26,7 +28,7 @@ module SciRuby
         strokewidth 1
         fill white
         r   = rect 10, 10, handle.width+2, handle.height+2
-        img = image(:data => handle).tap { |i| i.move(11, 11) }
+        img = image(nil, :data => handle).tap { |i| i.move(11, 11) }
 
         # If a script was provided, watch it for updates
         every(2) do
@@ -34,7 +36,8 @@ module SciRuby
           unless new_time == update
             update  = new_time
             begin
-              handle  = SciRuby::Plotter.create_handle(File.read(script_or_handle), script_or_handle)
+              #handle  = SciRuby::Plotter.create_handle(File.read(script_or_handle), script_or_handle)
+              handle = SciRuby::Plotter.create_handle script_or_handle
               img.real.clear # This may create a memory leak, but img.remove does not work.
 
               # Update window and rectangle size to accommodate new image, in case size has changed.
@@ -54,23 +57,37 @@ module SciRuby
       end
     end
 
-    class << self
+    # A simple REPL without the P. Based roughly on IRB. Look on Wikipedia if you're not sure what a REPL is.
+    class Interpreter
+      def initialize filename, script = nil
+        @filename = filename
+        @bind     = binding
+        @script = script.nil? ? File.new(filename, "r") : StringIO.new(script)
+        @script.define_singleton_method(:encoding, lambda { external_encoding }) unless @script.respond_to?(:encoding)
 
-      # Evaluate some code and draw an SVG.
-      def create_handle script, filename=nil
-        filename ||= '(editor)'
-        bind = TOPLEVEL_BINDING
-        eval 'require "rubyvis"', bind, __FILE__, __LINE__
-        file_line_number = 0
+        @scanner  = ::RubyLex.new
+        @scanner.set_input @script
+      end
+
+      attr_reader :filename, :bind
+
+      def eval_script
         vis = nil
-        script.each_line do |line|
-          file_line_number += 1
-          vis = eval script, bind, filename, file_line_number
+        @scanner.each_top_level_statement do |line, line_number|
+          line.untaint
+          vis = eval(line, bind, filename, line_number)
         end
-
         vis = eval("vis", bind, __FILE__, __LINE__) unless vis.is_a?(::Rubyvis::Panel)
         vis.render()
 
+        vis
+      end
+    end
+
+    class << self
+      # Render an SVG into memory from the watched file / editor.
+      def create_handle filename, script=nil
+        vis = Interpreter.new(filename, script).eval_script
         RSVG::Handle.new_from_data(vis.to_svg).tap { |s| s.close }
       end
     end

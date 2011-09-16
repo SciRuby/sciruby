@@ -4,15 +4,20 @@
 
 source :gemcutter
 
-gem "distribution", "~>0.4.0"
-gem "statsample", "~>1.1.0"
+gem "distribution", ">=0.4.0"
+gem "green_shoes", :git => "git://github.com/ashbb/green_shoes"
+gem "statsample", ">=1.1.0"
 gem "gsl", "~>1.14.5"
-gem "rubyvis", "~>0.4.0"
-gem "rdoc", "~> 3.8"
-gem "green_shoes", :git => "git@github.com:mohawkjohn/green_shoes"
-gem 'rspec', "~> 2.6"
-gem 'rspec-core', "~> 2.6.4"
+gem "rsvg2", "~>1.0.0"
+gem "rubyvis", ">=0.4.0"
+
 gem "hoe", "~>2.12", :group => [:development, :test]
+gem "rdoc", ">=0", :group => [:development, :test]
+gem "rspec", ">=2.0", :group => [:development, :test]
+gem "haml", ">=0", :group => [:development, :test]
+gem "coderay", ">=0", :group => [:development, :test]
+gem "nokogiri", ">=0", :group => [:development, :test]
+gem "RedCloth", ">=0", :group => [:development, :test]
 gem "shoulda", "~>2.11", :group => [:development, :test]
 gem "hoe-gemspec", "~>1.0", :group => [:development, :test]
 gem "hoe-bundler", "~>1.1", :group => [:development, :test]

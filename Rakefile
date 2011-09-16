@@ -56,16 +56,21 @@ end
 h = Hoe.spec 'sciruby' do
   self.version = SciRuby::VERSION
   self.developer('SciRuby Development Team', 'sciruby-dev@googlegroups.com')
-  self.extra_deps = {'distribution' => "~> 0.4.0",
-                     'green_shoes' => "~> 1.0",
-                     'statsample' => "~> 1.1.0",
+  self.extra_deps = {'distribution' => ">=0.4.0",
+                     'green_shoes' => ">=1.0.283",
+                     'statsample' => ">=1.1.0",
                      'gsl' => "~> 1.14.5",
-                     'gtksourceview2' => "~> 1.0.0",
                      'rsvg2' => '~> 1.0.0',
-                     'rubyvis' => '~> 0.4.0'        }.to_a
+                     'rubyvis' => '>=0.4.0'        }.to_a
 
 
   self.extra_dev_deps = {'hoe' => "~> 2.12",
+                         'rdoc' => ">=0",
+                         'rspec' => ">=2.0",
+                         'haml' => ">=0", # for Rubyvis
+                         'coderay' => ">=0", # for Rubyvis
+                         'nokogiri' => ">=0", # for Rubyvis
+                         'RedCloth' => ">=0", # for Rubyvis
                          'shoulda' => "~> 2.11",
                          'hoe-gemspec' => "~> 1.0",
                          'hoe-bundler' => "~> 1.1",

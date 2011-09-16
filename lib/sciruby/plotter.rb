@@ -3,7 +3,14 @@ require "green_shoes"
 require "rsvg2"
 
 module SciRuby
+  class << self
+    def Rubyvis
+      ::Rubyvis
+    end
+  end
+
   class Plotter
+
     def initialize script_or_handle
       update = false
       handle = begin
@@ -11,13 +18,11 @@ module SciRuby
           script_or_handle
         else
           update = File.mtime(script_or_handle)
-          SciRuby::Plotter.create_handle File.read(script_or_handle)
+          SciRuby::Plotter.create_handle File.read(script_or_handle), script_or_handle
         end
       end
 
       Shoes.app :title => "Plotter - SciRuby", :width => handle.width+20, :height => handle.height+20 do
-        puts app.win.inspect
-        puts app.canvas.class.inspect
         strokewidth 1
         fill white
         r   = rect 10, 10, handle.width+2, handle.height+2
@@ -29,7 +34,7 @@ module SciRuby
           unless new_time == update
             update  = new_time
             begin
-              handle  = SciRuby::Plotter.create_handle(File.read(script_or_handle))
+              handle  = SciRuby::Plotter.create_handle(File.read(script_or_handle), script_or_handle)
               img.real.clear # This may create a memory leak, but img.remove does not work.
 
               # Update window and rectangle size to accommodate new image, in case size has changed.
@@ -50,11 +55,23 @@ module SciRuby
     end
 
     class << self
+
       # Evaluate some code and draw an SVG.
-      def create_handle script
-        panel = eval script, binding, __FILE__, __LINE__
-        panel.render
-        RSVG::Handle.new_from_data(panel.to_svg).tap { |s| s.close }
+      def create_handle script, filename=nil
+        filename ||= '(editor)'
+        bind = TOPLEVEL_BINDING
+        eval 'require "rubyvis"', bind, __FILE__, __LINE__
+        file_line_number = 0
+        vis = nil
+        script.each_line do |line|
+          file_line_number += 1
+          vis = eval script, bind, filename, file_line_number
+        end
+
+        vis = eval("vis", bind, __FILE__, __LINE__) unless vis.is_a?(::Rubyvis::Panel)
+        vis.render()
+
+        RSVG::Handle.new_from_data(vis.to_svg).tap { |s| s.close }
       end
     end
   end

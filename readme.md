@@ -2,7 +2,7 @@
 
 [https://github.com/SciRuby/sciruby](https://github.com/SciRuby/sciruby)
 
-<a href="http://www.pledgie.com/campaigns/15783"><img alt="Click here to lend your support to SciRuby and make a donation at pledgie.com" src="http://www.pledgie.com/campaigns/15783.png?skin_name=chrome" border="0" /></a>
+<a href="http://www.pledgie.com/campaigns/15783"><img alt="Click here to lend your support to SciRuby and make a donation at pledgie.com" src="http://www.pledgie.com/campaigns/15783.png" border="0" /></a>
 
 ## Description
 

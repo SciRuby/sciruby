@@ -57,7 +57,7 @@ SRC
             end
 
             button "Plot" do
-              SciRuby::Plotter.new(SciRuby::Plotter.create_handle(code.text))
+              SciRuby::Plotter.new(SciRuby::Plotter.create_handle('(editor)', code.text))
             end
           end
 

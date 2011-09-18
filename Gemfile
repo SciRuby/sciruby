@@ -5,7 +5,7 @@
 source :gemcutter
 
 gem "distribution", ">=0.4.0"
-gem "green_shoes", :git => "git://github.com/ashbb/green_shoes.git"
+gem "green_shoes", :path => "/home/jwoods/green_shoes" #:git => "git://github.com/ashbb/green_shoes.git"
 gem "statsample", ">=1.1.0"
 gem "gsl", "~>1.14.5"
 gem "rsvg2", "~>1.0.0"
@@ -19,6 +19,7 @@ gem "coderay", ">=0", :group => [:development, :test]
 gem "nokogiri", ">=0", :group => [:development, :test]
 gem "RedCloth", ">=0", :group => [:development, :test]
 gem "shoulda", "~>2.11", :group => [:development, :test]
+gem "gtksourceview2", ">=0", :group => [:development, :test]
 gem "hoe-gemspec", "~>1.0", :group => [:development, :test]
 gem "hoe-bundler", "~>1.1", :group => [:development, :test]
 gem "minitest", "~>2.0", :group => [:development, :test]

@@ -28,7 +28,7 @@ module SciRuby
         strokewidth 1
         fill white
         r   = rect 10, 10, handle.width+2, handle.height+2
-        img = image(nil, :data => handle).tap { |i| i.move(11, 11) }
+        img = image(:data => handle).tap { |i| i.move(11, 11) }
 
         # If a script was provided, watch it for updates
         every(2) do
@@ -36,12 +36,10 @@ module SciRuby
           unless new_time == update
             update  = new_time
             begin
-              #handle  = SciRuby::Plotter.create_handle(File.read(script_or_handle), script_or_handle)
               handle = SciRuby::Plotter.create_handle script_or_handle
               img.real.clear # This may create a memory leak, but img.remove does not work.
 
               # Update window and rectangle size to accommodate new image, in case size has changed.
-              #app.resize handle.width+20, handle.height+20
               app.resize handle.width+20, handle.height+20
               r.style    :width => handle.width+2,  :height => handle.height+2
 

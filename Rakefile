@@ -71,6 +71,7 @@ h = Hoe.spec 'sciruby' do
                          'coderay' => ">=0", # for Rubyvis
                          'nokogiri' => ">=0", # for Rubyvis
                          'RedCloth' => ">=0", # for Rubyvis
+                         'gtksourceview2' => ">=0", # for editor
                          'shoulda' => "~> 2.11",
                          'hoe-gemspec' => "~> 1.0",
                          'hoe-bundler' => "~> 1.1",

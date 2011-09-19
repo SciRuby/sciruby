@@ -37,10 +37,10 @@ module SciRuby
     end
   end
 
-  autoload(:Plotter, 'sciruby/plotter')
-  autoload(:Editor, 'sciruby/editor')
-  autoload(:Recommend, 'sciruby/recommend')
-  autoload(:Validation, 'sciruby/validation')
+  autoload(:Plotter, File.join(DIR, 'sciruby', 'plotter'))
+  autoload(:Editor, File.join(DIR, 'sciruby', 'editor'))
+  autoload(:Recommend, File.join(DIR, 'sciruby', 'recommend'))
+  autoload(:Validation, File.join(DIR, 'sciruby', 'validation'))
 end
 
-autoload(:Shoes, 'ext/shoes')
+autoload(:Shoes, File.join(SciRuby::DIR, 'ext', 'shoes'))

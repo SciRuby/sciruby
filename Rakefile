@@ -4,6 +4,7 @@
 $:.unshift(File.dirname(__FILE__)+'/lib/')
 
 require 'rubygems'
+require 'rdoc/task'
 require 'sciruby'
 require 'hoe'
 
@@ -55,6 +56,7 @@ end
 
 h = Hoe.spec 'sciruby' do
   self.version = SciRuby::VERSION
+  self.require_ruby_version ">=1.9"
   self.developer('SciRuby Development Team', 'sciruby-dev@googlegroups.com')
   self.extra_deps = {'distribution' => ">=0.4.0",
                      'green_shoes' => ">=1.0.282",
@@ -76,6 +78,8 @@ h = Hoe.spec 'sciruby' do
                          'hoe-gemspec' => "~> 1.0",
                          'hoe-bundler' => "~> 1.1",
                          'minitest' => "~> 2.0" }.to_a
+
+  #self.executables = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
 
   self.post_install_message = <<-EOF
 ***********************************************************
@@ -116,6 +120,7 @@ Thanks for installing SciRuby! Happy hypothesis testing!
 ***********************************************************
   EOF
 
+  self.need_rdoc = false
 
 end
 

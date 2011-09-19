@@ -5,7 +5,7 @@
 source :gemcutter
 
 gem "distribution", ">=0.4.0"
-gem "green_shoes", :path => "/home/jwoods/green_shoes" #:git => "git://github.com/ashbb/green_shoes.git"
+gem "green_shoes", ">=1.0.282" #:path => "/home/jwoods/green_shoes" #:git => "git://github.com/ashbb/green_shoes.git"
 gem "statsample", ">=1.1.0"
 gem "gsl", "~>1.14.5"
 gem "rsvg2", "~>1.0.0"

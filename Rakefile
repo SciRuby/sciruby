@@ -57,7 +57,7 @@ h = Hoe.spec 'sciruby' do
   self.version = SciRuby::VERSION
   self.developer('SciRuby Development Team', 'sciruby-dev@googlegroups.com')
   self.extra_deps = {'distribution' => ">=0.4.0",
-                     'green_shoes' => ">=1.0.283",
+                     'green_shoes' => ">=1.0.282",
                      'statsample' => ">=1.1.0",
                      'gsl' => "~> 1.14.5",
                      'rsvg2' => '~> 1.0.0',

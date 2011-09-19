@@ -46,7 +46,7 @@ module SciRuby
               # Display new image.
               img     = image(:data => handle).tap { |i| i.move(11, 11) }
             rescue => e
-              alert "There appears to be an error in your plot code. Here's the trace:\n\n" + e.backtrace.join("\n"),
+              alert "There appears to be an error in your plot code. Here's the trace:\n\n" + Plotter.clean_trace(e.backtrace, script_or_handle).join("\n"),
                     :title => "Rubyvis Error - SciRuby"
             end
           end
@@ -54,6 +54,7 @@ module SciRuby
 
       end
     end
+
 
     # A simple REPL without the P. Based roughly on IRB. Look on Wikipedia if you're not sure what a REPL is.
     class Interpreter
@@ -87,6 +88,16 @@ module SciRuby
       def create_handle filename, script=nil
         vis = Interpreter.new(filename, script).eval_script
         RSVG::Handle.new_from_data(vis.to_svg).tap { |s| s.close }
+      end
+
+      # Clean a trace so only the relevant information is included.
+      def clean_trace bt, script_filename
+        short_trace = []
+        bt.each do |line|
+          break unless line.include?(script_filename)
+          short_trace << line
+        end
+        short_trace
       end
     end
   end

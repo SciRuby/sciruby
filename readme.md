@@ -1,7 +1,7 @@
 # SciRuby
 
-home  :: http://sciruby.com
-git   :: http://github.com/SciRuby/sciruby
+* http://sciruby.com
+* http://github.com/SciRuby/sciruby
 
 ## Description
 

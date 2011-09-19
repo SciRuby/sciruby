@@ -101,17 +101,17 @@ install gtk2 and optionally gtksourceview2:
 You will probably first need to install the headers for
 a number of required packages. In Ubuntu, use:
 
-  $ sudo apt-get install libgtk2.0-dev libgtksourceview2-dev \
+  $ sudo apt-get install libgtk2.0-dev libgtksourceview2-dev \\
       librsvg2-dev libcairo2-dev
 
 If you have trouble with Green Shoes, you should look at
 the Green Shoes wiki:
 
-http://github.com/ashbb/green_shoes/wiki
+* http://github.com/ashbb/green_shoes/wiki
 
 For Mac OSX Green Shoes:
 
-https://github.com/ashbb/green_shoes/wiki/Building-Green-Shoes-on-OSX
+* https://github.com/ashbb/green_shoes/wiki/Building-Green-Shoes-on-OSX
 
 More explicit instructions for SciRuby should be available
 at our website, sciruby.com, or through our mailing list

@@ -8,6 +8,8 @@ module Rubyvis
   end
 end
 
+warn "[DEPRECATION] SciRuby::Validation is deprecated and will be replaced in the near future."
+
 # Added by John O. Woods.
 #
 # Methods for quantifying the predictive abilities of binary classifier systems (i.e., true positives, false positives,

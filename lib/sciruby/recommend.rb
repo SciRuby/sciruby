@@ -1,6 +1,8 @@
 require 'set'
 require 'distribution' # for Hypergeometric
 
+warn "[DEPRECATION] SciRuby::Recommend is deprecated."
+
 unless defined?(SortedSet) # Ruby 1.8
   class SortedSet < Set
   end

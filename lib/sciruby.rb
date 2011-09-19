@@ -32,8 +32,13 @@ module SciRuby
   DIR     = Pathname.new(__FILE__).realpath.dirname.to_s
 
   class << self
-    def plot script # &panel
+    def plot script
       SciRuby::Plotter.new script
+    end
+
+    def integrate *args, &block
+      require "integration"
+      ::Integration.integrate(*args, &block)
     end
   end
 

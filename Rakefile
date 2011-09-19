@@ -61,6 +61,8 @@ h = Hoe.spec 'sciruby' do
   self.extra_deps = {'distribution' => ">=0.4.0",
                      'green_shoes' => ">=1.0.282",
                      'statsample' => ">=1.1.0",
+                     'integration' => ">= 0",
+                     'minimization' => ">= 0",
                      'gsl' => "~> 1.14.5",
                      'rsvg2' => '~> 1.0.0',
                      'rubyvis' => '>=0.4.0'        }.to_a

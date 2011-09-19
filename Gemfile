@@ -10,6 +10,8 @@ gem "statsample", ">=1.1.0"
 gem "gsl", "~>1.14.5"
 gem "rsvg2", "~>1.0.0"
 gem "rubyvis", ">=0.4.0"
+gem "integration", ">=0"
+gem "minimization", ">=0"
 
 gem "hoe", "~>2.12", :group => [:development, :test]
 gem "rdoc", ">=0", :group => [:development, :test]

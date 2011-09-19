@@ -29,6 +29,7 @@ require "bundler/setup"
 
 module SciRuby
   VERSION = '0.1.2'
+  DIR     = Pathname.new(__FILE__).realpath.dirname.to_s
 
   class << self
     def plot script # &panel

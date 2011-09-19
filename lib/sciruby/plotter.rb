@@ -3,6 +3,20 @@ require "rubyvis"
 require "green_shoes"
 require "irb/ruby-lex"
 
+class Shoes
+  class App
+    def icon filename=nil
+      filename.nil? ? win.icon : win.icon = filename
+    end
+
+    class << self
+      def default_icon= filename
+        Gtk::Window.set_default_icon(filename)
+      end
+    end
+  end
+end
+
 module SciRuby
   class << self
     def Rubyvis
@@ -11,8 +25,10 @@ module SciRuby
   end
 
   class Plotter
+    ICON_FILENAME = File.join(DIR, '..', 'static', 'sciruby-icon.png')
     # Create a new plotter app.
     def initialize script_or_handle
+      Shoes::App::default_icon = ICON_FILENAME
 
       update = false
       handle = begin
@@ -25,6 +41,8 @@ module SciRuby
       end
 
       Shoes.app :title => "Plotter - SciRuby", :width => handle.width+20, :height => handle.height+20 do
+        icon SciRuby::Plotter::ICON_FILENAME
+        STDERR.puts icon
         strokewidth 1
         fill white
         r   = rect 10, 10, handle.width+2, handle.height+2

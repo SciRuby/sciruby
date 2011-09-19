@@ -1,5 +1,4 @@
 require "rubyvis"
-require "green_shoes"
 require "rsvg2"
 require "gtk2"
 require "gtksourceview2"
@@ -23,8 +22,8 @@ end
 SRC
 
     def initialize
-
-      s = Shoes.app(:title => "Plot Editor - SciRuby", :width => DEFAULT_WIDTH, :height => DEFAULT_HEIGHT) do
+      Shoes.app(:title => "Plot Editor - SciRuby", :width => DEFAULT_WIDTH, :height => DEFAULT_HEIGHT) do
+        icon SciRuby::ICON_PATH
         stack do
           caption strong "enter rubyvis code:"
 

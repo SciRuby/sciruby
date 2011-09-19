@@ -42,3 +42,5 @@ module SciRuby
   autoload(:Recommend, 'sciruby/recommend')
   autoload(:Validation, 'sciruby/validation')
 end
+
+autoload(:Shoes, 'ext/shoes')

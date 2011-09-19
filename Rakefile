@@ -77,10 +77,49 @@ h = Hoe.spec 'sciruby' do
                          'hoe-bundler' => "~> 1.1",
                          'minitest' => "~> 2.0" }.to_a
 
-  # self.rubyforge_name = 'scirubyx' # if different than 'sciruby'
+  self.post_install_message = <<-EOF
+***********************************************************
+Welcome to SciRuby: Tools for Scientific Computing in Ruby!
+
+                     *** WARNING ***
+Please be aware that SciRuby is in ALPHA status. If you're
+thinking of using SciRuby to write mission critical code,
+such as for driving a car or flying a space shuttle, you
+may wish to choose other software (for now).
+
+In order to leverage the GUI features, you will need to
+install gtk2 and optionally gtksourceview2:
+
+  $ gem install gtk2 gtksourceview2
+
+You will probably first need to install the headers for
+a number of required packages. In Ubuntu, use:
+
+  $ sudo apt-get install libgtk2.0-dev libgtksourceview2-dev \
+      librsvg2-dev libcairo2-dev
+
+If you have trouble with Green Shoes, you should look at
+the Green Shoes wiki:
+
+http://github.com/ashbb/green_shoes/wiki
+
+For Mac OSX Green Shoes:
+
+https://github.com/ashbb/green_shoes/wiki/Building-Green-Shoes-on-OSX
+
+More explicit instructions for SciRuby should be available
+at our website, sciruby.com, or through our mailing list
+(which can also be found on our website).
+
+Thanks for installing SciRuby! Happy hypothesis testing!
+
+***********************************************************
+  EOF
+
+
 end
 
-Rake::RDocTask.new(:docs) do |rd|
+RDoc::Task.new(:docs) do |rd|
   rd.main = h.readme_file
   rd.options << '-d' if (`which dot` =~ /\/dot/) unless
     ENV['NODOT'] || Hoe::WINDOZE

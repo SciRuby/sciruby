@@ -1,6 +1,7 @@
 # SciRuby
 
-[https://github.com/SciRuby/sciruby](https://github.com/SciRuby/sciruby)
+home  :: http://sciruby.com
+git   :: http://github.com/SciRuby/sciruby
 
 [![Click here to lend your support to SciRuby and make a donation at pledgie.com!](https://www.pledgie.com/campaigns/15783.png?skin_name=chrome)](http://www.pledgie.com/campaigns/15783)
 

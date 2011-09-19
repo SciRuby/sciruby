@@ -24,9 +24,23 @@
 # Specific notices will be placed where they are appropriate.
 #
 
-module SciRuby
-  VERSION = '0.1.2'
+require "rubygems"
+require "bundler/setup"
 
-  autoload(:Recommend, 'sciruby/recommend')
-  autoload(:Validation, 'sciruby/validation')
+module SciRuby
+  VERSION = '0.1.3'
+  DIR     = Pathname.new(__FILE__).realpath.dirname.to_s
+
+  class << self
+    def plot script # &panel
+      SciRuby::Plotter.new script
+    end
+  end
+
+  autoload(:Plotter, File.join(DIR, 'sciruby', 'plotter'))
+  autoload(:Editor, File.join(DIR, 'sciruby', 'editor'))
+  autoload(:Recommend, File.join(DIR, 'sciruby', 'recommend'))
+  autoload(:Validation, File.join(DIR, 'sciruby', 'validation'))
 end
+
+autoload(:Shoes, File.join(SciRuby::DIR, 'ext', 'shoes'))

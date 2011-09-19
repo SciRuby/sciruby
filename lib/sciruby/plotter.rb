@@ -24,7 +24,6 @@ module SciRuby
 
       Shoes.app :title => "Plotter - SciRuby", :width => handle.width+20, :height => handle.height+20 do
         icon SciRuby::ICON_PATH
-        STDERR.puts icon
         strokewidth 1
         fill white
         r   = rect 10, 10, handle.width+2, handle.height+2

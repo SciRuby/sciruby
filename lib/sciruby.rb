@@ -46,6 +46,7 @@ module SciRuby
   autoload(:Editor, File.join(DIR, 'sciruby', 'editor'))
   autoload(:Recommend, File.join(DIR, 'sciruby', 'recommend'))
   autoload(:Validation, File.join(DIR, 'sciruby', 'validation'))
+  autoload(:Data, File.join(DIR, 'sciruby', 'data'))
 end
 
 autoload(:Shoes, File.join(SciRuby::DIR, 'ext', 'shoes'))

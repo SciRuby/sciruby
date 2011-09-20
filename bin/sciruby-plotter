@@ -3,8 +3,6 @@
 require 'rubygems'
 require 'sciruby'
 
-STDERR.puts "RUBY_VERSION = #{RUBY_VERSION}"
-
 if ARGV.size == 0
   STDERR.puts "sciruby-plotter: missing plot script"
   STDERR.puts "Usage: sciruby-plotter myscript.rb"

@@ -26,6 +26,7 @@
 
 require "rubygems"
 require "bundler/setup"
+require "./lib/ext/string"
 
 module SciRuby
   VERSION = '0.1.3'
@@ -40,6 +41,16 @@ module SciRuby
       require "integration"
       ::Integration.integrate(*args, &block)
     end
+
+    # Produce a list of datasets that can be loaded using the +dataset+ method
+    def dataset_search database, args = {}
+      "SciRuby::Data::#{database.to_s.camelize}".constantize.new(args).datasets.keys
+    end
+
+    # Load a dataset from a specific database. For a list of datasets, use `dataset_search(:guardian)`, for example.
+    def dataset database, source_id
+      "SciRuby::Data::#{database.to_s.camelize}".constantize.new.dataset(source_id)
+    end
   end
 
   autoload(:Plotter, File.join(DIR, 'sciruby', 'plotter'))
@@ -50,3 +61,4 @@ module SciRuby
 end
 
 autoload(:Shoes, File.join(SciRuby::DIR, 'ext', 'shoes'))
+autoload(:CSV, File.join(SciRuby::DIR, 'ext', 'csv'))

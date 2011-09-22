@@ -53,6 +53,7 @@ module SciRuby
     end
   end
 
+  autoload(:Config, File.join(DIR, 'sciruby', 'config'))
   autoload(:Plotter, File.join(DIR, 'sciruby', 'plotter'))
   autoload(:Editor, File.join(DIR, 'sciruby', 'editor'))
   autoload(:Recommend, File.join(DIR, 'sciruby', 'recommend'))

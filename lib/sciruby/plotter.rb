@@ -45,6 +45,7 @@ module SciRuby
               # Display new image.
               img     = image(:data => handle).tap { |i| i.move(11, 11) }
             rescue => e
+              STDERR.puts e.backtrace
               alert "There appears to be an error in your plot code. Here's the trace:\n\n" + Plotter.clean_trace(e.backtrace, script_or_handle).join("\n"),
                     :title => "Rubyvis Error - SciRuby"
             end

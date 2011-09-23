@@ -65,6 +65,7 @@ h = Hoe.spec 'sciruby' do
                      'minimization' => ">= 0",
                      'gsl' => "~> 1.14.5",
                      'rsvg2' => '~> 1.0.0',
+                     'simpler' => '>=0.1.0',
                      'rubyvis' => '>=0.4.0'        }.to_a
 
 

@@ -33,8 +33,6 @@ module SciRuby
         super args
       end
 
-      attr_reader :search_result
-
       # Return dataset meta-data found in the search, hashed by source_id. So, do datasets.keys if you want a list of
       # source_ids.
       def datasets

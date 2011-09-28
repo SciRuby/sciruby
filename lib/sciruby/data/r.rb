@@ -38,8 +38,8 @@ module SciRuby
               return TimeSeries.new(obj)
             elsif r_class == 'mts'
               return MultiTimeSeries.new(obj)
-            #elsif r_class == 'integer'
-            #  raise(NotImplementedError, "Can't handle integers: #{obj}")
+            elsif r_class == 'list'
+              return List.new(obj).to_h
             else
               raise(NotImplementedError, "Don't know how to recognize class #{r_class} yet.")
             end
@@ -50,7 +50,7 @@ module SciRuby
 
       def in_data_dir &block; SciRuby::Data::R.in_data_dir { yield } ; end
 
-      # Attempt to parse an R dataset through simpler. Works with most datasets (but not for table, dist, list, or array)
+      # Attempt to parse an R dataset through simpler. Works with most datasets (but not for table, dist, or array).
       #
       # Note that not all of these datasets have functions for converting directly to Statsample or SciRuby types. In
       # other words, parsing works, but it may not be as simple as calling to_dataset or to_h (yet).
@@ -61,10 +61,8 @@ module SciRuby
       # * crimtab (table)
       # * eurodist (dist)
       # * HairEyeColor (table)
-      # * Harman*.cor (list)
       # * iris3 (array)
       # * occupationalStatus (table)
-      # * state.center (list)
       # * Titanic (table)
       # * UCBAdmissions (table)
       # * volcano (matrix): TODO: Handle non-named rows and columns in matrix
@@ -215,3 +213,4 @@ require File.join(SciRuby::Data::R::DIR, 'r', 'multi_time_series.rb')
 require File.join(SciRuby::Data::R::DIR, 'r', 'vector.rb')
 require File.join(SciRuby::Data::R::DIR, 'r', 'r_matrix.rb')
 require File.join(SciRuby::Data::R::DIR, 'r', 'grouped_data.rb')
+require File.join(SciRuby::Data::R::DIR, 'r', 'list.rb')

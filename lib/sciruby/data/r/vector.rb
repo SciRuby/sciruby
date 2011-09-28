@@ -17,11 +17,9 @@ module SciRuby::Data
       def assign_properties
         @names = read_names
         @names = nil if @names.nil? || (@names.is_a?(Array) && @names.empty?)
-        STDERR.puts "@names = #{@names.inspect}"
 
         @levels = read_levels
         @levels = nil if @levels.nil? || (@levels.is_a?(Array) && @levels.empty?)
-        STDERR.puts "@levels = #{@levels.inspect}"
 
         @data = read_array_data
       end
@@ -34,11 +32,10 @@ module SciRuby::Data
 
       def read_multiple_lines fn=nil
         col_width = max_col_width
-        STDERR.puts "col_width = #{col_width}"
         return super(fn) if col_width == 0
         
         lines = (block_given? ? yield : call_function(fn)).split("\n")
-        STDERR.puts "rml_ Got back:\n#{lines.join("\n")}"
+        #STDERR.puts "rml_ Got back:\n#{lines.join("\n")}"
 
         lines.delete_if { |line| line !~ /^ *\[/ }
 
@@ -59,7 +56,7 @@ module SciRuby::Data
         col_width = max_col_width
 
         lines = (block_given? ? yield : call_function(fn)).split("\n")
-        STDERR.puts "rmln Got back:\n#{lines.join("\n")}"
+        #STDERR.puts "rmln Got back:\n#{lines.join("\n")}"
 
         return nil if lines.first =~ /^NULL/
 

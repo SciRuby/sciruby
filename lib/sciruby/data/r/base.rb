@@ -13,7 +13,7 @@ module SciRuby::Data
       end
 
       def self.class obj
-        STDERR.puts "obj=#{obj}"
+        #STDERR.puts "obj=#{obj}"
         Base.new(obj).send :read_class
       end
 
@@ -32,7 +32,7 @@ module SciRuby::Data
       end
 
       def call_function fn=nil
-        STDERR.puts "Call function: #{fn.to_s}\t#{rob}"
+        #STDERR.puts "Call function: #{fn.to_s}\t#{rob}"
         fn.nil? ? r.eval! { rob } : r.eval! { "#{fn.to_s}(#{rob})" }
       end
 
@@ -41,20 +41,18 @@ module SciRuby::Data
       end
 
       def read_class fn=:class
-        x = read_single_line(fn).first
-        STDERR.puts "fn=#{fn}\tx=#{x}"
-        x
+        read_single_line(fn).first
       end
 
       def read_single_line fn=nil
         line = call_function fn
-        STDERR.puts "rsl Got back: #{line}"
+        #STDERR.puts "rsl Got back: #{line}"
         CSV::parse_line(line.split(' ', 2).tap{ |s| s.shift }.first, :col_sep => ' ')
       end
 
       def read_single_token fn=nil
         line = call_function fn
-        STDERR.puts "rst Got back: #{line}"
+        #STDERR.puts "rst Got back: #{line}"
         line.split.tap{ |s| s.shift }.first
       end
 
@@ -63,7 +61,7 @@ module SciRuby::Data
       #     read_multiple_lines { call_property('height') }
       def read_multiple_lines fn=nil
         lines = block_given? ? yield : call_function(fn)
-        STDERR.puts "rml Got back:\n#{lines}"
+        #STDERR.puts "rml Got back:\n#{lines}"
 
         lines = lines.split("\n")
 

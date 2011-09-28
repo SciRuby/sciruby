@@ -9,7 +9,6 @@ module SciRuby::Data
       def assign_properties
         @names = read_names
         @names = nil if @names.nil? || (@names.is_a?(Array) && @names.empty?)
-        STDERR.puts "@names = #{@names.inspect}"
 
         @data = {}
         @names.each do |list_item|

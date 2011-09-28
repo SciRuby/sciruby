@@ -203,8 +203,6 @@ module SciRuby
   end
 end
 
-STDERR.puts File.expand_path(__FILE__)
-
 require File.join(SciRuby::Data::R::DIR, 'r', 'base.rb')
 require File.join(SciRuby::Data::R::DIR, 'r', 'data_frame.rb')
 require File.join(SciRuby::Data::R::DIR, 'r', 'time_series_base.rb')

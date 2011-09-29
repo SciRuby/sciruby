@@ -40,6 +40,11 @@ module SciRuby
       require "integration"
       ::Integration.integrate(*args, &block)
     end
+
+    # Shorthand for SciRuby::Analysis.store(*args, &block)
+    def analyze *args, &block
+      SciRuby::Analysis.store(*args, &block)
+    end
   end
 
   autoload(:Analysis, File.join(DIR, 'sciruby', 'analysis'))

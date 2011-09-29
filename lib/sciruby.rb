@@ -42,8 +42,9 @@ module SciRuby
     end
   end
 
-  autoload(:Plotter, File.join(DIR, 'sciruby', 'plotter'))
+  autoload(:Analysis, File.join(DIR, 'sciruby', 'analysis'))
   autoload(:Editor, File.join(DIR, 'sciruby', 'editor'))
+  autoload(:Plotter, File.join(DIR, 'sciruby', 'plotter'))
   autoload(:Recommend, File.join(DIR, 'sciruby', 'recommend'))
   autoload(:Validation, File.join(DIR, 'sciruby', 'validation'))
 end

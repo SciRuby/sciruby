@@ -51,11 +51,17 @@ module SciRuby
     def dataset database, source_id
       "SciRuby::Data::#{database.to_s.camelize}".constantize.new.dataset(source_id)
     end
+
+    # Shorthand for SciRuby::Analysis.store(*args, &block)
+    def analyze *args, &block
+      SciRuby::Analysis.store(*args, &block)
+    end
   end
 
+  autoload(:Analysis, File.join(DIR, 'sciruby', 'analysis'))
   autoload(:Config, File.join(DIR, 'sciruby', 'config'))
-  autoload(:Plotter, File.join(DIR, 'sciruby', 'plotter'))
   autoload(:Editor, File.join(DIR, 'sciruby', 'editor'))
+  autoload(:Plotter, File.join(DIR, 'sciruby', 'plotter'))
   autoload(:Recommend, File.join(DIR, 'sciruby', 'recommend'))
   autoload(:Validation, File.join(DIR, 'sciruby', 'validation'))
   autoload(:Data, File.join(DIR, 'sciruby', 'data'))

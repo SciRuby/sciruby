@@ -79,7 +79,7 @@ module SciRuby
               cache_dataset(source_id, raw, link_info.format)
             rescue TypeError => e
               if pos == datasets[source_id].download_links.size - 1
-                raise(TypeError, "Dataset appears to have moved or is unavailable; all sources returned invalid formats.")
+                raise DatasetNotFoundError.new(e)
               end
             ensure
               pos += 1

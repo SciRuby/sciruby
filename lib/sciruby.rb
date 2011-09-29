@@ -51,7 +51,7 @@ module SciRuby
     def dataset database, source_id
       begin
         "SciRuby::Data::#{database.to_s.camelize}".constantize.new.dataset(source_id)
-      rescue IOError => e
+      rescue DatabaseUnavailableError => e
         warn "Database appears to be unavailable. Attempting to use cached version."
         SciRuby::Data::Cacher.new.dataset(source_id, database)
       end

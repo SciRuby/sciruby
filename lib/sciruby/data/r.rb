@@ -28,7 +28,11 @@ module SciRuby
       # == R datasets that work partially
       # * chickwts: doesn't know how to handle levels, but still loads them as strings.
       def dataset id
-        r(id)
+        begin
+          r(id)
+        rescue Simpler::RError => e
+          raise DatasetNotFoundError.new(e)
+        end
       end
 
       # TODO: Fix so that aggregate datasets, like state, are listed properly in search results.

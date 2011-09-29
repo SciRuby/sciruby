@@ -4,7 +4,32 @@ require "uri"
 require "cgi"
 require "ostruct"
 
+
 module SciRuby
+  class DatabaseUnavailableError < IOError
+    def initialize domain, path, http_get_result=nil
+      @domain = domain
+      @path = path
+      @http_get_result = http_get_result
+    end
+    attr_reader :domain, :path, :http_get_result
+
+    def to_s
+      "Database at domain '#{@domain}', path '#{@path}' appears to be unavailable."
+    end
+  end
+
+  class DatasetNotFoundError < TypeError
+    def initialize e
+      @exp=e
+    end
+
+    def to_s
+      "Dataset does not exist. It may have moved, is not available in a format SciRuby can interpret." + @exp.message + "\n" + @exp.backtrace.join("\n")
+    end
+  end
+
+
   module Data
     DIR = File.join(SciRuby::DIR, 'sciruby', 'data')
 
@@ -118,7 +143,7 @@ module SciRuby
         result = http_get(domain, path, params)
 
         if result.include?(self.class.const_get(:FOUR_OH_FOUR_MESSAGE, true))
-          raise(IOError, "404 Not Found: domain='#{domain}'; path='#{path}'. Try again later.")
+          raise(DatabaseUnavailableError.new(domain, path, result))
         end
         
         result

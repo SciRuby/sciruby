@@ -1,22 +1,53 @@
 module SciRuby
   module Data
     # R data module.
-    class R < SearcherBase
+    class R < Base
       DIR = Pathname.new(__FILE__).realpath.dirname.to_s
 
       require "simpler"
 
+      # Attempt to parse an R dataset through simpler. Works with most datasets (but not for table, dist, or array).
+      #
+      # Note that not all of these datasets have functions for converting directly to Statsample or SciRuby types. In
+      # other words, parsing works, but it may not be as simple as calling to_dataset or to_h (yet).
+      #
+      # TODO: Add basic conversion functions like to_h, to_a, etc.
+      #
+      # == R datasets that don't work
+      # * crimtab (table)
+      # * eurodist (dist)
+      # * HairEyeColor (table)
+      # * iris3 (array)
+      # * occupationalStatus (table)
+      # * Titanic (table)
+      # * UCBAdmissions (table)
+      # * volcano (matrix): TODO: Handle non-named rows and columns in matrix
+      #
+      # TODO: rownames that are just counters need to be ignored in some cases, e.g., Puromycin
+      #
+      # == R datasets that work partially
+      # * chickwts: doesn't know how to handle levels, but still loads them as strings.
+      def dataset id
+        r(id)
+      end
+
+      # TODO: Fix so that aggregate datasets, like state, are listed properly in search results.
+      def search args={}
+        parse_datasets_index(r.eval! { %q{library(help="datasets")} })
+      end
+      alias_method :datasets, :search
+
+      # Alias for self.r.
+      def r obj=nil; SciRuby::Data::R.r(obj); end
+
+      
       class << self
         def in_dir &block
           SciRuby::Data.in_dir {  Dir.chdir('r') { yield } }
         end
-        
+
         def in_man_dir &block
           in_dir {   Dir.chdir('man') { yield } }
-        end
-
-        def in_data_dir &block
-          in_dir {   Dir.chdir('data') { yield } }
         end
 
         # With an argument, this function attempts to read from R some variable (probably a built-in dataset).
@@ -48,115 +79,21 @@ module SciRuby
         end
       end
 
-      def in_data_dir &block; SciRuby::Data::R.in_data_dir { yield } ; end
 
-      # Attempt to parse an R dataset through simpler. Works with most datasets (but not for table, dist, or array).
-      #
-      # Note that not all of these datasets have functions for converting directly to Statsample or SciRuby types. In
-      # other words, parsing works, but it may not be as simple as calling to_dataset or to_h (yet).
-      #
-      # TODO: Add basic conversion functions like to_h, to_a, etc.
-      #
-      # == R datasets that don't work
-      # * crimtab (table)
-      # * eurodist (dist)
-      # * HairEyeColor (table)
-      # * iris3 (array)
-      # * occupationalStatus (table)
-      # * Titanic (table)
-      # * UCBAdmissions (table)
-      # * volcano (matrix): TODO: Handle non-named rows and columns in matrix
-      #
-      # TODO: rownames that are just counters need to be ignored in some cases, e.g., Puromycin
-      #
-      # == R datasets that work partially
-      # * chickwts: doesn't know how to handle levels, but still loads them as strings.
-      def dataset id
-        in_data_dir do
-          if File.exist? "#{id}.tab"
-            return Tab.new("#{id}.tab").to_dataset
-          end
-        end
-
-        raise(NotImplementedError, "Need to handle non-tab format data")
-      end
-
-
-      def search args={}
-        parse_datasets_index(r.eval! { %q{library(help="datasets")} })
-      end
-
-
-      # Represents a .tab file in R. Only handles reading. e.g., morley.tab in R data. This class is deprecated by r(obj)
-      class Tab
-        def initialize filename
-          @contents = filename.include?("\n") ? filename : File.read(filename)
-        end
-
-        def to_dataset
-          parse_tab.to_dataset
-        end
-
-        def parse_tab
-          self.class.parse_tab @contents
-        end
-
-        class << self
-          # Read an R .tab file.
-          def parse_tab raw
-            require "statsample"
-
-            lines = raw.split("\n")
-            first_line = lines.shift
-            fields = first_line.split
-            h = Hash.new { |h,k| h[k] = [] }
-            lines.each do |line|
-              entries = line.split
-
-              # Forgot to include the blank column header in fields
-              fields.unshift(fallback_header(fields)) if entries.size > fields.size && first_line =~ /^ /
-
-              entries.each_index do |i|
-                h[fields[i]] << entries[i]
-              end
-            end
-
-            # Need to convert from string to the correct data type.
-            h.each_pair do |key, values|
-              new_values = []
-
-              level = :to_i
-              # TODO: Make this less hackish. Find a way to handle strings too. Maybe use whatever CSV for the :converters param.
-              values.each do |val|
-                level = :to_f if val =~ /\./ || val =~ /e/ || val =~ /E/
-              end
-              values.each do |val|
-                new_values << val.send(level)
-              end
-              h[key] = new_values.to_scale
-            end
-
-            h
-          end
-        protected
-          # Header to fall back on for a vector of rownames that have no column name.
-          def fallback_header(fields)
-            return 'row.names' unless fields.include?('row.names')
-            return 'rownames' unless fields.include?('rownames')
-            return 'rnames' unless fields.include?('rnames')
-            return 'id' unless fields.include?('id')
-            raise(NotImplementedError, "You have a column of row names with no name in your table, and all three of the fallback headers are taken (row.names, rownames, rnames, id). This is weird.")
-          end
-        end
-
-      end
 
       # Hacked together tex parser to extract useful information from .Rd R manual files. Unlikely to work on any other
       # TeX or LaTeX files.
       class Man < OpenStruct
-        def in_dir &block
-          SciRuby::Data::R.in_man_dir { yield }
+        class << self
+          def in_dir &block
+            SciRuby::Data::R.in_man_dir { yield }
+          end
         end
+
+        def in_dir &block
+          SciRuby::Data::R::Man.in_dir { yield }
+        end
+
 
         def initialize dataset_id
           h = {}

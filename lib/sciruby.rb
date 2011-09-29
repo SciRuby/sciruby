@@ -1,4 +1,4 @@
-# = sci_ruby.rb -
+# = sciruby.rb -
 # SciRuby - Ruby scientific visualization and computation.
 #
 # Copyright (C) 2011  SciRuby Development Team
@@ -49,7 +49,12 @@ module SciRuby
 
     # Load a dataset from a specific database. For a list of datasets, use `dataset_search(:guardian)`, for example.
     def dataset database, source_id
-      "SciRuby::Data::#{database.to_s.camelize}".constantize.new.dataset(source_id)
+      begin
+        "SciRuby::Data::#{database.to_s.camelize}".constantize.new.dataset(source_id)
+      rescue IOError => e
+        warn "Database appears to be unavailable. Attempting to use cached version."
+        SciRuby::Data::Cacher.new.dataset(source_id, database)
+      end
     end
 
     # Shorthand for SciRuby::Analysis.store(*args, &block)

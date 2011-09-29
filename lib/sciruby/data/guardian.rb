@@ -2,9 +2,11 @@ module SciRuby
   module Data
     
     # World Government Data from the Guardian.
-    class Guardian < SearcherBase
+    class Guardian < PublicSearcher
       QUERY_DOMAIN = %q{www.guardian.co.uk}
       QUERY_PATH   = %q{/world-government-data/search.json}
+      FOUR_OH_FOUR_MESSAGE = '404 Page not found'
+      ALLOWED_FORMATS = [:csv, :excel]
 
       class DatasetInfo < ::OpenStruct
         def initialize h
@@ -27,10 +29,10 @@ module SciRuby
       # * facet_source_title: e.g., data from Australian government would be data.nsw.org.au
       # * facet_format: e.g., csv, excel, xml, shapefile, kml
       def initialize args={}
-        args[:facet_format] ||= :csv
-        @require_format ||= args[:facet_format] # This should be removed when we can interpret other formats.
+        #args[:facet_format] ||= :csv
+        #@require_format ||= args[:facet_format] # This should be removed when we can interpret other formats.
 
-        super args
+        @search_result = search(args)
       end
 
       # Return dataset meta-data found in the search, hashed by source_id. So, do datasets.keys if you want a list of
@@ -62,35 +64,33 @@ module SciRuby
           pos = 0
           datasets[source_id].download_links.each do |link_info|
 
-            unless link_info.format == @require_format.to_s
+            unless ALLOWED_FORMATS.include?(link_info.format)
               pos += 1
               next # Format is incorrect.
             end
 
             # Format appears to be correct, prior to actually downloading. Proceed.
-            d = nil
-            exception_raised = false
 
             # Attempt to read the cached one first, and if that fails, try downloading.
             raw = cached_dataset(source_id) || download_dataset(link_info.link)
-
+            
             begin
-              d = CSV.parse(raw, :headers => true, :converters => :all).to_dataset
-              d.name = datasets[source_id].title
-              cache_dataset source_id, raw
-            rescue CSV::MalformedCSVError => e
-              exception_raised = true
-              raise(TypeError, "Malformed CSV; dataset has probably moved") if pos == datasets[source_id].download_links.size - 1
+              ds  = parse_dataset link_info.format, raw, datasets[source_id].title
+              cache_dataset(source_id, raw, link_info.format)
+            rescue TypeError => e
+              if pos == datasets[source_id].download_links.size - 1
+                raise(TypeError, "Dataset appears to have moved or is unavailable; all sources returned invalid formats.")
+              end
             ensure
               pos += 1
             end
-            return d unless d.nil?
 
-            raise(TypeError, "All dataset sources returned malformed CSV data; dataset has probably moved") if exception_raised
-            raise(NameError, "Couldn't find any dataset sources in the correct format (CSV)")
+            return ds unless ds.nil?
+
           end
         end
       end
+
     end
   end
 end

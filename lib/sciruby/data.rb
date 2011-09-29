@@ -14,32 +14,82 @@ module SciRuby
       end
     end
 
+    # Really just a placeholder.
+    class Base #:nodoc:
+    end
+
     # Basic dataset type -- handles caching of datasets, that's about it.
-    class Base
+    class Cacher < Base
+
+      # Attempt to load a dataset. This is overridden for publicly-searchable datasets.
+      # Basically it works as a fallback if a publicly-searchable database is unavailable for some reason, but we
+      # may already have the data in the cache.
+      def dataset source_id, module_name=nil
+        module_name ||= self.class.to_s
+        raw = cached_dataset(source_id, module_name)
+        if raw.nil?
+          raise(ArgumentError, "Dataset is not cached.")
+        else
+          match  = SciRuby::Config.data_source_dir(module_name, false) { SciRuby::Config.basename_exists?(source_id) }
+          format = match.split('.').last.to_sym
+          title  = SciRuby::Config.basename_for_dataset(source_id)
+          parse_dataset(format, raw, title)
+        end
+      end
+      
+    protected
+
       # Attempt to get the dataset from the cache. This function is a little bit fragile for the following reason:
       # The +dataset+ function [eventually] allows for different +download_links+ of a dataset, which may be in different
       # formats. +cached_dataset+, however, guesses the format based on the format indicated for the first download link.
       #
-      # TODO: Fix this, probably by adding a file extension to cached datasets, and using that to determine the interpreter.
       # TODO: Consider gzipping cached datasets.
-      def cached_dataset source_id
-        SciRuby::Config.for_dataset self.class.to_s, source_id do |filename|
-          return nil unless File.exists?(filename)
-          return File.read(filename)
+      def cached_dataset source_id, module_name=nil
+        module_name ||= self.class.to_s
+        SciRuby::Config.for_dataset_basename(module_name, source_id) do |basename|
+          filename = SciRuby::Config.basename_exists?(source_id)
+          return nil unless filename
+          File.read(filename)
         end
       end
 
       # Store a dataset locally. Use cached_dataset to retrieve.
-      def cache_dataset source_id, raw_data
-        SciRuby::Config.cache_dataset self.class.to_s, source_id, raw_data
+      def cache_dataset source_id, raw_data, format
+        SciRuby::Config.cache_dataset self.class.to_s, source_id, raw_data, format
+      end
+
+      # Parse and cache a dataset, using the appropriate interpreter.
+      def parse_dataset format, raw, name
+        begin
+          case format
+            when :csv
+              CSV.parse(raw, :headers => true, :converters => :all).to_dataset.tap { |da| da.name = name }
+            when :excel
+              require "statsample"
+              Statsample::Excel.parse(raw, :name => name)
+          end
+        rescue
+          raise TypeError, "Format was not as expected; dataset may have moved"
+        end
+      end
+    end
+
+
+    # Base class for searching datasets. R dataset interpreter and PublicSearcherBase (and thus Guardian) are all derived
+    # from this type.
+    class Searcher < Cacher
+      def initialize args={}
+        @search_result = search(args)
       end
     end
 
 
     # Handles searching public datasets. Doesn't actually do it itself, but you can derive searchers from this -- e.g.,
     # Guardian.
-    class SearcherBase < Base
+    class PublicSearcher < Searcher
+      FOUR_OH_FOUR_MESSAGE = '404'
       attr_reader :search_result
+
       # Search the site or database using some set of parameters.
       #
       # This function is the one that you should redefine if you want to require certain parameters, or if there are
@@ -53,10 +103,6 @@ module SciRuby
         JSON.parse(search_internal(args))
       end
 
-      def initialize args={}
-        @search_result = search(args)
-      end
-
       # Download a dataset from a given link.
       def download_dataset link
         url = URI.parse link
@@ -66,7 +112,16 @@ module SciRuby
     protected
       # Like http_get, but gets the domain and path from the child searcher class.
       def search_internal params={} #:nodoc:
-        http_get(self.class.const_get(:QUERY_DOMAIN, true), self.class.const_get(:QUERY_PATH, true), params)
+        domain = self.class.const_get(:QUERY_DOMAIN, true)
+        path   = self.class.const_get(:QUERY_PATH, true)
+
+        result = http_get(domain, path, params)
+
+        if result.include?(self.class.const_get(:FOUR_OH_FOUR_MESSAGE, true))
+          raise(IOError, "404 Not Found: domain='#{domain}'; path='#{path}'. Try again later.")
+        end
+        
+        result
       end
 
       # Execute an HTTP get request with or without parameters.

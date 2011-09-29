@@ -30,31 +30,31 @@ module SciRuby
   #  # instead of calling text summary
   #  an1.generate("report.html")
   module Analysis
-    @@stored_analysis={}
+    @@stored_analyses={}
     @@last_analysis=nil
     def self.clear_analysis
-      @@stored_analysis.clear
+      @@stored_analyses.clear
     end
-    def self.stored_analysis
-      @@stored_analysis
+    def self.stored_analyses
+      @@stored_analyses
     end
     def self.last
-      @@stored_analysis[@@last_analysis]
+      @@stored_analyses[@@last_analysis]
     end
     def self.store(name, opts=Hash.new,&block)
       raise "You should provide a block" if !block
       @@last_analysis=name
       opts={:name=>name}.merge(opts)
-      @@stored_analysis[name]=Suite.new(opts,&block)
+      @@stored_analyses[name]=Suite.new(opts,&block)
     end
     # Run analysis +*args+
     # Without arguments, run all stored analyses
     # Only 'echo' will be printed to screen.
     def self.run(*args)
-      args=stored_analysis.keys if args.size==0
-      raise "Analysis #{args} doesn't exists" if (args - stored_analysis.keys).size>0
+      args=stored_analyses.keys if args.size==0
+      raise "Analysis #{args} doesn't exists" if (args - stored_analyses.keys).size>0
       args.each do |name|
-        stored_analysis[name].run
+        stored_analyses[name].run
       end
     end
 
@@ -63,11 +63,11 @@ module SciRuby
     # Each analysis is wrapped inside a ReportBuilder::Section object.
     # This is the method used by +save+ and +to_text+.
     def self.add_to_reportbuilder(rb, *args)
-      args=stored_analysis.keys if args.size==0
-      raise "Analysis #{name} doesn't exists" if (args - stored_analysis.keys).size>0
+      args=stored_analyses.keys if args.size==0
+      raise "Analysis #{name} doesn't exists" if (args - stored_analyses.keys).size>0
       args.each do |name|
-        section=ReportBuilder::Section.new(:name=>stored_analysis[name].name)
-        rb_an=stored_analysis[name].add_to_reportbuilder(section)
+        section=ReportBuilder::Section.new(:name=>stored_analyses[name].name)
+        rb_an=stored_analyses[name].add_to_reportbuilder(section)
         rb.add(section)
         rb_an.run
       end

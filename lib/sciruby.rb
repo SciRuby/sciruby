@@ -72,5 +72,6 @@ module SciRuby
   autoload(:Data, File.join(DIR, 'sciruby', 'data'))
 end
 
+autoload(:Statsample, File.join(SciRuby::DIR, 'ext', 'statsample'))
 autoload(:Shoes, File.join(SciRuby::DIR, 'ext', 'shoes'))
 autoload(:CSV, File.join(SciRuby::DIR, 'ext', 'csv'))

@@ -27,7 +27,7 @@ module SciRuby
         dir_name = module_name.to_s if module_name.is_a?(Symbol)
         dir_name ||= module_name.split('::').tap{ |m| 2.times { m.shift } }.join('::').underscore
         data_dir do
-          FileUtils.mkdir(dir_name) unless Dir.exists?(dir_name) || !create
+          FileUtils.mkdir(dir_name) if !Dir.exists?(dir_name) && create
           Dir.chdir dir_name do
             yield if block_given?
           end

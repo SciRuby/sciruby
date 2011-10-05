@@ -90,10 +90,13 @@ module SciRuby
             when :csv
               CSV.parse(raw, :headers => true, :converters => :all).to_dataset.tap { |da| da.name = name }
             when :excel
-              require "statsample"
               Statsample::Excel.parse(raw, :name => name)
           end
-        rescue
+        rescue NameError => e
+          STDERR.puts "Unable to load statsample"
+          raise e
+        rescue => e
+          STDERR.puts e.inspect
           raise TypeError, "Format was not as expected; dataset may have moved"
         end
       end

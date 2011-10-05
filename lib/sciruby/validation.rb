@@ -128,11 +128,9 @@ module SciRuby
           end
 
           vis.render()
-          f = File.new("output.svg", "w")
-          f.puts vis.to_svg
-          f.close
-
-          `inkscape output.svg`
+          require "rsvg2"
+          svg = RSVG::Handle.new_from_data(vis.to_svg).tap { |s| s.close }
+          SciRuby::Plotter.new svg
         end
 
       protected
@@ -215,13 +213,11 @@ module SciRuby
         v = vis(type, options)
 
         v.render()
-        f = File.new("output.svg", "w")
-        f.puts v.to_svg
-        f.close
 
-        `inkscape output.svg`
+        require "rsvg2"
 
-        self
+        svg = RSVG::Handle.new_from_data(v.to_svg).tap { |s| s.close }
+        SciRuby::Plotter.new svg
       end
 
 

@@ -26,11 +26,13 @@
 
 require "rubygems"
 require "bundler/setup"
-require "./lib/ext/string"
 
 module SciRuby
   VERSION = '0.1.3'
   DIR     = Pathname.new(__FILE__).realpath.dirname.to_s
+
+  require File.join(::SciRuby::DIR, 'ext', 'string.rb')
+  require File.join(::SciRuby::DIR, 'ext', 'csv.rb')
 
   class << self
     def plot script
@@ -72,6 +74,4 @@ module SciRuby
   autoload(:Data, File.join(DIR, 'sciruby', 'data'))
 end
 
-autoload(:Statsample, File.join(SciRuby::DIR, 'ext', 'statsample'))
 autoload(:Shoes, File.join(SciRuby::DIR, 'ext', 'shoes'))
-autoload(:CSV, File.join(SciRuby::DIR, 'ext', 'csv'))

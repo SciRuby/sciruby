@@ -29,6 +29,15 @@ module SciRuby
         r   = rect 10, 10, handle.width+2, handle.height+2
         img = image(:data => handle).tap { |i| i.move(11, 11) }
 
+        keypress do |key|
+          if key == 's'
+            file = ask_save_file
+            File.open(file, "w+") do |f|
+              f.write(SciRuby::Plotter.create_svg(script_or_handle))
+            end
+          end
+        end
+
         # If a script was provided, watch it for updates
         every(2) do
           new_time = File.mtime(script_or_handle)
@@ -84,11 +93,25 @@ module SciRuby
     end
 
     class << self
-      # Render an SVG into memory from the watched file / editor.
+      # Render an SVG into memory from the watched file / editor, returning a handle.
       def create_handle filename, script=nil
-        vis = Interpreter.new(filename, script).eval_script
-        RSVG::Handle.new_from_data(vis.to_svg).tap { |s| s.close }
+        svg = create_svg filename, script
+        begin
+          RSVG::Handle.new_from_data(svg).tap { |s| s.close }
+        rescue RSVG::Error => e
+          STDERR.puts "There appears to be a mysterious problem with the SVG output for your plot. Storing debug output in debug.svg."
+          STDERR.puts "Make sure your data() call is in the right place."
+          File.open("debug.svg", "w") { |f| f.puts svg }
+          raise e
+        end
       end
+      
+      # Render an SVG, returning the file contents (not written).
+      def create_svg filename, script=nil
+        vis = Interpreter.new(filename, script).eval_script
+        svg = vis.to_svg
+      end
+      
 
       # Clean a trace so only the relevant information is included.
       def clean_trace bt, script_filename

@@ -1,7 +1,7 @@
 .autotest
 History.txt
 Manifest.txt
-readme.md
+README.txt
 Rakefile
 lib/sciruby.rb
 lib/sciruby/validation.rb

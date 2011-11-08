@@ -63,7 +63,7 @@ h = Hoe.spec 'sciruby' do
                      'statsample' => ">=1.1.0",
                      'integration' => ">= 0",
                      'minimization' => ">= 0",
-                     'gsl' => "~> 1.14.5",
+                     'gsl' => ">= 1.14.5",
                      'rsvg2' => '~> 1.0.0',
                      'simpler' => '>=0.1.0',
                      'rubyvis' => '>=0.4.0'        }.to_a
@@ -145,7 +145,7 @@ RDoc::Task.new(:docs) do |rd|
     rd.options << spec.rdoc_options[title_index + 1]
     end
   else
-    title = "#{h.name}-#{h.version} Documentation"
+    title = "SciRuby #{h.version} Documentation"
     title = "#{h.rubyforge_name}'s " + title if h.rubyforge_name != h.name
     rd.options << '--title' << title
   end

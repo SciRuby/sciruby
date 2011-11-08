@@ -73,6 +73,8 @@ After checking out the source, run:
 This task will install any missing dependencies, run the tests/specs,
 and generate the RDoc.
 
+NOTE: Don't despair if `rake newb` doesn't work for you. We're still working out the kinks.
+
 ## LICENSE:
 
 SciRuby is licensed under the GNU General Public License, v3.

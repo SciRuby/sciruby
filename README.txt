@@ -55,7 +55,7 @@ Or, inside a Ruby shell,
 
 You'll also want to make sure you install the headers for the GUI. If you're using Ubuntu:
 
-    sudo apt-get install libgtk2.0-dev libgtksourceview2-dev librsvg2-dev libcairo2-dev
+    sudo apt-get install libgtk2.0-dev libgtksourceview2.0-dev librsvg2-dev libcairo2-dev
 
 You can also optionally get rb-gsl, statistics2, and other useful architecture-specific packages using
 

@@ -61,6 +61,8 @@ You can also optionally get rb-gsl, statistics2, and other useful architecture-s
 
     gem install statsample-optimization
 
+Note that as of this writing, rb-gsl is incompatible with the 1.15 version of the GSL headers. You should make sure you're using the 1.14 headers.
+
 More detailed installation instructions are available at sciruby.com: http://sciruby.com/docs#installation
 
 ## DEVELOPERS:

@@ -11,6 +11,42 @@ module SciRuby
 
   class Plotter
     # Create a new plotter app.
+    #
+    # == Argument
+    #
+    # +script_or_handle+:: either a script filename which SciRuby::Plotter should
+    #                      watch, or an RSVG::Handle which you have already created.
+    #
+    # == Examples
+    #
+    # Let's say you're in a Rails console and you want to use Plotter. You could do
+    # something like this:
+    #
+    #     vis = Rubyvis::Panel.new do
+    #       # your plot code here
+    #     end
+    #     vis.render
+    #     svg_string = vis.to_svg
+    #     svg_handle = RSVG::Handle.new_from_data svg_string
+    #     SciRuby::Plotter.new svg_handle
+    #
+    # But you could also load a script as follows:
+    #
+    #    SciRuby::Plotter.new 'plot_xy.rb'
+    #
+    # If you take this route, you don't need to include a +render+ or a +to_svg+; these
+    # are handled automatically when the script is evaluated.
+    #
+    # If you don't have your script saved, there's an additional option for static plots:
+    #
+    #    SciRuby::Plotter.new(SciRuby::Plotter.create_handle('(editor)', <<-ENDPLOT))
+    #      Rubyvis::Panel.new do
+    #        # plot code here
+    #      end
+    #    ENDPLOT
+    #
+    # Again, no +to_svg+ or +render+ is needed here.
+    #
     def initialize script_or_handle
       update = false
       handle = begin

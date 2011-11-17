@@ -1,3 +1,17 @@
+# Copyright (c) 2010 - 2011, Ruby Science Foundation
+# All rights reserved.
+#
+# Please see LICENSE.txt for additional copyright notices.
+#
+# By contributing source code to SciRuby, you agree to be bound by our Contributor
+# Agreement:
+#
+# * https://github.com/SciRuby/sciruby/wiki/Contributor-Agreement
+#
+# === analysis.rb
+#
+
+
 require 'sciruby/analysis/suite'
 require 'sciruby/analysis/suite_report_builder'
 
@@ -5,7 +19,9 @@ module SciRuby
   # DSL to run a statistical analysis without hassle.
   # * Shortcut methods to avoid having to use complete namespaces, many based on R.
   # * Attach/detach vectors to workspace, as with R
-  # == Example
+  #
+  # === Example
+  #
   #  an1 = Statsample::Analysis.store(:first) do
   #    # Load excel file with x,y,z vectors
   #    ds = excel('data.xls')
@@ -29,6 +45,7 @@ module SciRuby
   #  # .summary() method call 'report_building' on the object,
   #  # instead of calling text summary
   #  an1.generate("report.html")
+  #
   module Analysis
     @@stored_analyses={}
     @@last_analysis=nil

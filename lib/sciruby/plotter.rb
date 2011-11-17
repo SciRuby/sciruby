@@ -1,3 +1,16 @@
+# Copyright (c) 2010 - 2011, Ruby Science Foundation
+# All rights reserved.
+#
+# Please see LICENSE.txt for additional copyright notices.
+#
+# By contributing source code to SciRuby, you agree to be bound by our Contributor
+# Agreement:
+#
+# * https://github.com/SciRuby/sciruby/wiki/Contributor-Agreement
+#
+# === plotter.rb
+#
+
 require "rsvg2"
 require "rubyvis"
 require "irb/ruby-lex"
@@ -12,12 +25,12 @@ module SciRuby
   class Plotter
     # Create a new plotter app.
     #
-    # == Argument
+    # === Argument
     #
     # +script_or_handle+:: either a script filename which SciRuby::Plotter should
     #                      watch, or an RSVG::Handle which you have already created.
     #
-    # == Examples
+    # === Examples
     #
     # Let's say you're in a Rails console and you want to use Plotter. You could do
     # something like this:
@@ -165,7 +178,7 @@ module SciRuby
       #
       # Look for a 'w'. This means RMagick can write. If it has a - where the w should be, writing is not supported.
       #
-      # = Arguments
+      # === Arguments
       #
       # +script_filename+::  The script to evaluate using +create_svg+
       # +output_extension+:: e.g., '.pdf' or '.svg', with or without the period

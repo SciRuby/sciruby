@@ -67,6 +67,10 @@ More detailed installation instructions are available at sciruby.com: http://sci
 
 ## DEVELOPERS:
 
+Before commiting any code, you *MUST* read our Contributor Agreement:
+
+* http://github.com/SciRuby/sciruby/wiki/Contributor-Agreement
+
 After checking out the source, run:
 
     $ bundle exec rake newb
@@ -79,7 +83,11 @@ NOTE: Don't despair if `rake newb` doesn't work for you. We're still working out
 
 ## LICENSE:
 
-SciRuby is licensed under the GNU General Public License, v3.
+Copyright (c) 2010 - 2011, The Ruby Science Foundation.
+
+All rights reserved.
+
+SciRuby is licensed under the BSD 2-clause license. See LICENSE.txt for details.
 
 ## DONATIONS:
 

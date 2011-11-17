@@ -77,6 +77,7 @@ h = Hoe.spec 'sciruby' do
                          'nokogiri' => ">=0", # for Rubyvis
                          'RedCloth' => ">=0", # for Rubyvis
                          'gtksourceview2' => ">=0", # for editor
+                         'rmagick' => ">= 2.13", # for writing non-SVG image files
                          'shoulda' => "~> 2.11",
                          'hoe-gemspec' => "~> 1.0",
                          'hoe-bundler' => "~> 1.1",

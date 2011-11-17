@@ -68,8 +68,16 @@ module SciRuby
         keypress do |key|
           if key == 's'
             file = ask_save_file
-            File.open(file, "w+") do |f|
-              f.write(SciRuby::Plotter.create_svg(script_or_handle))
+            unless file.nil?
+              begin
+                data = SciRuby::Plotter.create_write_data(script_or_handle, File.extname(file))
+                File.open(file, "w+") do |f|
+                  f.write(data)
+                end
+              rescue ArgumentError => e
+                STDERR.puts e.backtrace
+                alert "Unable to write format #{File.extname(file)}. Note that you can always save as an SVG.\n\n#{e.to_s}"
+              end
             end
           end
         end
@@ -146,6 +154,46 @@ module SciRuby
       def create_svg filename, script=nil
         vis = Interpreter.new(filename, script).eval_script
         svg = vis.to_svg
+      end
+
+      # Returns raw data that can be written directly to a file, based on the +output_extension+ given. Uses RMagick to
+      # do the writing, so handles just about any format RMagick handles. For a list supported by your machine, you can
+      # do:
+      #
+      #     require 'RMagick'
+      #     Magick::formats
+      #
+      # Look for a 'w'. This means RMagick can write. If it has a - where the w should be, writing is not supported.
+      #
+      # = Arguments
+      #
+      # +script_filename+::  The script to evaluate using +create_svg+
+      # +output_extension+:: e.g., '.pdf' or '.svg', with or without the period
+      # +width+::            width of the image to be created
+      # +height+::           height of the image to be created
+      #
+      def create_write_data script_filename, output_extension
+        # Normalize the output extension.
+        output_extension.upcase!
+        output_extension = output_extension.split('.').tap{ |ext| ext.shift }.join('.') if output_extension =~ /^\./
+
+        if output_extension == 'SVG'
+          create_svg script_filename
+        else
+          begin
+            require 'RMagick'
+
+            format_support = Magick.formats[output_extension]
+            raise(ArgumentError, "RMagick cannot write format '#{output_extension}'") if format_support.nil? || format_support[2] == '-'
+
+            image = Magick::Image::from_blob(create_svg(script_filename)) { self.format = 'SVG' }
+            image[0].format = output_extension
+            image[0].to_blob
+
+          rescue LoadError
+            raise(ArgumentError, "RMagick not found; cannot write PDF")
+          end
+        end
       end
       
 

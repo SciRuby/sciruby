@@ -1,6 +1,21 @@
-=== 1.0.0 / 2011-01-31
+=== 0.0.14 / Not yet released
 
-* 1 major enhancement
+* NEW LICENSE: BSD 2-clause
+* Contributor Agreement now required reading for committing code
+* Second pre-alpha version
+  * Plotter allows saving to formats other than SVG -- anything that RMagick supports.
+    * RMagick is an optional dependency. SVG writing will work even without it.
+  * Minor improvements to API documentation
 
-  * Birthday!
+=== 0.0.13 / 2011-11-03
+
+* First pre-alpha version.
+  * SciRuby::Plotter   :: GUI for updating plots as scripts are modified
+  * SciRuby::Editor    :: code editor for modifying rubyvis plot scripts
+  * SciRuby::Analysis  :: domain-specific language for hassle-free statistical analysis, originally from Statsample
+  * Shoes extensions   :: Green Shoes extensions for Plotter and Editor GUIs
+  * R dataset loading  :: Capable of reading most R datasets if R is installed
+  * Guardian datasets  :: Experimental support for loading some Guardian datasets
+  * SciRuby::Recommend :: deprecated code for expert recommendation
+  * SciRuby::Validation:: deprecated code for ROC plots and precision-recall curves
 

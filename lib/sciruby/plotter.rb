@@ -52,7 +52,7 @@ module SciRuby
     #
     # If you don't have your script saved, there's an additional option for static plots:
     #
-    #    SciRuby::Plotter.new(SciRuby::Plotter.create_handle('(editor)', <<-ENDPLOT))
+    #    SciRuby::Plotter.new(SciRuby::Plotter.create_handle(:title => '(editor)', :raw_script => <<-ENDPLOT))
     #      Rubyvis::Panel.new do
     #        # plot code here
     #      end
@@ -67,7 +67,7 @@ module SciRuby
           script_or_handle
         else
           update = File.mtime(script_or_handle)
-          handle = SciRuby::Plotter.create_handle script_or_handle
+          handle = SciRuby::Plotter.create_handle :title => script_or_handle
         end
       end
 
@@ -83,11 +83,9 @@ module SciRuby
             file = ask_save_file
             unless file.nil?
               begin
-                data = SciRuby::Plotter.create_write_data(script_or_handle, File.extname(file))
-                File.open(file, "w+") do |f|
-                  f.write(data)
-                end
+                SciRuby::Plotter.write_image(script_or_handle, file)
               rescue ArgumentError => e
+                STDERR.puts e.inspect
                 STDERR.puts e.backtrace
                 alert "Unable to write format #{File.extname(file)}. Note that you can always save as an SVG.\n\n#{e.to_s}"
               end
@@ -101,7 +99,7 @@ module SciRuby
           unless new_time == update
             update  = new_time
             begin
-              handle = SciRuby::Plotter.create_handle script_or_handle
+              handle = SciRuby::Plotter.create_handle :title => script_or_handle
               img.real.clear # This may create a memory leak, but img.remove does not work.
 
               # Update window and rectangle size to accommodate new image, in case size has changed.
@@ -150,42 +148,73 @@ module SciRuby
     end
 
     class << self
-      # Render an SVG into memory from the watched file / editor, returning a handle.
-      def create_handle filename, script=nil
-        svg = create_svg filename, script
+      # Render an SVG into an RSVG::Handle.
+      #
+      # This method used in preparation for drawing a watched script onto the Plotter window.
+      #
+      # It is also used occasionally to create a handle from an already-produced raw SVG file. Mostly this is in order
+      # to save to other formats.
+      #
+      # === Arguments
+      #
+      # +:title+      ::  The script filename, or if +:raw_script+ is supplied, the title of the script (e.g., '(editor)')
+      # +:raw_script+ ::  The raw script as a string, which you may want to supply if you're initializing Plotter inside
+      #                   of a Rails or IRB console. Defaults to the contents of the file named in +:title+.
+      # +:svg+        ::  The raw SVG string, if you've produced that already.
+      #
+      # You must supply at least +:svg+ OR +:title+.
+      #
+      def create_handle options = {}
+        options = {
+            :title => nil,
+            :raw_script => nil,
+            :svg    => nil
+        }.merge(options)
+
+        raise(ArgumentError, "Need at least :svg or :title for create_handle") if options[:title].nil? && options[:svg].nil?
+
+        svg = options[:svg] || create_svg(options[:title], options[:raw_script])
         begin
           RSVG::Handle.new_from_data(svg).tap { |s| s.close }
         rescue RSVG::Error => e
-          STDERR.puts "There appears to be a mysterious problem with the SVG output for your plot. Storing debug output in debug.svg."
-          STDERR.puts "Make sure your data() call is in the right place."
-          File.open("debug.svg", "w") { |f| f.puts svg }
+          STDERR.puts "There appears to be a mysterious problem with the SVG output for your plot. Storing debug output in sciruby_debug.svg."
+          STDERR.puts "Make sure your data() call is in the right place in your plot code."
+          File.open("sciruby_debug.svg", "w") { |f| f.puts svg }
           raise e
         end
       end
       
-      # Render an SVG, returning the file contents (not written).
-      def create_svg filename, script=nil
-        vis = Interpreter.new(filename, script).eval_script
+      # Render an SVG, returning the file contents (not written). +title+ should be a filename, unless you supply a script
+      # as a string for +raw_script+.
+      def create_svg title, raw_script=nil
+        vis = Interpreter.new(title, raw_script).eval_script
         svg = vis.to_svg
       end
 
-      # Returns raw data that can be written directly to a file, based on the +output_extension+ given. Uses RMagick to
-      # do the writing, so handles just about any format RMagick handles. For a list supported by your machine, you can
-      # do:
+
+      # Write image to a file. Format is chosen automatically based on +output_filename+.
       #
-      #     require 'RMagick'
-      #     Magick::formats
+      # === Arguments
       #
-      # Look for a 'w'. This means RMagick can write. If it has a - where the w should be, writing is not supported.
+      # +script_filename+::  The script to evaluate using +create_svg+
+      # +output_filename+::  Name of the image file to write (needs to have an extension!)
+      #
+      def write_image script_filename, output_filename
+        data = create_image_data(script_filename, File.extname(output_filename))
+        File.open(output_filename, "w+") do |f|
+          f.write(data)
+        end
+      end
+
+
+      # Returns raw image data (a string) from either create_write_image or create_svg
       #
       # === Arguments
       #
       # +script_filename+::  The script to evaluate using +create_svg+
       # +output_extension+:: e.g., '.pdf' or '.svg', with or without the period
-      # +width+::            width of the image to be created
-      # +height+::           height of the image to be created
       #
-      def create_write_data script_filename, output_extension
+      def create_image_data script_filename, output_extension
         # Normalize the output extension.
         output_extension.upcase!
         output_extension = output_extension.split('.').tap{ |ext| ext.shift }.join('.') if output_extension =~ /^\./
@@ -193,19 +222,68 @@ module SciRuby
         if output_extension == 'SVG'
           create_svg script_filename
         else
-          begin
-            require 'RMagick'
+          new_format = output_extension == 'PS' ? 'PS3' : output_extension
+          create_image(script_filename, new_format).to_blob
+        end
+      end
 
-            format_support = Magick.formats[output_extension]
-            raise(ArgumentError, "RMagick cannot write format '#{output_extension}'") if format_support.nil? || format_support[2] == '-'
 
-            image = Magick::Image::from_blob(create_svg(script_filename)) { self.format = 'SVG' }
-            image[0].format = output_extension
-            image[0].to_blob
+      # Returns a Magick::Image that can be converted to a blob and then written directly to a file, based on the
+      # +output_extension+ given. Uses RMagick to do the writing, so handles just about any format RMagick handles. For
+      # a list supported by your machine, you can do:
+      #
+      #     require 'RMagick'
+      #     Magick::formats
+      #
+      # Look for a 'w'. This means RMagick can write. If it has a - where the w should be, writing is not supported.
+      #
+      # Note about PostScript: For whatever reason, postscript quality is shitty in ImageMagick. This is a bug. You should
+      # probably write to a PDF instead. If you need help writing to a PostScript, ask on the SciRuby Google Group, and
+      # maybe we can resolve this bug together. =)
+      #
+      # === Arguments
+      #
+      # +script_filename+::  The script to evaluate using +create_svg+
+      # +new_format+     ::  e.g., :PDF, :PS, :PS3, etc.
+      #
+      def create_image script_filename, new_format
+        new_format = new_format.to_s
+        begin
+          require 'RMagick'
 
-          rescue LoadError
-            raise(ArgumentError, "RMagick not found; cannot write PDF")
+          format_support = Magick.formats[new_format]
+          raise(ArgumentError, "RMagick cannot write format '#{new_format}'") if format_support.nil? || format_support[2] == '-'
+
+          raw_svg = create_svg(script_filename)
+
+          # Specify input parameters in the block. We're always going to convert *from* SVG, so that goes there.
+          image = Magick::Image::from_blob(raw_svg) { self.format = 'SVG' }
+          page  = image[0].page # Get dimensions
+
+          # Set write options.
+          #   * format is based on the extension the user gives for the file. For most types, just use the extension.
+          #     For postscript, you actually want PS3.
+          #   * use-cropbox is for PDFs and postscripts, to tell it to use the cropbox instead of the mediabox. This
+          #     improves the image quality by forcing it to use a size closer to that of the actual SVG. See also:
+          #     https://github.com/SciRuby/sciruby/issues/15#issuecomment-2880761
+          image[0].format = new_format
+
+          if %w{PS PS2 PS3 PDF}.include?(new_format) # PDF/PS settings
+            STDERR.puts "create_image: use-cropbox enabled"
+            image[0]["use-cropbox"] = 'true'
+
+            unless new_format == 'PDF'
+              # This is a kludge. Not clear on why this is necessary, but otherwise quality is simply terrible.
+              STDERR.puts "Warning: PostScript creation is wonky! See documentation on SciRuby::Plotter::create_image."
+              STDERR.puts "create_image: setting density to 100x100; setting page dimensions"
+              image[0].density = "100x100"
+              image[0].page    = page
+            end
           end
+
+          image[0]
+        rescue LoadError
+          raise(ArgumentError, "RMagick not found; cannot write PDF")
         end
       end
       

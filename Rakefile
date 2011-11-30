@@ -57,6 +57,7 @@ end
 h = Hoe.spec 'sciruby' do
   self.version = SciRuby::VERSION
   self.require_ruby_version ">=1.9"
+  self.readme_file = 'README.rdoc'
   self.developer('SciRuby Development Team', 'sciruby-dev@googlegroups.com')
   self.extra_deps = {'distribution' => ">=0.4.0",
                      'green_shoes' => ">=1.0.282",

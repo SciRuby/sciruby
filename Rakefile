@@ -130,11 +130,12 @@ Thanks for installing SciRuby! Happy hypothesis testing!
 end
 
 RDoc::Task.new(:docs) do |rd|
-  rd.main = h.readme_file
   rd.options << '-d' if (`which dot` =~ /\/dot/) unless
     ENV['NODOT'] || Hoe::WINDOZE
   rd.rdoc_dir = 'doc'
 
+  rd.rdoc_files.include(h.readme_file)
+  rd.main = h.readme_file
   rd.rdoc_files.include("lib/**/*.rb")
   rd.rdoc_files += h.spec.extra_rdoc_files
   rd.rdoc_files.reject! {|f| f=="Manifest.txt"}

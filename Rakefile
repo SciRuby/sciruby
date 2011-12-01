@@ -57,6 +57,7 @@ end
 h = Hoe.spec 'sciruby' do
   self.version = SciRuby::VERSION
   self.require_ruby_version ">=1.9"
+  self.readme_file = 'README.rdoc'
   self.developer('SciRuby Development Team', 'sciruby-dev@googlegroups.com')
   self.extra_deps = {'distribution' => ">=0.4.0",
                      'green_shoes' => ">=1.0.282",
@@ -129,11 +130,12 @@ Thanks for installing SciRuby! Happy hypothesis testing!
 end
 
 RDoc::Task.new(:docs) do |rd|
-  rd.main = h.readme_file
   rd.options << '-d' if (`which dot` =~ /\/dot/) unless
     ENV['NODOT'] || Hoe::WINDOZE
   rd.rdoc_dir = 'doc'
 
+  rd.rdoc_files.include(h.readme_file)
+  rd.main = h.readme_file
   rd.rdoc_files.include("lib/**/*.rb")
   rd.rdoc_files += h.spec.extra_rdoc_files
   rd.rdoc_files.reject! {|f| f=="Manifest.txt"}

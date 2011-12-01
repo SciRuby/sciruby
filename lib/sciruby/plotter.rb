@@ -258,7 +258,7 @@ module SciRuby
 
           # Specify input parameters in the block. We're always going to convert *from* SVG, so that goes there.
           image = Magick::Image::from_blob(raw_svg) { self.format = 'SVG' }
-          page  = image[0].page # Get dimensions
+          page  = image[0].page.dup # Get dimensions
 
           # Set write options.
           #   * format is based on the extension the user gives for the file. For most types, just use the extension.

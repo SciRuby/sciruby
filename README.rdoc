@@ -1,10 +1,10 @@
 = SciRuby
 
-A science and visualization package written for Ruby
+Tools for Scientific Computing in Ruby
 
-* Project homepage: http://sciruby.com
-* Google+ page: https://plus.google.com/109304769076178160953/posts
-* Installation guide: http://sciruby.com/docs
+* {Project homepage: sciruby.com}[http://sciruby.com]
+* {SciRuby on Google+}[https://plus.google.com/109304769076178160953/posts]
+* {Installation guide}[http://sciruby.com/docs#installation]
 
 == Description
 
@@ -12,7 +12,7 @@ Ruby has for some time had no equivalent to the beautifully constructed numpy, s
 
 We are not the first with this idea, but we are trying to bring it to life.
 
-Support us at {Pledgie.com}[http://www.pledgie.com/campaigns/15783]
+{<img src=https://www.pledgie.com/campaigns/15783.png?skin_name=chrome>}[http://www.pledgie.com/campaigns/15783]
 
 === WARNING:
 
@@ -70,7 +70,7 @@ More detailed installation instructions are available at {here}[http://sciruby.c
 
 == DEVELOPERS:
 
-Before commiting any code, you *MUST* read our {Contributor Agreement}[http://github.com/SciRuby/sciruby/wiki/Contributor-Agreement]
+Before commiting any code, you *MUST* read our {Contributor Agreement}[http://github.com/SciRuby/sciruby/wiki/Contributor-Agreement].
 
 After checking out the source, run:
 
@@ -88,10 +88,8 @@ Copyright (c) 2010 - 2011, The Ruby Science Foundation.
 
 All rights reserved.
 
-SciRuby is licensed under the BSD 2-clause license. See link:LICENSE.txt for details.
+SciRuby is licensed under the BSD 2-clause license. See {LICENSE.txt}[https://github.com/SciRuby/sciruby/wiki/License] for details.
 
 == DONATIONS:
 
-http://pledgie.com/campaigns/15783.png
-
-{click here to support SciRuby on pedgie}[http://www.pledgie.com/campaigns/15783]
+{<img src=https://www.pledgie.com/campaigns/15783.png?skin_name=chrome>}[http://www.pledgie.com/campaigns/15783]

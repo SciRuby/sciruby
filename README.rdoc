@@ -18,6 +18,12 @@ We are not the first with this idea, but we are trying to bring it to life.
 
 Please be aware that SciRuby is in *PRE-ALPHA* status. If you're thinking of using SciRuby to write mission critical code, such as for driving a car or flying a space shuttle, you may wish to choose other software (for now).
 
+=== A note about repositories
+
+Most of the work right now is happening in NMatrix. If you want to help out, you should check out either mohawkjohn's or chriswailes' fork of NMatrix, not this one.
+
+Updates only happen in the main repository when a feature becomes stable. The project activity log may be misleading.
+
 == Features
 
 * SciRuby::Plotter - visualization GUI for updating plots as scripts are modified
@@ -27,10 +33,7 @@ Please be aware that SciRuby is in *PRE-ALPHA* status. If you're thinking of usi
 * SciRuby::Analysis - domain-specific language (DSL) for hassle-free statistical analysis (originally from {Statsample}[http://github.com/clbustos/statsample])
 * {Minimization}[https://github.com/clbustos/minimization] algorithms in pure Ruby and using GSL
 * Numeric {integration}[https://github.com/clbustos/integration] algorithms
-
-== Planned Features
-
-* {Numarray}[http://narray.rubyforge.org/] rewrite, including sparse matrices.
+* {NMatrix}[https://github.com/SciRuby/nmatrix], an experimental linear algebra system for Ruby, with dense and sparse matrices
 
 == SYNOPSIS:
 
@@ -47,7 +50,7 @@ Or, inside a Ruby shell,
 * statsample (and optionally statsample-optimization)
 * distribution
 * rubyvis
-* narray
+* nmatrix
 * minimization
 * integration
 * green_shoes

@@ -2,21 +2,15 @@
 
 Tools for Scientific Computing in Ruby
 
-* {Project homepage: sciruby.com}[http://sciruby.com]
-* {SciRuby on Google+}[https://plus.google.com/109304769076178160953/posts]
-* {Installation guide}[http://sciruby.com/docs#installation]
+* {Installation}[https://github.com/SciRuby/sciruby/wiki/Installation]
+* {Website}[http://sciruby.com]
+* {Google+}[https://plus.google.com/109304769076178160953/posts]
 
 == Description
 
 Ruby has for some time had no equivalent to the beautifully constructed numpy, scipy, and matplotlib libraries for Python. We believe that the time for a Ruby science and visualization package has come and gone. Sometimes when a solution of sugar and water becomes super-saturated, from it precipitates a pure, delicious, and diabetes-inducing crystal of sweetness, induced by no more than the tap of a finger. So it is, we believe, with the need for numeric and visualization libraries in Ruby.
 
 We are not the first with this idea, but we are trying to bring it to life.
-
-{<img src=https://www.pledgie.com/campaigns/15783.png?skin_name=chrome>}[http://www.pledgie.com/campaigns/15783]
-
-=== WARNING:
-
-Please be aware that SciRuby is in *PRE-ALPHA* status. If you're thinking of using SciRuby to write mission critical code, such as for driving a car or flying a space shuttle, you may wish to choose other software (for now).
 
 === A note about repositories
 
@@ -45,23 +39,17 @@ Or, inside a Ruby shell,
 
     $ require 'sciruby'
 
-== REQUIREMENTS:
+== Installation
 
-* statsample (and optionally statsample-optimization)
-* distribution
-* rubyvis
-* nmatrix
-* minimization
-* integration
-* green_shoes
+For a more complete tutorial, with fixes for the most common errors, {read the installation page on our wiki}[https://github.com/SciRuby/sciruby/wiki/Installation].
 
-== INSTALLATION:
-
-    gem install sciruby
-
-You'll also want to make sure you install the headers for the GUI. If you're using Ubuntu:
+There are some libraries and gems you'll need to install before using SciRuby, e.g. {green_shoes}[https://github.com/ashbb/green_shoes]. If you're in Ubuntu:
 
     sudo apt-get install libgtk2.0-dev libgtksourceview2.0-dev librsvg2-dev libcairo2-dev
+
+Then, you just install sciruby as a gem:
+
+    gem install sciruby
 
 You can also optionally get rb-gsl, statistics2, and other useful architecture-specific packages using
 
@@ -69,30 +57,26 @@ You can also optionally get rb-gsl, statistics2, and other useful architecture-s
 
 Note that as of this writing, rb-gsl is incompatible with the 1.15 version of the GSL headers. You should make sure you're using the 1.14 headers.
 
-More detailed installation instructions are available at {here}[http://sciruby.com/docs#installation]
+At the moment, *there's a problem* with this setup: {NMatrix}[https://github.com/sciruby/nmatrix] is incompatible with the +rb-gsl+ gem, which it makes impossible to use SciRuby as a whole, but you're able to use the subprojects independently. We're working on a fix for it {in this repository}[https://github.com/sciruby/rb-gsl].
 
-== DEVELOPERS:
+== Developers
 
-Before commiting any code, you *MUST* read our {Contributor Agreement}[http://github.com/SciRuby/sciruby/wiki/Contributor-Agreement].
+Read the instructions in +CONTRIBUTING.md+ if you want to help.
 
-After checking out the source, run:
+== Warning
 
-    $ bundle exec rake newb
-    $ bundle install
+Please be aware that SciRuby is in *ALPHA* status. If you're thinking of using SciRuby to write mission critical code, such as for driving a car or flying a space shuttle, you may wish to choose other software (for now).
 
-This task will install any missing dependencies, run the tests/specs,
-and generate the RDoc.
+== License
 
-NOTE: Don't despair if `rake newb` doesn't work for you. We're still working out the kinks.
-
-== LICENSE:
-
-Copyright (c) 2010 - 2011, The Ruby Science Foundation.
+Copyright (c) 2010 - 2013, The Ruby Science Foundation.
 
 All rights reserved.
 
 SciRuby is licensed under the BSD 2-clause license. See {LICENSE.txt}[https://github.com/SciRuby/sciruby/wiki/License] for details.
 
-== DONATIONS:
+== Donations
 
-{<img src=https://www.pledgie.com/campaigns/15783.png?skin_name=chrome>}[http://www.pledgie.com/campaigns/15783]
+Support a SciRuby Fellow:
+
+{<img src=http://pledgie.com/campaigns/15783.png?skin_name=chrome>}[http://www.pledgie.com/campaigns/15783]

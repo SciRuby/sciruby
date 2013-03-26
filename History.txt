@@ -6,6 +6,7 @@
   * Plotter allows saving to formats other than SVG -- anything that RMagick supports.
     * RMagick is an optional dependency. SVG writing will work even without it.
   * Minor improvements to API documentation
+* Removed old tests and unnecessary files.
 
 === 0.0.13 / 2011-11-03
 

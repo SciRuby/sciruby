@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
-require 'rubygems'
+$:.unshift File.join(File.dirname(__FILE__), *%w{ .. lib })
+
 require 'sciruby'
 
 if ARGV.size == 0

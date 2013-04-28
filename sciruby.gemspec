@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["SciRuby Development Team"]
   s.date = "2011-11-03"
-  s.description = "Ruby has for some time had no equivalent to the beautifully constructed numpy, scipy, and matplotlib libraries for Python. We believe that the time for a Ruby science and visualization package has come and gone. Sometimes when a solution of sugar and water becomes super-saturated, from it precipitates a pure, delicious, and diabetes-inducing crystal of sweetness, induced by no more than the tap of a finger. So it is, we believe, with the need for numeric and visualization libraries in Ruby.\n\nWe are not the first with this idea, but we are trying to bring it to life.\n\n[![Click here to lend your support to SciRuby and make a donation at pledgie.com!](https://www.pledgie.com/campaigns/15783.png?skin_name=chrome)](http://www.pledgie.com/campaigns/15783)"
+  s.description = "Ruby has for some time had no equivalent to the beautifully constructed numpy, scipy, and matplotlib libraries for Python. We believe that the time for a Ruby science and visualization package has come and gone. Sometimes when a solution of sugar and water becomes super-saturated, from it precipitates a pure, delicious, and diabetes-inducing crystal of sweetness, induced by no more than the tap of a finger. So it is, we believe, with the need for numeric and visualization libraries in Ruby. We are not the first with this idea, but we are trying to bring it to life."
   s.email = ["sciruby-dev@googlegroups.com"]
   s.executables = ["sciruby-plotter"]
   s.extra_rdoc_files = ["History.txt", "Manifest.txt"]

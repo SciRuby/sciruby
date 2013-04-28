@@ -5,6 +5,7 @@ Tools for Scientific Computing in Ruby
 * {Installation}[https://github.com/SciRuby/sciruby/wiki/Installation]
 * {Website}[http://sciruby.com]
 * {Google+}[https://plus.google.com/109304769076178160953/posts]
+* {NMatrix}[http://github.com/SciRuby/nmatrix]
 
 == Description
 
@@ -14,7 +15,7 @@ We are not the first with this idea, but we are trying to bring it to life.
 
 === A note about repositories
 
-Most of the work right now is happening in NMatrix. If you want to help out, you should check out either mohawkjohn's or chriswailes' fork of NMatrix, not this one.
+Most of the work right now is happening in {NMatrix}[http://github.com/SciRuby/nmatrix]. If you want to help out, you should check out either mohawkjohn's or chriswailes' fork of NMatrix, not this one.
 
 Updates only happen in the main repository when a feature becomes stable. The project activity log may be misleading.
 
@@ -28,6 +29,7 @@ Updates only happen in the main repository when a feature becomes stable. The pr
 * {Minimization}[https://github.com/clbustos/minimization] algorithms in pure Ruby and using GSL
 * Numeric {integration}[https://github.com/clbustos/integration] algorithms
 * {NMatrix}[https://github.com/SciRuby/nmatrix], an experimental linear algebra system for Ruby, with dense and sparse matrices
+* {rb-gsl fork replacing NArray with NMatrix}[http://github.com/SciRuby/rb-gsl]
 
 == SYNOPSIS:
 

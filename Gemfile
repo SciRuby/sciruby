@@ -27,6 +27,5 @@ gem "rmagick", ">=2.13", :group => [:development, :test]
 gem "hoe-gemspec", "~>1.0", :group => [:development, :test]
 gem "hoe-bundler", "~>1.1", :group => [:development, :test]
 gem "minitest", "~>2.0", :group => [:development, :test]
-gem "hoe", "~>2.12", :group => [:development, :test]
 
 # vim: syntax=ruby

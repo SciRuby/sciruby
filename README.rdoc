@@ -19,63 +19,13 @@ Most of the work right now is happening in {NMatrix}[http://github.com/SciRuby/n
 
 Updates only happen in the main repository when a feature becomes stable. The project activity log may be misleading.
 
-== Features
-
-* SciRuby::Plotter - visualization GUI for updating plots as scripts are modified
-* SciRuby::Editor - code editor for modifying rubyvis plot scripts
-* {Rubyvis}[http://rubyvis.rubyforge.org] - {Protovis}[http://mbostock.github.com/protovis/]-like plotting in Ruby
-* {Statsample}[https://github.com/clbustos/statsample] - a suite for basic and advanced statistics in Ruby
-* SciRuby::Analysis - domain-specific language (DSL) for hassle-free statistical analysis (originally from {Statsample}[http://github.com/clbustos/statsample])
-* {Minimization}[https://github.com/clbustos/minimization] algorithms in pure Ruby and using GSL
-* Numeric {integration}[https://github.com/clbustos/integration] algorithms
-* {NMatrix}[https://github.com/SciRuby/nmatrix], an experimental linear algebra system for Ruby, with dense and sparse matrices
-* {rb-gsl fork replacing NArray with NMatrix}[http://github.com/SciRuby/rb-gsl]
-
-== SYNOPSIS:
-
-From the command line,
-
-    sciruby-plotter my_plot.rb
-
-Or, inside a Ruby shell,
-
-    $ require 'sciruby'
-
-== Installation
-
-For a more complete tutorial, with fixes for the most common errors, {read the installation page on our wiki}[https://github.com/SciRuby/sciruby/wiki/Installation].
-
-There are some libraries and gems you'll need to install before using SciRuby, e.g. {green_shoes}[https://github.com/ashbb/green_shoes]. If you're in Ubuntu:
-
-    sudo apt-get install libgtk2.0-dev libgtksourceview2.0-dev librsvg2-dev libcairo2-dev
-
-Then, you just install sciruby as a gem:
-
-    gem install sciruby
-
-You can also optionally get rb-gsl, statistics2, and other useful architecture-specific packages using
-
-    gem install statsample-optimization
-
-Note that as of this writing, rb-gsl is incompatible with the 1.15 version of the GSL headers. You should make sure you're using the 1.14 headers.
-
-At the moment, *there's a problem* with this setup: {NMatrix}[https://github.com/sciruby/nmatrix] is incompatible with the +rb-gsl+ gem, which it makes impossible to use SciRuby as a whole, but you're able to use the subprojects independently. We're working on a fix for it {in this repository}[https://github.com/sciruby/rb-gsl].
-
-== Developers
-
-Read the instructions in +CONTRIBUTING.md+ if you want to help.
-
-== Warning
-
-Please be aware that SciRuby is in *ALPHA* status. If you're thinking of using SciRuby to write mission critical code, such as for driving a car or flying a space shuttle, you may wish to choose other software (for now).
-
 == License
 
-Copyright (c) 2010 - 2013, The Ruby Science Foundation.
+Copyright (c) 2010 onward, The Ruby Science Foundation.
 
 All rights reserved.
 
-SciRuby is licensed under the BSD 2-clause license. See {LICENSE.txt}[https://github.com/SciRuby/sciruby/wiki/License] for details.
+SciRuby is licensed under the BSD 3-clause license. See {LICENSE.txt}[https://github.com/SciRuby/sciruby/wiki/License] for details.
 
 == Donations
 

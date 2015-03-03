@@ -17,7 +17,7 @@ We are not the first with this idea, but we are trying to bring it to life.
 
 Most of the work right now is happening in {NMatrix}[http://github.com/SciRuby/nmatrix]. If you want to help out, you should check out either mohawkjohn's or chriswailes' fork of NMatrix, not this one.
 
-Updates only happen in the main repository when a feature becomes stable. The project activity log may be misleading.
+**This repository is a placeholder!** Don't try to commit things here. Instead, go check out the many other repositories in the SciRuby account.
 
 == License
 

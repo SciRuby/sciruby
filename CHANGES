@@ -1,3 +1,8 @@
+0.2.2 (2015-06-09)
+
+  * Add SciRuby::Gems and SciRuby.gems
+  * SciRuby libraries can be autoloaded
+
 0.2.1 (2015-06-08)
 
   * Initial release as a meta gem

@@ -8,7 +8,7 @@ There are various ways in which you can improve SciRuby. Coding and documentatio
 
 Apart from adding features and functionality, you can also create tests (we use RSpec), guides on how to do something using SciRuby, document the libraries and help find and fix bugs.
 
-Start by visiting our [issue tracker] if you want to start contributing, there's probably something with which you can help.
+Start by visiting our [issue tracker](https://github.com/SciRuby/sciruby/issues?state=open) if you want to start contributing, there's probably something with which you can help.
 
 ## Projects
 
@@ -34,7 +34,7 @@ If you solved a problem or created an application that uses SciRuby or its subpr
 
 ## Conclusion
 
-Before commiting any code, you *MUST* read our {Contributor Agreement}[http://github.com/SciRuby/sciruby/wiki/Contributor-Agreement]. This is meant to protect both us and the users of SciRuby, as there are lots of scientific packages (or code found in books) that aren't so "open" as we would like them to be.
+Before commiting any code, you *MUST* read our [Contributor Agreement](http://github.com/SciRuby/sciruby/wiki/Contributor-Agreement). This is meant to protect both us and the users of SciRuby, as there are lots of scientific packages (or code found in books) that aren't so "open" as we would like them to be.
 
 [mailing-list]: https://groups.google.com/forum/?fromgroups#!forum/sciruby-dev
 [sciruby]: http://sciruby.com

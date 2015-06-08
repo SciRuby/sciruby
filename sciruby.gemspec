@@ -1,5 +1,6 @@
 # coding: utf-8
-require File.dirname(__FILE__) + '/lib/sciruby/version'
+$: << File.join(File.dirname(__FILE__), 'lib')
+require 'sciruby'
 require 'date'
 
 SCIRUBY_FULL = false unless defined?(SCIRUBY_FULL)
@@ -23,12 +24,12 @@ Gem::Specification.new do |s|
     s.files.reject! {|f| f =~ /\Alib/ }
 
     s.add_runtime_dependency 'sciruby', "= #{SciRuby::VERSION}"
-    File.read('Gemfile').scan(/gem\s+'(.*?)'/) { s.add_runtime_dependency $1, '~> 0' }
+    SciRuby.all_gems.each {|gem| s.add_runtime_dependency gem, '~> 0' }
   else
     s.files.delete 'sciruby-full.gemspec'
 
     m = "Please consider installing 'sciruby-full' or the following gems:\n"
-    File.read('Gemfile').scan(/gem\s+'(.*?)'/) { m << "  * #{$1}\n" }
+    SciRuby.all_gems.each {|gem| m << "  * #{gem}\n" }
     s.post_install_message = m << "\n"
   end
 end

@@ -1,3 +1,5 @@
+# This file specifies all gems which are installed by the `sciruby-full` gem or recommended by the `sciruby` gem.
+
 source 'https://rubygems.org'
 
 gem 'nmatrix'

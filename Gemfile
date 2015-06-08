@@ -14,7 +14,6 @@ gem 'iruby'
 gem 'pry'
 gem 'awesome_print'
 
-gem 'extendmatrix'
 gem 'daru'
 
 gem 'integration'
@@ -25,8 +24,8 @@ gem 'statsample'
 gem 'statsample-glm'
 gem 'statsample-timeseries'
 gem 'statsample-bivariate-extension'
+gem 'extendmatrix'
 
 gem 'publisci'
 
 gem 'ai4r'
-

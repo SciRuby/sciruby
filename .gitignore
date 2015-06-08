@@ -1,2 +1,2 @@
-.idea/*
-pkg/
+*.gem
+Gemfile.lock

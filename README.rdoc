@@ -1,4 +1,4 @@
-= SciRuby
+= SciRuby meta gem
 
 Tools for Scientific Computing in Ruby
 
@@ -12,10 +12,6 @@ Tools for Scientific Computing in Ruby
 Ruby has for some time had no equivalent to the beautifully constructed numpy, scipy, and matplotlib libraries for Python. We believe that the time for a Ruby science and visualization package has come and gone. Sometimes when a solution of sugar and water becomes super-saturated, from it precipitates a pure, delicious, and diabetes-inducing crystal of sweetness, induced by no more than the tap of a finger. So it is, we believe, with the need for numeric and visualization libraries in Ruby.
 
 We are not the first with this idea, but we are trying to bring it to life.
-
-=== A note about repositories
-
-**This repository is a placeholder!** Don't try to commit things here. Instead, go look at one of the many projects in the SciRuby account.
 
 == License
 

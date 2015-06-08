@@ -4,7 +4,7 @@ This guide covers way in which you can contribute.
 
 ## How to help
 
-There are various ways in which you can improve SciRuby. Coding and documentation are the two primary possibilities, but you can also contribute to one of ours subprojects (listed below) and participate in the [mailing list][mailing-list] -- suggesting ideas and changes is very important!
+There are various ways in which you can improve SciRuby. Coding and documentation are the two primary possibilities and participate in the [mailing list][mailing-list] -- suggesting ideas and changes is very important!
 
 Apart from adding features and functionality, you can also create tests (we use RSpec), guides on how to do something using SciRuby, document the libraries and help find and fix bugs.
 

@@ -3,6 +3,6 @@ require 'sciruby'
 
 source 'https://rubygems.org'
 
-SciRuby.gems.all.each do |name, options|
+SciRuby.gems.each do |name, options|
   gem name, *options[:version], require: options[:require].first
 end

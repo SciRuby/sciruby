@@ -39,7 +39,7 @@ module SciRuby
       options[:module] = name.capitalize unless options.include?(:module)
       options[:module] = [*options[:module]].map(&:to_sym)
       options[:module].each {|mod| autoload_modules[mod] = options[:require] }
-      gems[name] = options
+      gems[name] = options unless options[:disabled]
     end
   end
 

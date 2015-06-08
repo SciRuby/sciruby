@@ -45,9 +45,10 @@ statsample-glm:
 statsample-bivariate-extension:
   descriptions: 'Statistics'
   module: ~
-#statsample-timeseries: # currently not working because of activesupport dependency
-# descriptions: 'Statistics'
-# module: ~
+statsample-timeseries:
+  disabled:     'because of activesupport conflict'
+  descriptions: 'Statistics'
+  module: ~
 extendmatrix:
   description: 'Helper methods for Matrix'
   module: ~
@@ -61,3 +62,7 @@ ai4r:
 
 bio:
   description: 'Bioinformatics suite'
+
+ruby-fftw3:
+  disabled:    'because it works only with narray'
+  description: 'Fast Fourier transformation'

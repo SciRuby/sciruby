@@ -22,10 +22,13 @@ gem 'distribution'
 
 gem 'statsample'
 gem 'statsample-glm'
-gem 'statsample-timeseries'
 gem 'statsample-bivariate-extension'
+#gem 'statsample-timeseries' # currently not working because of activesupport dependency
 gem 'extendmatrix'
 
 gem 'publisci'
 
 gem 'ai4r'
+
+# from the bioruby project
+gem 'bio'

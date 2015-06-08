@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
     s.files.reject! {|f| f =~ /\Alib/ }
 
     s.add_runtime_dependency 'sciruby', "= #{SciRuby::VERSION}"
-    SciRuby.all_gems.each {|gem| s.add_runtime_dependency gem, '~> 0' }
+    SciRuby.all_gems.each {|gem| s.add_runtime_dependency gem }
   else
     s.files.delete 'sciruby-full.gemspec'
 

@@ -2,7 +2,7 @@ module SciRuby
   extend self
 
   def all_gems
-    @all_gems ||= File.read(File.expand_path(File.join(__FILE__, '..', '..', '..', 'Gemfile'))).scan(/gem\s+'(.*?)'/).map(&:first)
+    @all_gems ||= File.read(File.expand_path(File.join(__FILE__, '..', '..', '..', 'Gemfile'))).scan(/^(?!#.*)gem\s+'(.*?)'/).map(&:first)
   end
 
   def installed_gems

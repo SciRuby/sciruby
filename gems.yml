@@ -1,0 +1,63 @@
+# Specify all gems which are installed by the `sciruby-full` gem or recommended by the `sciruby` gem.
+
+nmatrix:
+  description: 'Numerical matrix library'
+  module: [NMatrix, NVector]
+gsl-nmatrix:
+  description: 'Bindings for the GNU scientific library'
+  require: gsl
+  module: GSL
+
+rubyvis:
+  description: 'Plotting library'
+nyaplot:
+  description: 'Plotting library'
+plotrb:
+  description: 'Plotting library'
+gnuplot:
+  description: 'Plotting library'
+
+iruby:
+  module: IRuby
+  description: 'Ruby kernel for Jupyter'
+pry:
+  module: Pry
+  description: 'Ruby repl'
+awesome_print:
+  module: ~
+  description: 'Pretty object printing'
+
+daru:
+  description: 'Dataframe library'
+
+integration:
+  description: 'Numerical integration'
+minimization:
+  description: 'Numerical minimization'
+distribution:
+  description: 'Statistical distributions'
+
+statsample:
+  descriptions: 'Statistics'
+statsample-glm:
+  descriptions: 'Statistics'
+  module: ~
+statsample-bivariate-extension:
+  descriptions: 'Statistics'
+  module: ~
+#statsample-timeseries: # currently not working because of activesupport dependency
+# descriptions: 'Statistics'
+# module: ~
+extendmatrix:
+  description: 'Helper methods for Matrix'
+  module: ~
+
+publisci:
+  description: 'Publishing toolkit'
+  module: PubliSci
+
+ai4r:
+  description: 'Artificial intelligence'
+
+bio:
+  description: 'Bioinformatics suite'

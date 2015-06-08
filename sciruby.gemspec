@@ -24,12 +24,12 @@ Gem::Specification.new do |s|
     s.files.reject! {|f| f =~ /\Alib/ }
 
     s.add_runtime_dependency 'sciruby', "= #{SciRuby::VERSION}"
-    SciRuby.all_gems.each {|gem| s.add_runtime_dependency gem }
+    SciRuby.gems.all.each {|name, options| s.add_runtime_dependency name, *options[:version] }
   else
     s.files.delete 'sciruby-full.gemspec'
 
     m = "Please consider installing 'sciruby-full' or the following gems:\n"
-    SciRuby.all_gems.each {|gem| m << "  * #{gem}\n" }
+    SciRuby.gems.all.each {|name, options| m << "  * #{name}\n" }
     s.post_install_message = m << "\n"
   end
 end

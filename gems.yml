@@ -216,3 +216,9 @@ ode:
   description: Ordinary differential equations
   category: numerics
   exclude: because of Fortran dependency
+
+ruby-minisat:
+  description: SAT solver
+  category: logic
+  require: minisat
+  module: MiniSat

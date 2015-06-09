@@ -58,7 +58,7 @@ algorithms:
 
 daru:
   description: Dataframe library
-  category: database
+  category: data
 
 integration:
   description: Numerical integration
@@ -106,7 +106,7 @@ statsample-optimization:
 extendmatrix:
   description: Helper methods for Matrix
   module: ~
-  category: numerics
+  category: algebra
 
 publisci:
   description: Publishing toolkit
@@ -115,7 +115,7 @@ publisci:
 
 ai4r:
   description: Artificial intelligence
-  category: machine learning
+  category: artificial intelligence
 
 gimuby:
   description: Genetic algorithms
@@ -161,43 +161,43 @@ ruby-dcl:
 ruby-band:
   exclude: because of dependencies
   description: Data mining
-  category: machine learning
+  category: artificial intelligence
   module: ~
 
 classifier:
   description: Machine learning
-  category: machine learning
+  category: artificial intelligence
 
 stuff-classifier:
   description: Machine learning
-  category: machine learning
+  category: artificial intelligence
   module: StuffClassifier
 
 decisiontree:
   description: Machine learning
-  category: machine learning
+  category: artificial intelligence
   module: DecisionTree
 
 irtruby:
   exclude: because of dependencies
   description: Machine learning
-  category: machine learning
+  category: artificial intelligence
   module: IRT
 
 ruby-opencv:
   description: Computer vision
   exclude: because of dependencies
-  category: computer vision
+  category: artificial intelligence
   module: OpenCV
 
 ruby-fann:
   description: Neural networks
-  category: machine learning
+  category: artificial intelligence
   module: RubyFann
 
 rb-libsvm:
   description: Support vector machines (machine learning)
-  category: machine learning
+  category: artificial intelligence
   module: Libsvm
   require: libsvm
 
@@ -215,33 +215,33 @@ sciruby-full:
 
 matrix:
   description: Stdlib matrix module
-  category: numerics
+  category: algebra
   maintainer: stdlib
 
 prime:
   description: Stdlib prime module
-  category: numerics
+  category: algebra
   maintainer: stdlib
 
 cmath:
   description: Stdlib cmath module
-  category: numerics
+  category: algebra
   maintainer: stdlib
 
 rsruby:
   description: R interpreter
-  category: r interpreter
+  category: statistics
   exclude: because of dependencies
   module: RSRuby
 
 rinruby:
   description: R interpreter
-  category: r interpreter
+  category: statistics
   module: [R, RinRuby]
 
 rserve-client:
   description: R interpreter
-  category: r interpreter
+  category: statistics
   module: RServe
   require: rserve
 
@@ -252,26 +252,26 @@ ode:
 
 ruby-minisat:
   description: SAT solver
-  category: logic
+  category: algebra
   require: minisat
   module: MiniSat
 
 cassowary:
   description: Incremental constraint solver
-  category: solver
+  category: optimization
   exclude: because of dependencies
 
 lpsolve:
   description: Linear solver
-  category: solver
+  category: optimization
   exclude: because of dependencies
   module: LPSolve
 
 unit:
   description: Calculation with units
-  category: symbolic
+  category: physics
 
 modshogun:
   description: Machine learning
-  category: machine learning
+  category: artificial intelligence
   exclude: not available as a gem

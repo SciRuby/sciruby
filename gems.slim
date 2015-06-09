@@ -5,21 +5,30 @@ ruby:
       sort_by.with_index {|e, i| [yield(e), i] }
     end
   end
+
 doctype html
 html
   head
     title SciRuby gems
     link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"
+    link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.css"
+    script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"
+    script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.js"
   body
     h1 SciRuby gems
-    table.table.table-striped
-      thead
-        tr
-          th Maintainer
-          th Category
-          th Name
-          th Description
-          th Autoloaded modules
+    table.table(data-toggle="table"
+                data-search="true"
+		data-sortable="true"
+                data-show-toggle="true"
+                data-show-columns="true"
+                data-mobile-responsive="true"
+		data-striped="true")
+      thead: tr
+        th data-sortable="true" Maintainer
+        th data-sortable="true" Category
+        th data-sortable="true" Name
+        th data-sortable="true" Description
+        th data-sortable="true" Autoloaded modules
       tbody
         - SciRuby.gems.each_value.                 \
            stable_sort_by {|gem| gem[:name] }.     \
@@ -29,6 +38,6 @@ html
             tr
               td = gem[:maintainer]
               td = gem[:category]
-              td = gem[:name]
+              td: a href="https://rubygems.org/gems/#{gem[:name]}" = gem[:name]
               td = gem[:description]
               td = gem[:module].join(', ')

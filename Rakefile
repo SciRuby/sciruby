@@ -1,4 +1,4 @@
-rule '.html' => ['.slim'] do |t|
+file 'gems.html' => %w(gems.slim gems.yml) do |t|
   sh "slimrb #{t.source} > #{t.name}"
 end
 

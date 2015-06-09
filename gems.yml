@@ -42,6 +42,11 @@ awesome_print:
   description: Pretty object printing
   category: utilities
 
+algorithms:
+  module: [Algorithms, Containers]
+  description: Algorithms and data structures
+  category: utilities
+
 daru:
   description: Dataframe library
   category: database

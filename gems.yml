@@ -222,3 +222,8 @@ ruby-minisat:
   category: logic
   require: minisat
   module: MiniSat
+
+cassowary:
+  description: Incremental constraint solver
+  category: solver
+  exclude: because of dependencies

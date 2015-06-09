@@ -36,4 +36,8 @@ Gem::Specification.new do |s|
     gems.each {|gem| m << "  * #{gem[:name]} - #{gem[:description]}\n" }
     s.post_install_message = m << "\n"
   end
+
+  s.add_development_dependency 'bundler'
+  s.add_development_dependency 'rake'
+  s.add_development_dependency 'slim'
 end

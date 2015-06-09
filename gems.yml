@@ -143,6 +143,7 @@ rb-libsvm:
   description: Support vector machines (machine learning)
   category: machine learning
   module: Libsvm
+  require: libsvm
 
 sciruby:
   description: SciRuby meta gem

@@ -122,7 +122,7 @@ irtruby:
   description: Machine learning
   category: machine learning
 
-ruby-opencv
+ruby-opencv:
   description: Computer vision
   disabled: because of dependencies
   category: computer vision

@@ -194,3 +194,22 @@ cmath:
   description: Stdlib cmath module
   category: numerics
   exclude: since it is part of stdlib
+
+rsruby:
+  description: R interpreter
+  category: r interpreter
+  exclude: because of dependencies
+  module: RSRuby
+
+rinruby:
+  description: R interpreter
+  category: r interpreter
+  exclude: because of dependencies
+  module: R
+
+rserve-client:
+  description: R interpreter
+  category: r interpreter
+  exclude: because of dependencies
+  module: RServe
+  require: rserve

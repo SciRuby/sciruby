@@ -139,6 +139,25 @@ ruby-fftw3:
   description: Fast Fourier transformation
   category: numerics
 
+ruby-netcdf:
+  description: Data file
+  category: data
+  module: ~
+  exclude: because it works only with narray
+
+ruby-pgplot:
+  description: Plotting
+  category: plotting
+  module: Pgplot
+  require: pgplot
+  exclude: because it works only with narray
+
+ruby-dcl:
+  description: Plotting
+  category: plotting
+  module: ~
+  exclude: because it works only with narray
+
 ruby-band:
   exclude: because of dependencies
   description: Data mining

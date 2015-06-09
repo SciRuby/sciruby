@@ -165,7 +165,7 @@ ruby-dcl:
   exclude: because it works only with narray
 
 ruby-band:
-  exclude: because of dependencies
+  exclude: because it requires jruby
   description: Data mining
   category: artificial intelligence
   module: ~
@@ -254,7 +254,7 @@ rserve-client:
 ode:
   description: Ordinary differential equations
   category: numerics
-  exclude: because of native dependencies
+  exclude: because of Fortran dependencies
 
 ruby-minisat:
   description: SAT solver
@@ -270,7 +270,7 @@ cassowary:
 lpsolve:
   description: Linear solver
   category: optimization
-  exclude: because of native dependencies
+  exclude: because of outdated native dependencies
   module: LPSolve
 
 unit:

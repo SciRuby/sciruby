@@ -211,3 +211,8 @@ rserve-client:
   category: r interpreter
   module: RServe
   require: rserve
+
+ode:
+  description: Ordinary differential equations
+  category: numerics
+  exclude: because of Fortran dependency

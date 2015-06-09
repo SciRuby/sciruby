@@ -233,3 +233,7 @@ lpsolve:
   category: solver
   exclude: because of dependencies
   module: LPSolve
+
+unit:
+  description: Calculation with units
+  category: symbolic

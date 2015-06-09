@@ -1,0 +1,24 @@
+ruby:
+  require 'sciruby'
+doctype html
+html
+  head
+    title SciRuby gems
+    link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"
+  body
+    h1 SciRuby gems
+    table.table.table-striped
+      thead
+        tr
+          th Name
+          th Category
+          th Description
+          th Autoloaded modules
+      tbody
+        - SciRuby.gems.each_value.sort_by {|gem| gem[:category] }.chunk {|gem| gem[:category] }.each do |cat, gems|
+          - gems.sort_by {|gem| gem [:name] }.each do |gem|
+            tr
+              td = gem[:name]
+              td = gem[:category]
+              td = gem[:description]
+              td = gem[:module].join(', ')

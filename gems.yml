@@ -2,7 +2,7 @@
 
 nmatrix:
   description: Numerics matrix library
-  module: [NMatrix, NVector]
+  module: [N, NMatrix, NVector]
   category: numerics
 
 gsl-nmatrix:
@@ -59,22 +59,22 @@ distribution:
   category: statistics
 
 statsample:
-  descriptions: Statistics
+  description: Statistics
   category: statistics
 
 statsample-glm:
-  descriptions: Statistics
+  description: Statistics
   module: ~
   category: statistics
 
 statsample-bivariate-extension:
-  descriptions: Statistics
+  description: Statistics
   module: ~
   category: statistics
 
 statsample-timeseries:
-  disabled:     because of activesupport conflict
-  descriptions: Statistics
+  exclude: because of activesupport conflict
+  description: Statistics
   module: ~
   category: statistics
 
@@ -97,14 +97,16 @@ bio:
   category: biology
 
 ruby-fftw3:
-  disabled:    because it works only with narray
+  module: FFTW3
+  exclude: because it works only with narray
   description: Fast Fourier transformation
   category: numerics
 
 ruby-band:
-  disabled:    because of dependencies
+  exclude: because of dependencies
   description: Data mining
   category: machine learning
+  module: ~
 
 classifier:
   description: Machine learning
@@ -113,26 +115,44 @@ classifier:
 stuff-classifier:
   description: Machine learning
   category: machine learning
+  module: StuffClassifier
 
 decisiontree:
   description: Machine learning
   category: machine learning
+  module: DecisionTree
 
 irtruby:
+  exclude: because of dependencies
   description: Machine learning
   category: machine learning
+  module: IRT
 
 ruby-opencv:
   description: Computer vision
-  disabled: because of dependencies
+  exclude: because of dependencies
   category: computer vision
+  module: OpenCV
 
 ruby-fann:
   description: Neural networks
-  disabled: because of dependencies
+  exclude: because of dependencies
   category: machine learning
+  module: RubyFann
 
-ruby-libsvm:
+rb-libsvm:
   description: Machine learning
-  disabled: because of dependencies
   category: machine learning
+  module: Libsvm
+
+sciruby:
+  description: SciRuby meta gem
+  category: meta
+  exclude: to avoid circular dependencies
+  module: ~
+
+sciruby-full:
+  description: SciRuby meta gem (Full installation)
+  category: meta
+  exclude: to avoid circular dependencies
+  module: ~

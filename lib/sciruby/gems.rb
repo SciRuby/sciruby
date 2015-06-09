@@ -40,7 +40,7 @@ module SciRuby
       gem[:module] = name.capitalize unless gem.include?(:module)
       gem[:module] = [*gem[:module]].map(&:to_sym)
       gem[:module].each {|mod| autoload_modules[mod] = gem[:require] }
-      gems[name] = gem unless gem[:disabled]
+      gems[name] = gem
     end
   end
 

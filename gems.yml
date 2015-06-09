@@ -204,12 +204,10 @@ rsruby:
 rinruby:
   description: R interpreter
   category: r interpreter
-  exclude: because of dependencies
-  module: R
+  module: [R, RinRuby]
 
 rserve-client:
   description: R interpreter
   category: r interpreter
-  exclude: because of dependencies
   module: RServe
   require: rserve

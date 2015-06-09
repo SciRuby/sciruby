@@ -19,17 +19,18 @@ Gem::Specification.new do |s|
   s.require_paths = %w(lib)
   s.files = `git ls-files`.split($/)
 
+  gems = SciRuby.gems.each_value.reject {|gem| gem[:exclude] }.sort_by {|gem| gem[:name] }
   if SCIRUBY_FULL
     s.files.delete 'sciruby.gemspec'
     s.files.reject! {|f| f =~ /\Alib/ }
 
     s.add_runtime_dependency 'sciruby', "= #{SciRuby::VERSION}"
-    SciRuby.gems.each_value.reject {|gem| gem[:exclude] }.each {|gem| s.add_runtime_dependency gem[:name], *gem[:version] }
+    gems.each {|gem| s.add_runtime_dependency gem[:name], *gem[:version] }
   else
     s.files.delete 'sciruby-full.gemspec'
 
     m = "Please consider installing 'sciruby-full' or the following gems:\n"
-    SciRuby.gems.each_value.sort_by {|gem| gem[:name] }.each {|gem| m << "  * #{gem[:name]} - #{gem[:description]}\n" }
+    gems.each {|gem| m << "  * #{gem[:name]} - #{gem[:description]}\n" }
     s.post_install_message = m << "\n"
   end
 end

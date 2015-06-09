@@ -179,3 +179,18 @@ sciruby-full:
   category: meta
   exclude: to avoid circular dependencies
   module: ~
+
+matrix:
+  description: Stdlib matrix module
+  category: numerics
+  exclude: since it is part of stdlib
+
+prime:
+  description: Stdlib prime module
+  category: numerics
+  exclude: since it is part of stdlib
+
+cmath:
+  description: Stdlib cmath module
+  category: numerics
+  exclude: since it is part of stdlib

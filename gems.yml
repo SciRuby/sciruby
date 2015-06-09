@@ -136,12 +136,11 @@ ruby-opencv:
 
 ruby-fann:
   description: Neural networks
-  exclude: because of dependencies
   category: machine learning
   module: RubyFann
 
 rb-libsvm:
-  description: Machine learning
+  description: Support vector machines (machine learning)
   category: machine learning
   module: Libsvm
 

@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+$: << File.dirname(__FILE__)
+require 'helper'
+
+puts SciRuby.gems.inspect
+puts SciRuby.installed_gems.inspect
+puts SciRuby.modules.inspect
+puts SciRuby.installed_modules.inspect
+puts Prime

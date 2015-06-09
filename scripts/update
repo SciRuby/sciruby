@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+$: << File.dirname(__FILE__)
+require 'helper'
+
+file = File.join(__dir__, '..', 'gems.yml')
+data = YAML.load_file(file)
+File.write(file, YAML.dump(sort_hash(data)))

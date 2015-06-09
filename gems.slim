@@ -1,5 +1,10 @@
 ruby:
   require 'sciruby'
+  module ::Enumerable
+    def stable_sort_by
+      sort_by.with_index {|e, i| [yield(e), i] }
+    end
+  end
 doctype html
 html
   head
@@ -10,15 +15,20 @@ html
     table.table.table-striped
       thead
         tr
-          th Name
+          th Maintainer
           th Category
+          th Name
           th Description
           th Autoloaded modules
       tbody
-        - SciRuby.gems.each_value.sort_by {|gem| gem[:category] }.chunk {|gem| gem[:category] }.each do |cat, gems|
-          - gems.sort_by {|gem| gem [:name] }.each do |gem|
+        - SciRuby.gems.each_value.                 \
+           stable_sort_by {|gem| gem[:name] }.     \
+           stable_sort_by {|gem| gem[:category] }. \
+           stable_sort_by {|gem| gem[:maintainer] == 'sciruby' ? 0 : (gem[:maintainer] ? 1 : 2) }. \
+	    each do |gem|
             tr
-              td = gem[:name]
+              td = gem[:maintainer]
               td = gem[:category]
+              td = gem[:name]
               td = gem[:description]
               td = gem[:module].join(', ')

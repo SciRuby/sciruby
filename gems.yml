@@ -4,12 +4,14 @@ nmatrix:
   description: Numerics matrix library
   module: [N, NMatrix, NVector]
   category: numerics
+  maintainer: sciruby
 
 gsl-nmatrix:
   description: Bindings for the GNU scientific library
   require: gsl
   module: GSL
   category: numerics
+  maintainer: sciruby
 
 rubyvis:
   description: Plotting library
@@ -37,6 +39,7 @@ iruby:
   module: IRuby
   description: Ruby kernel for Jupyter
   category: user interface
+  maintainer: sciruby
 
 pry:
   module: Pry
@@ -60,23 +63,28 @@ daru:
 integration:
   description: Numerical integration
   category: numerics
+  maintainer: sciruby
 
 minimization:
   description: Numerical minimization
   category: numerics
+  maintainer: sciruby
 
 distribution:
   description: Statistical distributions
   category: statistics
+  maintainer: sciruby
 
 statsample:
   description: Statistics
   category: statistics
+  maintainer: sciruby
 
 statsample-glm:
   description: Statistics
   module: ~
   category: statistics
+  maintainer: sciruby
 
 statsample-bivariate-extension:
   description: Statistics
@@ -177,29 +185,29 @@ rb-libsvm:
 sciruby:
   description: SciRuby meta gem
   category: meta
-  exclude: to avoid circular dependencies
   module: ~
+  maintainer: sciruby
 
 sciruby-full:
   description: SciRuby meta gem (Full installation)
   category: meta
-  exclude: to avoid circular dependencies
   module: ~
+  maintainer: sciruby
 
 matrix:
   description: Stdlib matrix module
   category: numerics
-  exclude: since it is part of stdlib
+  maintainer: stdlib
 
 prime:
   description: Stdlib prime module
   category: numerics
-  exclude: since it is part of stdlib
+  maintainer: stdlib
 
 cmath:
   description: Stdlib cmath module
   category: numerics
-  exclude: since it is part of stdlib
+  maintainer: stdlib
 
 rsruby:
   description: R interpreter
@@ -221,7 +229,7 @@ rserve-client:
 ode:
   description: Ordinary differential equations
   category: numerics
-  exclude: because of Fortran dependency
+  exclude: because of dependencies
 
 ruby-minisat:
   description: SAT solver

@@ -29,6 +29,8 @@ Enter commands:
     plot = Nyaplot::Plot.new
     sc = plot.add(:scatter, [0,1,2,3,4], [-1,2,-3,4,-5])
 
+Take a look at {gems.yml}[https://github.com/SciRuby/sciruby/blob/master/gems.yml] for interesting gems which are included in `sciruby-full`.
+
 == License
 
 Copyright (c) 2010 onward, The Ruby Science Foundation.

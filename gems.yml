@@ -6,6 +6,12 @@ nmatrix:
   category: numerics
   maintainer: sciruby
 
+narray:
+  description: Numerics matrix library
+  module: NArray
+  category: numerics
+  exclude: since it conflicts with nmatrix
+
 gsl-nmatrix:
   description: Bindings for the GNU scientific library
   require: gsl
@@ -33,7 +39,7 @@ mathgl:
   description: Plotting library
   category: plotting
   module: MathGL
-  exclude: because of dependencies
+  exclude: because of native dependencies
 
 iruby:
   module: IRuby
@@ -179,14 +185,14 @@ decisiontree:
   module: DecisionTree
 
 irtruby:
-  exclude: because of dependencies
+  exclude: because of native dependencies
   description: Machine learning
   category: artificial intelligence
   module: IRT
 
 ruby-opencv:
   description: Computer vision
-  exclude: because of dependencies
+  exclude: because of native dependencies
   category: artificial intelligence
   module: OpenCV
 
@@ -231,7 +237,7 @@ cmath:
 rsruby:
   description: R interpreter
   category: statistics
-  exclude: because of dependencies
+  exclude: because of native dependencies
   module: RSRuby
 
 rinruby:
@@ -248,7 +254,7 @@ rserve-client:
 ode:
   description: Ordinary differential equations
   category: numerics
-  exclude: because of dependencies
+  exclude: because of native dependencies
 
 ruby-minisat:
   description: SAT solver
@@ -259,12 +265,12 @@ ruby-minisat:
 cassowary:
   description: Incremental constraint solver
   category: optimization
-  exclude: because of dependencies
+  exclude: because of native dependencies
 
 lpsolve:
   description: Linear solver
   category: optimization
-  exclude: because of dependencies
+  exclude: because of native dependencies
   module: LPSolve
 
 unit:

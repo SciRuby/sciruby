@@ -34,6 +34,7 @@ html
            stable_sort_by {|gem| gem[:name] }.     \
            stable_sort_by {|gem| gem[:category] }. \
            stable_sort_by {|gem| gem[:maintainer] == 'sciruby' ? 0 : (gem[:maintainer] ? 1 : 2) }. \
+           stable_sort_by {|gem| gem[:exclude] ? 1 : 0 }. \
 	    each do |gem|
             tr
               td = gem[:maintainer]

@@ -1,3 +1,9 @@
+0.2.3 (2015-06-09)
+
+  * Simpler SciRuby.gems api
+  * Added gems.yml
+  * Updated list of sciruby gems
+
 0.2.2 (2015-06-09)
 
   * Add SciRuby::Gems and SciRuby.gems

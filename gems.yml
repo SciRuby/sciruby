@@ -103,6 +103,18 @@ ai4r:
   description: Artificial intelligence
   category: machine learning
 
+gimuby:
+  description: Genetic algorithms
+  category: optimization
+
+gga4r:
+  description: Generic algorithms
+  category: optimization
+
+darwinning:
+  description: Generic algorithms
+  category: optimization
+
 bio:
   description: Bioinformatics suite
   category: biology

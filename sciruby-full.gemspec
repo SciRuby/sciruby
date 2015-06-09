@@ -1,2 +1,2 @@
 SCIRUBY_FULL = true
-load 'sciruby.gemspec'
+eval(File.read('sciruby.gemspec'), TOPLEVEL_BINDING, 'sciruby.gemspec')

@@ -16,13 +16,13 @@ html
     script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.js"
   body
     h1 SciRuby gems
-    table.table(data-toggle="table"
-                data-search="true"
-		data-sortable="true"
-                data-show-toggle="true"
-                data-show-columns="true"
-                data-mobile-responsive="true"
-		data-striped="true")
+    table.table data={ toggle:            'table',
+                       search:            'true',
+		       sortable:          'true',
+		       show_toggle:       'true',
+		       show_columns:      'true',
+		       mobile_responsive: 'true',
+		       striped:           'true' }
       thead: tr
         th data-sortable="true" Maintainer
         th data-sortable="true" Category
@@ -39,5 +39,8 @@ html
               td = gem[:maintainer]
               td = gem[:category]
               td: a href="https://rubygems.org/gems/#{gem[:name]}" = gem[:name]
-              td = gem[:description]
+              td
+                - if gem[:exclude]
+                  span> style="color: red" This gem is excluded from sciruby-full #{gem[:exclude]}.
+                = gem[:description]
               td = gem[:module].join(', ')

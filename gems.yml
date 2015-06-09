@@ -92,7 +92,7 @@ statsample-bivariate-extension:
   category: statistics
 
 statsample-timeseries:
-  exclude: because of activesupport conflict
+  exclude: because of activesupport version conflict
   description: Statistics
   module: ~
   category: statistics

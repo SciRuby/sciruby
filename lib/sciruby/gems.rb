@@ -16,35 +16,36 @@ module SciRuby
     @installed_gems ||=
       begin
         require 'rubygems'
-        Hash[gems.map {|name, options| installed_gem(name, options) }.compact]
+        Hash[gems.each_value.map(&method(:installed_gem)).compact]
       end
   end
 
   # Return list of all known SciRuby modules
   def modules
-    @modules ||= gems.map {|name, options| options[:module] }.flatten
+    @modules ||= gems.each_value.map {|gem| gem[:module] }.flatten
   end
 
   # Return list of all installed SciRuby modules
   def installed_modules
-    @installed_modules ||= installed_gems.map {|name, options| options[:module] }.flatten
+    @installed_modules ||= installed_gems.each_value.map {|gem| gem[:module] }.flatten
   end
 
   private
 
   def load_gems(file)
-    YAML.load_file(file).each do |name, options|
-      options = Hash[options.map {|k,v| [k.to_sym, v] }]
-      options[:require] = [*(options[:require] || name)]
-      options[:module] = name.capitalize unless options.include?(:module)
-      options[:module] = [*options[:module]].map(&:to_sym)
-      options[:module].each {|mod| autoload_modules[mod] = options[:require] }
-      gems[name] = options unless options[:disabled]
+    YAML.load_file(file).each do |name, gem|
+      gem = Hash[gem.map {|k,v| [k.to_sym, v] }]
+      gem[:name] = name
+      gem[:require] = [*(gem[:require] || name)]
+      gem[:module] = name.capitalize unless gem.include?(:module)
+      gem[:module] = [*gem[:module]].map(&:to_sym)
+      gem[:module].each {|mod| autoload_modules[mod] = gem[:require] }
+      gems[name] = gem unless gem[:disabled]
     end
   end
 
-  def installed_gem(name, options)
-    [name, options.merge(gem_version: Gem::Specification.find_by_name(name).version.to_s)]
+  def installed_gem(gem)
+    [gem[:name], gem.merge(gem_version: Gem::Specification.find_by_name(gem[:name]).version.to_s)]
   rescue Exception
     nil
   end

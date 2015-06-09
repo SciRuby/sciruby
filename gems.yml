@@ -270,3 +270,8 @@ lpsolve:
 unit:
   description: Calculation with units
   category: symbolic
+
+modshogun:
+  description: Machine learning
+  category: machine learning
+  exclude: not available as a gem

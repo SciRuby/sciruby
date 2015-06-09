@@ -27,6 +27,12 @@ gnuplot:
   description: Plotting library
   category: plotting
 
+mathgl:
+  description: Plotting library
+  category: plotting
+  module: MathGL
+  exclude: because of dependencies
+
 iruby:
   module: IRuby
   description: Ruby kernel for Jupyter

@@ -45,7 +45,7 @@ module SciRuby
   end
 
   def installed_gem(gem)
-    [gem[:name], gem.merge(gem_version: Gem::Specification.find_by_name(gem[:name]).version.to_s)]
+    [gem[:name], gem.merge(installed_version: Gem::Specification.find_by_name(gem[:name]).version.to_s)]
   rescue Exception
     nil
   end

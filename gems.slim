@@ -1,9 +1,36 @@
 ruby:
   require 'sciruby'
+  require 'rubygems'
+
   module ::Enumerable
     def stable_sort_by
       sort_by.with_index {|e, i| [yield(e), i] }
     end
+  end
+
+  def get_status(gem)
+    STDERR.puts "Fetching #{gem[:name]}..."
+    spec = Gem::SpecFetcher.fetcher.spec_for_dependency(Gem::Dependency.new(gem[:name])).flatten.first
+
+    status = {danger: [], warning: []}
+    status[:danger] << "Not in sciruby-full: #{gem[:exclude]}" if gem[:exclude]
+    if gem[:maintainer] != 'stdlib'
+      if spec
+        status[:warning] << "No update since #{spec.date.strftime '%Y-%m-%d'}" if Time.now - spec.date > 2*365*24*3600
+        unless %w(sciruby sciruby-full).include?(gem[:name])
+          if gem[:version]
+            status[:danger] << "Outdated version, found #{spec.version}" unless Gem::Dependency.new(gem[:name], *gem[:version]).matches_spec?(spec)
+          else
+            status[:warning] << "No version constraint, found #{spec.version}" unless gem[:exclude]
+          end
+        end
+      else
+        status[:danger] << 'Gem not found' unless gem[:exclude]
+      end
+    end
+    status[:success] = ['OK'] if status.values.flatten.empty?
+
+    status
   end
 
 doctype html
@@ -14,34 +41,37 @@ html
     link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.css"
     script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"
     script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.js"
-  body
+  body: .container: .row: .col-md-11
     h1 SciRuby gems
     table.table data={ toggle:            'table',
                        search:            'true',
-		       sortable:          'true',
-		       show_toggle:       'true',
-		       show_columns:      'true',
-		       mobile_responsive: 'true',
-		       striped:           'true' }
+                       sortable:          'true',
+                       show_toggle:       'true',
+                       show_columns:      'true',
+                       mobile_responsive: 'true',
+                       striped:           'true' }
       thead: tr
         th data-sortable="true" Maintainer
         th data-sortable="true" Category
         th data-sortable="true" Name
+        th data-sortable="true" Version
         th data-sortable="true" Description
         th data-sortable="true" Autoloaded modules
+        th data-sortable="true" Status
       tbody
         - SciRuby.gems.each_value.                 \
            stable_sort_by {|gem| gem[:name] }.     \
            stable_sort_by {|gem| gem[:category] }. \
            stable_sort_by {|gem| gem[:maintainer] == 'sciruby' ? 0 : (gem[:maintainer] ? 1 : 2) }. \
-           stable_sort_by {|gem| gem[:exclude] ? 1 : 0 }. \
-	    each do |gem|
+           each do |gem|
             tr
               td = gem[:maintainer]
               td = gem[:category]
               td: a href="https://rubygems.org/gems/#{gem[:name]}" = gem[:name]
-              td
-                - if gem[:exclude]
-                  span> style="color: red" This gem is excluded from sciruby-full #{gem[:exclude]}.
-                = gem[:description]
+              td = gem[:version]
+              td = gem[:description]
               td = gem[:module].join(', ')
+              td
+                - get_status(gem).each do |tag, msgs|
+                  - msgs.each do |msg|
+                    span.label<> class="label-#{tag}" = msg

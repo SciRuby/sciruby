@@ -1,68 +1,96 @@
 # Specify all gems which are installed by the `sciruby-full` gem or recommended by the `sciruby` gem.
 
 nmatrix:
-  description: 'Numerical matrix library'
+  description: Numerical matrix library
   module: [NMatrix, NVector]
 gsl-nmatrix:
-  description: 'Bindings for the GNU scientific library'
+  description: Bindings for the GNU scientific library
   require: gsl
   module: GSL
 
 rubyvis:
-  description: 'Plotting library'
+  description: Plotting library
 nyaplot:
-  description: 'Plotting library'
+  description: Plotting library
 plotrb:
-  description: 'Plotting library'
+  description: Plotting library
 gnuplot:
-  description: 'Plotting library'
+  description: Plotting library
 
 iruby:
   module: IRuby
-  description: 'Ruby kernel for Jupyter'
+  description: Ruby kernel for Jupyter
 pry:
   module: Pry
-  description: 'Ruby repl'
+  description: Ruby repl
 awesome_print:
   module: ~
-  description: 'Pretty object printing'
+  description: Pretty object printing
 
 daru:
-  description: 'Dataframe library'
+  description: Dataframe library
 
 integration:
-  description: 'Numerical integration'
+  description: Numerical integration
 minimization:
-  description: 'Numerical minimization'
+  description: Numerical minimization
 distribution:
-  description: 'Statistical distributions'
+  description: Statistical distributions
 
 statsample:
-  descriptions: 'Statistics'
+  descriptions: Statistics
 statsample-glm:
-  descriptions: 'Statistics'
+  descriptions: Statistics
   module: ~
 statsample-bivariate-extension:
-  descriptions: 'Statistics'
+  descriptions: Statistics
   module: ~
 statsample-timeseries:
-  disabled:     'because of activesupport conflict'
-  descriptions: 'Statistics'
+  disabled:     because of activesupport conflict
+  descriptions: Statistics
   module: ~
 extendmatrix:
-  description: 'Helper methods for Matrix'
+  description: Helper methods for Matrix
   module: ~
 
 publisci:
-  description: 'Publishing toolkit'
+  description: Publishing toolkit
   module: PubliSci
 
 ai4r:
-  description: 'Artificial intelligence'
+  description: Artificial intelligence
 
 bio:
-  description: 'Bioinformatics suite'
+  description: Bioinformatics suite
 
 ruby-fftw3:
-  disabled:    'because it works only with narray'
-  description: 'Fast Fourier transformation'
+  disabled:    because it works only with narray
+  description: Fast Fourier transformation
+
+ruby-band:
+  disabled:    because of dependencies
+  description: Data mining
+
+classifier:
+  description: Machine learning
+
+stuff-classifier:
+  description: Machine learning
+
+decisiontree:
+  description: Machine learning
+
+irtruby:
+  description: Machine learning
+
+ruby-opencv
+  description: Computer vision
+  disabled: because of dependencies
+
+ruby-fann:
+  description: Neural networks
+  disabled: because of dependencies
+
+ruby-libsvm:
+  description: Machine learning
+  disabled: because of dependencies

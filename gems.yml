@@ -274,4 +274,4 @@ unit:
 modshogun:
   description: Machine learning
   category: artificial intelligence
-  exclude: not available as a gem
+  exclude: because it is not available as a gem

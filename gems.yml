@@ -227,3 +227,9 @@ cassowary:
   description: Incremental constraint solver
   category: solver
   exclude: because of dependencies
+
+lpsolve:
+  description: Linear solver
+  category: solver
+  exclude: because of dependencies
+  module: LPSolve

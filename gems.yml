@@ -1,96 +1,138 @@
 # Specify all gems which are installed by the `sciruby-full` gem or recommended by the `sciruby` gem.
 
 nmatrix:
-  description: Numerical matrix library
+  description: Numerics matrix library
   module: [NMatrix, NVector]
+  category: numerics
+
 gsl-nmatrix:
   description: Bindings for the GNU scientific library
   require: gsl
   module: GSL
+  category: numerics
 
 rubyvis:
   description: Plotting library
+  category: plotting
+
 nyaplot:
   description: Plotting library
+  category: plotting
+
 plotrb:
   description: Plotting library
+  category: plotting
+
 gnuplot:
   description: Plotting library
+  category: plotting
 
 iruby:
   module: IRuby
   description: Ruby kernel for Jupyter
+  category: user interface
+
 pry:
   module: Pry
   description: Ruby repl
+  category: user interface
+
 awesome_print:
   module: ~
   description: Pretty object printing
+  category: utilities
 
 daru:
   description: Dataframe library
+  category: database
 
 integration:
   description: Numerical integration
+  category: numerics
+
 minimization:
   description: Numerical minimization
+  category: numerics
+
 distribution:
   description: Statistical distributions
+  category: statistics
 
 statsample:
   descriptions: Statistics
+  category: statistics
+
 statsample-glm:
   descriptions: Statistics
   module: ~
+  category: statistics
+
 statsample-bivariate-extension:
   descriptions: Statistics
   module: ~
+  category: statistics
+
 statsample-timeseries:
   disabled:     because of activesupport conflict
   descriptions: Statistics
   module: ~
+  category: statistics
+
 extendmatrix:
   description: Helper methods for Matrix
   module: ~
+  category: numerics
 
 publisci:
   description: Publishing toolkit
   module: PubliSci
+  category: publishing
 
 ai4r:
   description: Artificial intelligence
+  category: machine learning
 
 bio:
   description: Bioinformatics suite
+  category: biology
 
 ruby-fftw3:
   disabled:    because it works only with narray
   description: Fast Fourier transformation
+  category: numerics
 
 ruby-band:
   disabled:    because of dependencies
   description: Data mining
+  category: machine learning
 
 classifier:
   description: Machine learning
+  category: machine learning
 
 stuff-classifier:
   description: Machine learning
+  category: machine learning
 
 decisiontree:
   description: Machine learning
+  category: machine learning
 
 irtruby:
   description: Machine learning
+  category: machine learning
 
 ruby-opencv
   description: Computer vision
   disabled: because of dependencies
+  category: computer vision
 
 ruby-fann:
   description: Neural networks
   disabled: because of dependencies
+  category: machine learning
 
 ruby-libsvm:
   description: Machine learning
   disabled: because of dependencies
+  category: machine learning

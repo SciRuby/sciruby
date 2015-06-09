@@ -3,21 +3,31 @@
 Tools for Scientific Computing in Ruby
 
 * {Website}[http://sciruby.com]
-* {Google+}[https://plus.google.com/109304769076178160953/posts]
 * {NMatrix}[http://github.com/SciRuby/nmatrix]
 
 == Description
 
-Ruby has for some time had no equivalent to the beautifully constructed numpy, scipy, and matplotlib libraries for Python. We believe that the time for a Ruby science and visualization package has come and gone. Sometimes when a solution of sugar and water becomes super-saturated, from it precipitates a pure, delicious, and diabetes-inducing crystal of sweetness, induced by no more than the tap of a finger. So it is, we believe, with the need for numeric and visualization libraries in Ruby.
+This gem acts as a meta gem which provides collects multiple scientific gems, including numeric and visualization libraries.
 
-We are not the first with this idea, but we are trying to bring it to life.
+== Getting started
 
-== Installation
+Installation:
 
     gem install sciruby
     gem install sciruby-full
 
-See also the {guide in the wiki}[https://github.com/SciRuby/sciruby/wiki/Installation].
+If you want to have a full-blown installation, use `sciruby-full`. See also the {guide in the wiki}[https://github.com/SciRuby/sciruby/wiki/Installation].
+
+Start a notebook server:
+
+    iruby notebook
+
+Enter commands:
+
+    require 'sciruby'
+    # Scientific gems are auto loaded, you can use them directly!
+    plot = Nyaplot::Plot.new
+    sc = plot.add(:scatter, [0,1,2,3,4], [-1,2,-3,4,-5])
 
 == License
 

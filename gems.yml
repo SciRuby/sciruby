@@ -78,6 +78,12 @@ statsample-timeseries:
   module: ~
   category: statistics
 
+statsample-optimization:
+  exclude: because of gsl conflict
+  description: Statistics
+  module: ~
+  category: statistics
+
 extendmatrix:
   description: Helper methods for Matrix
   module: ~

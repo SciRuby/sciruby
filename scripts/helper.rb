@@ -22,10 +22,12 @@ def sort_hash(object)
   end
 end
 
-def get_status(gem)
+def fetch_spec(gem)
   STDERR.puts "Fetching #{gem[:name]}..."
-  spec = Gem::SpecFetcher.fetcher.spec_for_dependency(Gem::Dependency.new(gem[:name])).flatten.first
+  Gem::SpecFetcher.fetcher.spec_for_dependency(Gem::Dependency.new(gem[:name])).flatten.first
+end
 
+def check_gem(gem, spec)
   status = { danger: [], warning: [] }
   status[:danger] << "Not in sciruby-full: #{gem[:exclude]}" if gem[:exclude]
   if gem[:maintainer] != 'stdlib'

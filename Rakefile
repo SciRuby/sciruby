@@ -7,6 +7,10 @@ task :test do
   sh 'scripts/test'
 end
 
+task :deploy do
+  sh 'scripts/deploy'
+end
+
 task 'gems.html' do
   sh 'slimrb --trace scripts/gems.slim > gems.html'
 end

@@ -77,7 +77,7 @@ html
       li
         | Last updated at #{Time.now.utc}
         - if ENV['TRAVIS']
-          |  by <a href="https://travis-ci.org/SciRuby/sciruby/jobs/#{ENV['TRAVIS_JOB_ID']}">Travis-CI</a> from commit
+          |  by <a href="https://travis-ci.org/SciRuby/sciruby/jobs/#{ENV['TRAVIS_JOB_ID']}">Travis CI</a> from commit
              <a href="https://github.com/SciRuby/sciruby/commit/#{ENV['TRAVIS_COMMIT']}">#{ENV['TRAVIS_COMMIT']}</a>.
         - else
           |  by #{`hostname -f`.chomp}.

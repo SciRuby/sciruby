@@ -5,7 +5,7 @@ Tools for Scientific Computing in Ruby
 * [Website](http://sciruby.com)
 * [NMatrix](http://github.com/SciRuby/nmatrix)
 * [List of scientific gems](https://minad.github.io/sciruby-gems)
-* [Travis-CI](https://travis-ci.org/SciRuby/sciruby)
+* [Travis CI](https://travis-ci.org/SciRuby/sciruby)
 
 ## Description
 

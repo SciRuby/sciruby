@@ -5,9 +5,16 @@ html
     title SciRuby gems
     link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"
     link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.css"
+    link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
     script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"
     script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.js"
-  body: .container: .row
+    css:
+      td { white-space: nowrap }
+      th { white-space: nowrap }
+      .fa-diamond { color: #8B0000 }
+      .fa-github { color: #000000 }
+      .fa-book { color: #191970 }
+  body: .container: .row: .col-md-12
     h1 SciRuby gems
     ul
       li
@@ -23,19 +30,23 @@ html
                        show_toggle:       'true',
                        show_columns:      'true',
                        mobile_responsive: 'true',
-                       striped:           'true' }
+                       striped:           'true',
+		       height:            500 }
       thead: tr
         th data-sortable="true" Maintainer
         th data-sortable="true" Category
         th data-sortable="true" Name
+        th Links
         th data-sortable="true" Version
         th data-sortable="true" Latest version
         th data-sortable="true" Description
         th data-sortable="true" Autoloaded modules
         th data-sortable="true" Status
+        /th Badges
       tbody
         - Helper.sorted_gems.each do |gem|
           - spec = Helper.fetch_spec(gem)
+          - github = Helper.github_name(spec)
           tr
             td
               - if gem[:maintainer]
@@ -43,10 +54,16 @@ html
                 span.label class="label-#{maintainer_tag[gem[:maintainer]] || 'warning'}" = gem[:maintainer]
             td = gem[:category]
             - if spec
+              td: a href=spec.homepage = gem[:name]
               td
-                a href=spec.homepage = gem[:name]
+                a<> href=spec.homepage : span.fa.fa-home
+                a<> href="http://www.rubydoc.info/gems/#{gem[:name]}/#{spec.version}": span.fa.fa-book
+                a<> href="https://rubygems.org/gems/#{gem[:name]}": span.fa.fa-diamond
+                - if github
+                  a<> href="https://github.com/#{github}": span.fa.fa-github
             - else
               td = gem[:name]
+              td
             td = gem[:version]
             td
               - if spec
@@ -56,3 +73,10 @@ html
             td
               - Helper.gem_status(gem).each do |tag, msg|
                   span.label<> class="label-#{tag}" = msg
+            /td
+              - if github
+                a<> href="https://github.com/#{github}": img src="https://img.shields.io/github/stars/#{github}.svg"
+                a<> href="https://github.com/#{github}/issues": img src="https://img.shields.io/github/issues-raw/#{github}.svg"
+                a<> href="https://codeclimate.com/github/#{github}": img src="https://img.shields.io/codeclimate/github/#{github}.svg"
+                a<> href="https://travis-ci.org/#{github}": img src="https://img.shields.io/travis/#{github}.svg"
+                a<> href="https://versioneye.com/ruby/#{gem[:name]}": img src="https://img.shields.io/versioneye/d/ruby/#{gem[:name]}.svg"

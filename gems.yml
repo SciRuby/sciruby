@@ -303,8 +303,8 @@ stuff-classifier:
 treat:
   category: linguistics
   description: Natural language processing
+  exclude: birch doesn't compile with 2.2
   module: Treat
-  version: "~> 2.1"
 unit:
   category: physics
   description: Calculation with units

@@ -8,6 +8,8 @@ $: << File.join(File.dirname(__FILE__), '..', 'lib')
 require 'sciruby'
 require 'date'
 require 'rubygems'
+require 'net/http'
+require 'json'
 
 module Enumerable
   def stable_sort_by
@@ -79,5 +81,14 @@ module Helper
     SciRuby.gems.each_value.sort_by {|gem| gem[:name] }.reject do |gem|
       gem[:maintainer] == 'stdlib' || %w(sciruby sciruby-full).include?(gem[:name])
     end.reject {|gem| gem[:exclude] && exclude }
+  end
+
+  def github_name(spec)
+    return nil unless spec
+    return spec.homepage if spec.homepage =~ %r{github.com/([^/]+/[^/]+)}
+    JSON.parse(Net::HTTP.get(URI("https://rubygems.org/api/v1/gems/#{spec.name}.json"))).each do |k,v|
+      return $1 if k =~ /_uri/ && v =~ %r{github.com/([^/]+/[^/]+)}
+    end
+    nil
   end
 end

@@ -1,6 +1,6 @@
 ---
 ai4r:
-  category: artificial intelligence
+  category: ai
   description: Artificial intelligence
   module: Ai4r
   version: "~> 1.13"
@@ -26,7 +26,7 @@ cassowary:
   exclude: Native dependencies
   module: Cassowary
 classifier:
-  category: artificial intelligence
+  category: ai
   description: Machine learning
   module: Classifier
   version: "~> 1.3"
@@ -45,7 +45,7 @@ darwinning:
   module: Darwinning
   version: "~> 0.0"
 decisiontree:
-  category: artificial intelligence
+  category: ai
   description: Machine learning
   module: DecisionTree
   version: "~> 0.5"
@@ -91,12 +91,12 @@ integration:
   owner: sciruby
   version: "~> 0.1"
 irtruby:
-  category: artificial intelligence
+  category: ai
   description: Machine learning
   exclude: Not available as a gem
   module: IRT
 iruby:
-  category: user interface
+  category: ui
   description: Ruby kernel for Jupyter
   module: IRuby
   owner: sciruby
@@ -117,7 +117,7 @@ matrix:
   module: Matrix
   owner: stdlib
 measurable:
-  category: artificial intelligence
+  category: ai
   description: Distance measures for machine learning
   module: Measurable
   version: "~> 0.0"
@@ -133,18 +133,18 @@ minimization:
   owner: sciruby
   version: "~> 0.2"
 modshogun:
-  category: artificial intelligence
+  category: ai
   description: Machine learning
   exclude: Not available as a gem
   module: Modshogun
 narray:
   category: numerics
-  description: Numerics matrix library
+  description: Numerical matrix library
   exclude: Conflicts with nmatrix
   module: NArray
 nmatrix:
   category: numerics
-  description: Numerics matrix library
+  description: Numerical matrix library
   module:
   - N
   - NMatrix
@@ -162,7 +162,7 @@ ode:
   exclude: Fortran dependencies
   module: Ode
 omoikane:
-  category: artificial intelligence
+  category: ai
   description: Machine learning
   module: Omoikane
   version: "~> 0.0"
@@ -177,8 +177,8 @@ prime:
   module: Prime
   owner: stdlib
 pry:
-  category: user interface
-  description: Ruby repl
+  category: ui
+  description: Ruby shell
   module: Pry
   version: "~> 0.10"
 publisci:
@@ -193,7 +193,7 @@ rb-gsl:
   module: GSL
   require: gsl
 rb-libsvm:
-  category: artificial intelligence
+  category: ai
   description: Support vector machines (machine learning)
   module: Libsvm
   require: libsvm
@@ -217,7 +217,7 @@ rsruby:
   exclude: Native dependencies
   module: RSRuby
 ruby-band:
-  category: artificial intelligence
+  category: ai
   description: Data mining
   exclude: Requires JRuby
 ruby-dcl:
@@ -225,7 +225,7 @@ ruby-dcl:
   description: Plotting
   exclude: Requires narray
 ruby-fann:
-  category: artificial intelligence
+  category: ai
   description: Neural networks
   module: RubyFann
   version: "~> 1.2"
@@ -245,7 +245,7 @@ ruby-netcdf:
   description: Data file
   exclude: Requires narray
 ruby-opencv:
-  category: artificial intelligence
+  category: ai
   description: Computer vision
   exclude: Native dependencies
   module: OpenCV
@@ -296,7 +296,7 @@ statsample-timeseries:
   description: Statistics
   exclude: activesupport version conflict
 stuff-classifier:
-  category: artificial intelligence
+  category: ai
   description: Machine learning
   module: StuffClassifier
   version: "~> 0.5"

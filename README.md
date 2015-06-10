@@ -39,6 +39,6 @@ All rights reserved.
 
 SciRuby is licensed under the BSD 3-clause license. See [LICENSE](LICENSE) for details.
 
-== Donations
+## Donations
 
 Support a SciRuby Fellow via [![Pledgie](http://pledgie.com/campaigns/15783.png?skin_name=chrome)](http://www.pledgie.com/campaigns/15783).

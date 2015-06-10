@@ -232,6 +232,11 @@ sciruby-full:
   description: SciRuby meta gem (Full installation)
   maintainer: sciruby
   module: 
+sicom:
+  category: statistics
+  description: R interpreter
+  exclude: requires jruby
+  module: 
 statsample:
   category: statistics
   description: Statistics

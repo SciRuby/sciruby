@@ -13,6 +13,6 @@ git fetch && git reset origin/gh-pages
 
 cp ../gems.html index.html
 
-git add index.html
+git add -A .
 git commit -m "rebuild pages"
-git push origin HEAD:gh-pages
+git push -q origin HEAD:gh-pages

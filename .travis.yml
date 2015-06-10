@@ -8,13 +8,8 @@ rvm:
 # - 1.9.3
 
 before_install:
-  - sudo apt-get update
-  - sudo apt-get install -y \
-      gnuplot-nox	    \
-      libgsl0-dev	    \
-      libsqlite3-dev	    \
-      libatlas-base-dev
-  - sudo apt-get clean
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq gnuplot-nox libgsl0-dev libsqlite3-dev libatlas-base-dev
   - sudo ln -s /usr/lib/libtoolize /usr/lib/libtool
 
 env:

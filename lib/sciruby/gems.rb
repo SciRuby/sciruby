@@ -13,11 +13,7 @@ module SciRuby
 
   # Return map of all installed SciRuby gems
   def installed_gems
-    @installed_gems ||=
-      begin
-        require 'rubygems'
-        Hash[gems.each_value.map(&method(:installed_gem)).compact]
-      end
+    @installed_gems ||= Hash[gems.each_value.map(&method(:installed_gem)).compact]
   end
 
   # Return list of all known SciRuby modules
@@ -44,6 +40,7 @@ module SciRuby
   end
 
   def installed_gem(gem)
+    require 'rubygems' unless defined?(Gem::Specification)
     [gem[:name], gem.merge(installed_version: Gem::Specification.find_by_name(gem[:name]).version.to_s)]
   rescue Exception
     nil

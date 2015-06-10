@@ -12,7 +12,11 @@ html
   body: .container: .row
     h1 SciRuby gems
     ul
-      li Last updated at #{Time.now.utc} on #{`hostname -f`}
+      li
+        | Last updated at #{Time.now.utc}
+        - if ENV['TRAVIS']
+          | by <a href="https://travis-ci.org/SciRuby/sciruby/jobs/#{ENV['TRAVIS_JOB_ID']}">Travis-CI</a> from commit
+             <a href="https://github.com/SciRuby/sciruby/commit/#{ENV['TRAVIS_COMMIT']}">.
       li #{SciRuby.gems.size} gems listed
     table.table data={ toggle:            'table',
                        search:            'true',

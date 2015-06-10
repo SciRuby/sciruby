@@ -2,6 +2,7 @@ class Module
   alias :const_missing_without_sciruby :const_missing
 
   def const_missing(name)
+    name = name.to_sym
     paths = SciRuby.autoload_modules.delete(name)
     if paths
       paths.each {|path| require path }

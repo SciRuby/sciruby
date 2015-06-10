@@ -12,7 +12,7 @@ html
   body: .container: .row
     h1 SciRuby gems
     ul
-      li Last updated #{Date.today}
+      li Last updated at #{Time.now.utc} on #{`hostname -f`}
       li #{SciRuby.gems.size} gems listed
     table.table data={ toggle:            'table',
                        search:            'true',

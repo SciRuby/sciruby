@@ -1,4 +1,3 @@
-# coding: utf-8
 $: << File.join(__FILE__, '..', '..', 'lib')
 require 'sciruby'
 require 'date'

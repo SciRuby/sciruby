@@ -1,0 +1,30 @@
+language: ruby
+
+rvm:
+  - ruby-head
+  - 2.2.2
+  - 2.1.6
+  - 2.0.0
+  - 1.9.3
+
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -y --no-install-recommends \
+      build-essential 	    			    \
+      gnuplot-nox				    \
+      libtool autoconf automake			    \
+      libgsl0-dev				    \
+      zlib1g-dev                    		    \
+      libsqlite3-dev				    \
+      libatlas-base-dev
+  - sudo apt-get clean
+  - sudo ln -s /usr/lib/libtoolize /usr/lib/libtool
+
+env:
+  global:
+    - secure: "Wr93642ujssq2+lTxWiAR0u3Y50MkNfq0jcEjPn9g2A9QQw8UitXZvtGjWa7VK8Cw2iJM7NQdY0G/eE+SBqGQ2d/NyDRwBdLUrQHBILWHeJFHoQnHcfgcGWoXVg2ztxkL6mmo8B5XpKm+ZEh4uYlZYiwp41VegmpmcuxWE0R1N0="
+
+script: bundle exec rake test && bundle exec rake deploy
+
+notifications:
+  irc: "chat.freenode.net#sciruby"

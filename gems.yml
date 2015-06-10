@@ -38,12 +38,12 @@ daru:
   category: data
   description: Dataframe library
   module: Daru
-  version: "~> 0.0.5"
+  version: "~> 0.0"
 darwinning:
   category: optimization
   description: Generic algorithms
   module: Darwinning
-  version: "~> 0.0.3"
+  version: "~> 0.0"
 decisiontree:
   category: artificial intelligence
   description: Machine learning
@@ -145,7 +145,7 @@ plotrb:
   category: plotting
   description: Plotting library
   module: Plotrb
-  version: "~> 0.0.1"
+  version: "~> 0.0"
 prime:
   category: algebra
   description: Stdlib prime module

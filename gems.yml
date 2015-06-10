@@ -101,6 +101,12 @@ iruby:
   module: IRuby
   owner: sciruby
   version: "~> 0.2"
+liblinear-ruby:
+  category: ai
+  description: Linear classifier
+  module: Liblinear
+  require: liblinear
+  version: "~> 0.0"
 lpsolve:
   category: optimization
   description: Linear solver

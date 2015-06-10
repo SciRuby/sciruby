@@ -2,6 +2,7 @@
 ai4r:
   category: artificial intelligence
   description: Artificial intelligence
+  module: Ai4r
   version: "~> 1.13"
 algorithms:
   category: utilities
@@ -13,19 +14,21 @@ algorithms:
 awesome_print:
   category: utilities
   description: Pretty object printing
-  module: 
   version: "~> 1.6"
 bio:
   category: biology
   description: Bioinformatics suite
+  module: Bio
   version: "~> 1.4"
 cassowary:
   category: optimization
   description: Incremental constraint solver
-  exclude: native dependencies
+  exclude: Native dependencies
+  module: Cassowary
 classifier:
   category: artificial intelligence
   description: Machine learning
+  module: Classifier
   version: "~> 1.3"
 cmath:
   category: algebra
@@ -34,10 +37,12 @@ cmath:
 daru:
   category: data
   description: Dataframe library
+  module: Daru
   version: "~> 0.0.5"
 darwinning:
   category: optimization
   description: Generic algorithms
+  module: Darwinning
   version: "~> 0.0.3"
 decisiontree:
   category: artificial intelligence
@@ -48,40 +53,37 @@ distribution:
   category: statistics
   description: Statistical distributions
   maintainer: sciruby
+  module: Distribution
   version: "~> 0.7"
 extendmatrix:
   category: algebra
   description: Helper methods for Matrix
-  module: 
   version: "~> 0.4"
 gga4r:
   category: optimization
   description: Generic algorithms
+  module: GeneticAlgorithm
   version: "~> 0.9"
 gimuby:
   category: optimization
   description: Genetic algorithms
+  module: Gimuby
   version: "~> 0.7"
 gnuplot:
   category: plotting
   description: Plotting library
+  module: Gnuplot
   version: "~> 2.6"
-gsl-nmatrix:
-  category: numerics
-  description: Bindings for the GNU scientific library
-  maintainer: sciruby
-  module: GSL
-  require: gsl
-  version: "~> 1.15"
 integration:
   category: numerics
   description: Numerical integration
   maintainer: sciruby
+  module: Integration
   version: "~> 0.1"
 irtruby:
   category: artificial intelligence
   description: Machine learning
-  exclude: not available as a gem
+  exclude: Not available as a gem
   module: IRT
 iruby:
   category: user interface
@@ -92,30 +94,33 @@ iruby:
 lpsolve:
   category: optimization
   description: Linear solver
-  exclude: outdated native dependencies
+  exclude: Outdated native dependencies
   module: LPSolve
 mathgl:
   category: plotting
   description: Plotting library
-  exclude: native dependencies
+  exclude: Native dependencies
   module: MathGL
 matrix:
   category: algebra
   description: Stdlib matrix module
   maintainer: stdlib
+  module: Matrix
 minimization:
   category: numerics
   description: Numerical minimization
   maintainer: sciruby
+  module: Minimization
   version: "~> 0.2"
 modshogun:
   category: artificial intelligence
   description: Machine learning
-  exclude: not available as a gem
+  exclude: Not available as a gem
+  module: Modshogun
 narray:
   category: numerics
   description: Numerics matrix library
-  exclude: conflicts with nmatrix
+  exclude: Conflicts with nmatrix
   module: NArray
 nmatrix:
   category: numerics
@@ -129,19 +134,23 @@ nmatrix:
 nyaplot:
   category: plotting
   description: Plotting library
+  module: Nyaplot
   version: "~> 0.1"
 ode:
   category: numerics
   description: Ordinary differential equations
   exclude: Fortran dependencies
+  module: Ode
 plotrb:
   category: plotting
   description: Plotting library
+  module: Plotrb
   version: "~> 0.0.1"
 prime:
   category: algebra
   description: Stdlib prime module
   maintainer: stdlib
+  module: Prime
 pry:
   category: user interface
   description: Ruby repl
@@ -152,6 +161,12 @@ publisci:
   description: Publishing toolkit
   module: PubliSci
   version: "~> 0.1"
+rb-gsl:
+  category: numerics
+  description: Bindings for the GNU scientific library
+  exclude: Requires narray
+  module: GSL
+  require: gsl
 rb-libsvm:
   category: artificial intelligence
   description: Support vector machines (machine learning)
@@ -174,18 +189,16 @@ rserve-client:
 rsruby:
   category: statistics
   description: R interpreter
-  exclude: native dependencies
+  exclude: Native dependencies
   module: RSRuby
 ruby-band:
   category: artificial intelligence
   description: Data mining
-  exclude: requires jruby
-  module: 
+  exclude: Requires JRuby
 ruby-dcl:
   category: plotting
   description: Plotting
-  exclude: requires narray
-  module: 
+  exclude: Requires narray
 ruby-fann:
   category: artificial intelligence
   description: Neural networks
@@ -194,7 +207,7 @@ ruby-fann:
 ruby-fftw3:
   category: numerics
   description: Fast Fourier transformation
-  exclude: requires narray
+  exclude: Requires narray
   module: FFTW3
 ruby-minisat:
   category: algebra
@@ -205,64 +218,58 @@ ruby-minisat:
 ruby-netcdf:
   category: data
   description: Data file
-  exclude: requires narray
-  module: 
+  exclude: Requires narray
 ruby-opencv:
   category: artificial intelligence
   description: Computer vision
-  exclude: native dependencies
+  exclude: Native dependencies
   module: OpenCV
 ruby-pgplot:
   category: plotting
   description: Plotting
-  exclude: requires narray
+  exclude: Requires narray
   module: Pgplot
   require: pgplot
 rubyvis:
   category: plotting
   description: Plotting library
+  module: Rubyvis
   version: "~> 0.5"
 sciruby:
   category: meta
   description: SciRuby meta gem
   maintainer: sciruby
-  module: 
 sciruby-full:
   category: meta
   description: SciRuby meta gem (Full installation)
   maintainer: sciruby
-  module: 
 sicom:
   category: statistics
   description: R interpreter
-  exclude: requires jruby
-  module: 
+  exclude: Requires JRuby
 statsample:
   category: statistics
   description: Statistics
   maintainer: sciruby
+  module: Statsample
   version: "~> 1.4"
 statsample-bivariate-extension:
   category: statistics
   description: Statistics
-  module: 
   version: "~> 1.1"
 statsample-glm:
   category: statistics
   description: Statistics
   maintainer: sciruby
-  module: 
   version: "~> 0.1"
 statsample-optimization:
   category: statistics
   description: Statistics
-  exclude: gsl conflict
-  module: 
+  exclude: GSL conflict
 statsample-timeseries:
   category: statistics
   description: Statistics
   exclude: activesupport version conflict
-  module: 
 stuff-classifier:
   category: artificial intelligence
   description: Machine learning
@@ -271,4 +278,5 @@ stuff-classifier:
 unit:
   category: physics
   description: Calculation with units
+  module: Unit
   version: "~> 0.5"

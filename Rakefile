@@ -2,8 +2,8 @@ task :test do
   sh 'scripts/test'
 end
 
-task :update do
-  sh 'scripts/update'
+task 'gems.html' do
+  sh 'slimrb --trace scripts/gems.slim > gems.html'
 end
 
-task default: :update
+task default: %w(test gems.html)

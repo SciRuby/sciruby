@@ -37,7 +37,8 @@ Gem::Specification.new do |s|
     s.post_install_message = m << "\n"
   end
 
-  s.add_development_dependency 'bundler'
+  s.add_development_dependency 'minitest'
   s.add_development_dependency 'rake'
+  s.add_development_dependency 'bundler'
   s.add_development_dependency 'slim'
 end

@@ -1,5 +1,7 @@
-- $: << File.dirname(__FILE__)
-- require 'helper'
+ruby:
+  $: << File.dirname(__FILE__)
+  require 'helper'
+  class << self; include Helper; end
 doctype html
 html
   head
@@ -10,7 +12,9 @@ html
     script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.js"
   body: .container: .row
     h1 SciRuby gems
-    h2 Last updated #{Date.today}, #{SciRuby.gems.size} gems listed
+    ul
+      li Last updated #{Date.today}
+      li #{SciRuby.gems.size} gems listed
     table.table data={ toggle:            'table',
                        search:            'true',
                        sortable:          'true',
@@ -28,23 +32,20 @@ html
         th data-sortable="true" Autoloaded modules
         th data-sortable="true" Status
       tbody
-        - SciRuby.gems.each_value.                 \
-           stable_sort_by {|gem| gem[:name] }.     \
-           stable_sort_by {|gem| gem[:category] }. \
-           stable_sort_by {|gem| gem[:maintainer] == 'sciruby' ? 0 : (gem[:maintainer] ? 1 : 2) }. \
-           each do |gem|
-            - status = check_gem(gem, spec = fetch_spec(gem))
+        - sorted_gems.each do |gem|
             tr
-              td = gem[:maintainer]
+              td
+                - if gem[:maintainer]
+                  - maintainer_tag = { 'stdlib' => 'info', 'sciruby' => 'success' }
+                  span.label class="label-#{maintainer_tag[gem[:maintainer]] || 'warning'}" = gem[:maintainer]
               td = gem[:category]
               td: a href="https://rubygems.org/gems/#{gem[:name]}" = gem[:name]
               td = gem[:version]
               td
-                - if spec
+                - if spec = fetch_spec(gem)
                   | #{spec.version} (#{spec.date.strftime '%Y-%m-%d'})
               td = gem[:description]
               td = gem[:module].join(', ')
               td
-                - status.each do |tag, msgs|
-                  - msgs.each do |msg|
+                - gem_status(gem).each do |tag, msg|
                     span.label<> class="label-#{tag}" = msg

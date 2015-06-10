@@ -1,3 +1,4 @@
+# coding: utf-8
 $: << File.join(__FILE__, '..', '..', 'lib')
 require 'sciruby'
 require 'rubygems'
@@ -8,43 +9,64 @@ module Enumerable
   end
 end
 
-def sort_hash(object)
-  if Hash === object
-    res = {}
-    object.each {|k, v| res[k] = sort_hash(v) }
-    Hash[res.sort_by {|a| a[0].to_s }]
-  elsif Array === object
-    array = []
-    object.each_with_index {|v, i| array[i] = sort_hash(v) }
-    array
-  else
-    object
-  end
-end
+GEMS_YML = File.join(__dir__, '..', 'gems.yml')
 
-def fetch_spec(gem)
-  STDERR.puts "Fetching #{gem[:name]}..."
-  Gem::SpecFetcher.fetcher.spec_for_dependency(Gem::Dependency.new(gem[:name])).flatten.first
-end
-
-def check_gem(gem, spec)
-  status = { danger: [], warning: [] }
-  status[:danger] << "Not in sciruby-full: #{gem[:exclude]}" if gem[:exclude]
-  if gem[:maintainer] != 'stdlib'
-    if spec
-      status[:warning] << "No update since #{spec.date.strftime '%Y-%m-%d'}" if Time.now - spec.date > 2*365*24*3600
-      unless %w(sciruby sciruby-full).include?(gem[:name])
-        if gem[:version]
-          status[:danger] << "Outdated version, found #{spec.version}" unless Gem::Dependency.new(gem[:name], *gem[:version]).matches_spec?(spec)
-        else
-          status[:danger] << "No version constraint, found #{spec.version}" unless gem[:exclude]
-        end
-      end
+module Helper
+  def sort_hash(object)
+    if Hash === object
+      res = {}
+      object.each {|k, v| res[k] = sort_hash(v) }
+      Hash[res.sort_by {|a| a[0].to_s }]
+    elsif Array === object
+      array = []
+      object.each_with_index {|v, i| array[i] = sort_hash(v) }
+      array
     else
-      status[:danger] << 'Gem not found' unless gem[:exclude]
+      object
     end
   end
-  status[:success] = ['OK'] if status.values.flatten.empty?
 
-  status
+  def check_gem(name, gem)
+    gem[:name].must_equal name
+    gem.must_be_instance_of Hash
+    gem.each_key {|k| k.must_be_instance_of Symbol }
+    gem[:category].must_be_instance_of String
+    gem[:description].must_be_instance_of String
+    gem[:exclude].must_be_instance_of String if gem[:exclude] != nil
+    gem[:module].must_be_instance_of Array
+    gem[:require].must_be_instance_of Array
+    gem[:require].empty?.must_equal false
+
+    if gem[:exclude] || gem[:maintainer] == 'stdlib' || %w(sciruby sciruby-full).include?(gem[:name])
+      gem[:version].must_be_nil
+    else
+      gem[:version].must_be_instance_of String
+    end
+  end
+
+  def fetch_spec(gem)
+    #STDERR.puts "Fetching #{gem[:name]}..."
+    Gem::SpecFetcher.fetcher.spec_for_dependency(Gem::Dependency.new(gem[:name])).flatten.first
+  end
+
+  def gem_status(gem)
+    status = []
+    status << [:danger, "Excluded: #{gem[:exclude]}"] if gem[:exclude]
+    unless gem[:exclude] || gem[:maintainer] == 'stdlib'
+      if spec = fetch_spec(gem)
+        status << [:warning, "Last update #{spec.date.strftime '%Y-%m-%d'}"] if Time.now - spec.date > 2*365*24*3600
+      else
+        status << [:danger, 'Gem not found'] unless gem[:exclude]
+      end
+    end
+    status << [:success, 'OK'] if status.empty?
+    status.sort_by(&:first)
+  end
+
+  def sorted_gems
+    SciRuby.gems.each_value.
+      stable_sort_by {|gem| gem[:name] }.
+      stable_sort_by {|gem| gem[:category] }.
+      stable_sort_by {|gem| gem[:maintainer] == 'sciruby' ? 0 : (gem[:maintainer] ? 1 : 2) }
+  end
 end

@@ -1,13 +1,6 @@
-#!/usr/bin/env ruby
-
-$: << File.dirname(__FILE__)
-require 'helper'
-
-file = File.join(__dir__, '..', 'gems.yml')
-data = YAML.load_file(file)
-File.write(file, YAML.dump(sort_hash(data)))
-
+#!/bin/sh
 # TODO: replace this with an automatic push to github pages
+# TODO: replace this with a shell script
 gist = '0e4c017780249b2d41ad'
 `cd #{__dir__}
 git clone git@gist.github.com:/#{gist}.git

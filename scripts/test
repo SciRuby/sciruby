@@ -2,9 +2,83 @@
 
 $: << File.dirname(__FILE__)
 require 'helper'
+require 'minitest/spec'
+require 'minitest/autorun'
 
-puts SciRuby.gems.inspect
-puts SciRuby.installed_gems.inspect
-puts SciRuby.modules.inspect
-puts SciRuby.installed_modules.inspect
-puts Prime
+class MiniTest::Spec
+  include Helper
+end
+
+describe 'gems.yml' do
+  it 'is sorted' do
+    sorted = YAML.dump(sort_hash(YAML.load_file(GEMS_YML)))
+    if File.read(GEMS_YML) != sorted
+      puts 'gems.yml has been sorted'
+      File.write(GEMS_YML, sorted)
+      fail
+    end
+  end
+
+  it 'contains no gratuitous keys' do
+    YAML.load_file(GEMS_YML).each do |name, gem|
+      gem.each_key {|k| %w(category maintainer description exclude version module require).include?(k).must_equal true }
+      gem['require'].wont_equal name if gem['require']
+    end
+  end
+end
+
+describe SciRuby do
+  it 'provides Hash of gems' do
+    SciRuby.gems.must_be_instance_of Hash
+    SciRuby.gems.each_key {|k| k.must_be_instance_of String }
+    SciRuby.gems.each do |name, gem|
+      check_gem(name, gem)
+    end
+  end
+
+  it 'provides Hash of installed gems' do
+    SciRuby.installed_gems.must_be_instance_of Hash
+    SciRuby.installed_gems.each_key {|k| k.must_be_instance_of String }
+    SciRuby.installed_gems.each do |name, gem|
+      check_gem(name, gem)
+      gem[:installed_version].must_be_instance_of String
+    end
+  end
+
+  it 'provides list of modules' do
+    SciRuby.modules.must_be_instance_of Array
+    SciRuby.modules.each {|m| m.must_be_instance_of Symbol }
+  end
+
+  it 'provides list of installed modules' do
+    SciRuby.installed_modules.must_be_instance_of Array
+    SciRuby.installed_modules.each {|m| m.must_be_instance_of Symbol }
+  end
+
+  it 'provides list of autoloadable modules' do
+    SciRuby.autoload_modules.must_be_instance_of Hash
+    SciRuby.autoload_modules.each_key {|k| k.must_be_instance_of Symbol }
+    SciRuby.autoload_modules.each_value {|v| v.must_be_instance_of Array }
+  end
+
+  it 'specifies no outdated gem versions' do
+    SciRuby.gems.each_value do |gem|
+      Gem::Dependency.new(gem[:name], *gem[:version]).matches_spec?(fetch_spec(gem)).must_equal true if gem[:version]
+    end
+  end
+
+  it 'autoloads modules' do
+    SciRuby.autoload_modules.must_include :Prime
+
+    Object.const_defined?(:Prime).must_equal false
+    Prime.must_be_instance_of Class
+    Object.const_defined?(:Prime).must_equal true
+
+    SciRuby.autoload_modules.wont_include :Prime
+
+    SciRuby.installed_gems.each_value.map {|gem| gem[:module] }.flatten.each do |mod|
+      next if mod == :R # FIXME, don't test Rinruby for now since it requires an installaion of R
+      Object.const_get(mod).wont_equal nil
+    end
+  end
+end

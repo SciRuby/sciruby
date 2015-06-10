@@ -19,7 +19,6 @@ Gem::Specification.new do |s|
     s.add_runtime_dependency 'sciruby', "= #{SciRuby::VERSION}"
     Helper.sciruby_gems(true).each {|gem| s.add_runtime_dependency gem[:name], *gem[:version] }
   else
-    s.require_paths = %w(lib)
     s.files = `git ls-files`.split($/)
     s.files.delete 'sciruby-full.gemspec'
 

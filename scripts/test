@@ -11,16 +11,16 @@ end
 
 describe 'gems.yml' do
   it 'is sorted' do
-    sorted = YAML.dump(sort_hash(YAML.load_file(GEMS_YML)))
-    if File.read(GEMS_YML) != sorted
+    sorted = YAML.dump(sort_hash(YAML.load_file(SciRuby::GEMS_YML)))
+    if File.read(SciRuby::GEMS_YML) != sorted
       puts 'gems.yml has been sorted'
-      File.write(GEMS_YML, sorted)
+      File.write(SciRuby::GEMS_YML, sorted)
       fail
     end
   end
 
   it 'contains no gratuitous keys' do
-    YAML.load_file(GEMS_YML).each do |name, gem|
+    YAML.load_file(SciRuby::GEMS_YML).each do |name, gem|
       gem.each_key {|k| %w(category maintainer description exclude version module require).include?(k).must_equal true }
       gem['require'].wont_equal name if gem['require']
     end
@@ -77,7 +77,7 @@ describe SciRuby do
     SciRuby.autoload_modules.wont_include :Prime
 
     SciRuby.installed_gems.each_value.map {|gem| gem[:module] }.flatten.each do |mod|
-      next if mod == :R # FIXME, don't test Rinruby for now since it requires an installaion of R
+      next if mod == :R || mod == :RinRuby # FIXME, don't test RinRuby for now since it requires an installaion of R
       Object.const_get(mod).wont_equal nil
     end
   end

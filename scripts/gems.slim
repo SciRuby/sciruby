@@ -1,7 +1,6 @@
 ruby:
   $: << File.dirname(__FILE__)
   require 'helper'
-  class << self; include Helper; end
 doctype html
 html
   head
@@ -32,7 +31,7 @@ html
         th data-sortable="true" Autoloaded modules
         th data-sortable="true" Status
       tbody
-        - sorted_gems.each do |gem|
+        - Helper.sorted_gems.each do |gem|
             tr
               td
                 - if gem[:maintainer]
@@ -42,10 +41,10 @@ html
               td: a href="https://rubygems.org/gems/#{gem[:name]}" = gem[:name]
               td = gem[:version]
               td
-                - if spec = fetch_spec(gem)
+                - if spec = Helper.fetch_spec(gem)
                   | #{spec.version} (#{spec.date.strftime '%Y-%m-%d'})
               td = gem[:description]
               td = gem[:module].join(', ')
               td
-                - gem_status(gem).each do |tag, msg|
+                - Helper.gem_status(gem).each do |tag, msg|
                     span.label<> class="label-#{tag}" = msg

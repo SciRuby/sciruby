@@ -1,6 +1,7 @@
 # coding: utf-8
 $: << File.join(__FILE__, '..', '..', 'lib')
 require 'sciruby'
+require 'date'
 require 'rubygems'
 
 module Enumerable
@@ -9,9 +10,9 @@ module Enumerable
   end
 end
 
-GEMS_YML = File.join(__dir__, '..', 'gems.yml')
-
 module Helper
+  extend self
+
   def sort_hash(object)
     if Hash === object
       res = {}
@@ -68,5 +69,11 @@ module Helper
       stable_sort_by {|gem| gem[:name] }.
       stable_sort_by {|gem| gem[:category] }.
       stable_sort_by {|gem| gem[:maintainer] == 'sciruby' ? 0 : (gem[:maintainer] ? 1 : 2) }
+  end
+
+  def sciruby_gems(exclude)
+    SciRuby.gems.each_value.sort_by {|gem| gem[:name] }.reject do |gem|
+      gem[:maintainer] == 'stdlib' || %w(sciruby sciruby-full).include?(gem[:name])
+    end.reject {|gem| gem[:exclude] && exclude }
   end
 end

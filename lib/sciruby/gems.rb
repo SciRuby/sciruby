@@ -49,5 +49,6 @@ module SciRuby
     nil
   end
 
-  load_gems File.expand_path(File.join(__FILE__, '..', '..', '..', 'gems.yml'))
+  GEMS_YML = File.expand_path(File.join(__FILE__, '..', '..', '..', 'gems.yml'))
+  load_gems GEMS_YML
 end

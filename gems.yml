@@ -183,7 +183,7 @@ rinruby:
 rserve-client:
   category: statistics
   description: R interpreter
-  module: RServe
+  module: Rserve
   require: rserve
   version: "~> 0.3"
 rsruby:

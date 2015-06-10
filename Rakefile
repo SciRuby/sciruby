@@ -1,3 +1,8 @@
+begin
+  require 'bundler/setup'
+rescue Exception
+end
+
 task :test do
   sh 'scripts/test'
 end

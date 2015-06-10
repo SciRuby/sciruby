@@ -15,7 +15,8 @@ html
         - if ENV['TRAVIS']
           |  by <a href="https://travis-ci.org/SciRuby/sciruby/jobs/#{ENV['TRAVIS_JOB_ID']}">Travis-CI</a> from commit
              <a href="https://github.com/SciRuby/sciruby/commit/#{ENV['TRAVIS_COMMIT']}">#{ENV['TRAVIS_COMMIT']}</a>.
-      li #{SciRuby.gems.size} gems listed
+      li #{SciRuby.gems.size} gems listed that <a href="https://rubygems.org/gems/sciruby">sciruby</a> knows about.
+      li Excluded gems are not included in the <a href="https://rubygems.org/gems/sciruby-full">sciruby-full</a> installation.
     table.table data={ toggle:            'table',
                        search:            'true',
                        sortable:          'true',

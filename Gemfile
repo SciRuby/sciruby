@@ -1,5 +1,4 @@
-$: << File.join(__FILE__, '..', 'scripts')
-require 'helper'
+load File.expand_path(File.join(__FILE__, '..', 'scripts', 'helper.rb'))
 
 source 'https://rubygems.org'
 

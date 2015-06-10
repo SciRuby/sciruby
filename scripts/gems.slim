@@ -1,6 +1,4 @@
-ruby:
-  $: << File.dirname(__FILE__)
-  require 'helper'
+- require File.expand_path(File.join(__FILE__, '..', 'helper.rb'))
 doctype html
 html
   head
@@ -15,8 +13,8 @@ html
       li
         | Last updated at #{Time.now.utc}
         - if ENV['TRAVIS']
-          | by <a href="https://travis-ci.org/SciRuby/sciruby/jobs/#{ENV['TRAVIS_JOB_ID']}">Travis-CI</a> from commit
-             <a href="https://github.com/SciRuby/sciruby/commit/#{ENV['TRAVIS_COMMIT']}">.
+          |  by <a href="https://travis-ci.org/SciRuby/sciruby/jobs/#{ENV['TRAVIS_JOB_ID']}">Travis-CI</a> from commit
+             <a href="https://github.com/SciRuby/sciruby/commit/#{ENV['TRAVIS_COMMIT']}">#{ENV['TRAVIS_COMMIT']}</a>.
       li #{SciRuby.gems.size} gems listed
     table.table data={ toggle:            'table',
                        search:            'true',

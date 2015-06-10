@@ -1,5 +1,4 @@
-$: << File.join(__FILE__, '..', 'scripts')
-require 'helper'
+require File.expand_path(File.join(__FILE__, '..', 'scripts', 'helper.rb'))
 
 SCIRUBY_FULL = false unless defined?(SCIRUBY_FULL)
 

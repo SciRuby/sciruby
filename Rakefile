@@ -1,8 +1,3 @@
-begin
-  require 'bundler/setup'
-rescue Exception
-end
-
 task 'gems.html' do
   sh 'slimrb --trace scripts/gems.slim > gems.html'
 end

@@ -1,4 +1,10 @@
-$: << File.join(__FILE__, '..', '..', 'lib')
+begin
+  require 'bundler/setup'
+rescue Exception
+end
+
+$: << File.join(File.dirname(__FILE__), '..', 'lib')
+
 require 'sciruby'
 require 'date'
 require 'rubygems'

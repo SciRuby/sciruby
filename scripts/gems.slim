@@ -14,6 +14,7 @@ html
       .fa-diamond { color: #8B0000 }
       .fa-github { color: #000000 }
       .fa-book { color: #191970 }
+      h1 { margin-bottom: 1em; }
   body: .container: .row: .col-md-12
     h1 SciRuby gems
     table.table data={ toggle:            'table',
@@ -29,10 +30,10 @@ html
         th data-sortable="true" Category
         th data-sortable="true" Name
         th Links
-        th data-sortable="true" Version
+        th data-sortable="true" Ver.
         th data-sortable="true" Latest version
         th data-sortable="true" Description
-        th data-sortable="true" Autoloaded modules
+        th data-sortable="true" Autoload modules
         th data-sortable="true" Status
       tbody
         - Helper.table_gems do |gem|
@@ -74,6 +75,6 @@ html
           |  by <a href="https://travis-ci.org/SciRuby/sciruby/jobs/#{ENV['TRAVIS_JOB_ID']}">Travis-CI</a> from commit
              <a href="https://github.com/SciRuby/sciruby/commit/#{ENV['TRAVIS_COMMIT']}">#{ENV['TRAVIS_COMMIT']}</a>.
         - else
-          |  by #{`hostname -f`}.
+          |  by #{`hostname -f`.chomp}.
       li #{SciRuby.gems.size} gems registered in <a href="https://github.com/SciRuby/sciruby/blob/master/gems.yml">sciruby/gems.yml</a>.
       li Excluded gems are not included in the <a href="https://rubygems.org/gems/sciruby-full">sciruby-full</a> installation.

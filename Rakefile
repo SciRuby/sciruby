@@ -1,5 +1,5 @@
 task 'gems.html' do
-  sh 'slimrb --trace scripts/gems.slim > gems.html'
+  sh 'slimrb --trace scripts/gems.slim > /tmp/gems.html && mv /tmp/gems.html .'
 end
 
 task :test do

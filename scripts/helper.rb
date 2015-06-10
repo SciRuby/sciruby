@@ -54,7 +54,12 @@ module Helper
 
   def fetch_spec(gem)
     #STDERR.puts "Fetching #{gem[:name]}..."
-    gem[:owner] != 'stdlib' && Gem::SpecFetcher.fetcher.spec_for_dependency(Gem::Dependency.new(gem[:name])).flatten.first
+    return nil if gem[:owner] == 'stdlib'
+    dep = Gem::Dependency.new(gem[:name])
+    spec = Gem::SpecFetcher.fetcher.spec_for_dependency(dep).flatten.first
+    return spec if spec
+    dep.prerelease = true
+    Gem::SpecFetcher.fetcher.spec_for_dependency(dep).flatten.first
   end
 
   def label(tag, msg)

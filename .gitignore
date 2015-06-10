@@ -2,4 +2,3 @@
 Gemfile.lock
 *.ipynb
 .ipynb_checkpoints
-gems.html

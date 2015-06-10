@@ -6,3 +6,11 @@ require 'helper'
 file = File.join(__dir__, '..', 'gems.yml')
 data = YAML.load_file(file)
 File.write(file, YAML.dump(sort_hash(data)))
+
+# TODO: replace this with an automatic push to github pages
+gist = '0e4c017780249b2d41ad'
+`cd #{__dir__}
+git clone git@gist.github.com:/#{gist}.git
+slimrb --trace gems.slim > #{File.join(gist, 'gems.html')}
+(cd #{gist}; git commit -a -m 'gems.html updated'; git push origin master)
+rm -rf #{gist}`

@@ -221,7 +221,7 @@ ruby-pgplot:
 rubyvis:
   category: plotting
   description: Plotting library
-  version: "~> 0.6"
+  version: "~> 0.5"
 sciruby:
   category: meta
   description: SciRuby meta gem

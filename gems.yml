@@ -79,6 +79,11 @@ gruff:
   description: Plotting library
   module: Gruff
   version: "~> 0.6"
+histogram:
+  category: statistics
+  description: Histogram method
+  module: Histogram
+  version: "~> 0.2"
 integration:
   category: numerics
   description: Numerical integration
@@ -111,6 +116,16 @@ matrix:
   description: Stdlib matrix module
   maintainer: stdlib
   module: Matrix
+measurable:
+  category: artificial intelligence
+  description: Distance measures for machine learning
+  module: Measurable
+  version: "~> 0.0"
+mikon:
+  category: data
+  description: Dataframe library
+  module: Mikon
+  version: "~> 0.0"
 minimization:
   category: numerics
   description: Numerical minimization
@@ -146,6 +161,11 @@ ode:
   description: Ordinary differential equations
   exclude: Fortran dependencies
   module: Ode
+omoikane:
+  category: artificial intelligence
+  description: Machine learning
+  module: Omoikane
+  version: "~> 0.0"
 plotrb:
   category: plotting
   description: Plotting library
@@ -280,6 +300,11 @@ stuff-classifier:
   description: Machine learning
   module: StuffClassifier
   version: "~> 0.5"
+treat:
+  category: linguistics
+  description: Natural language processing
+  module: Treat
+  version: "~> 2.1"
 unit:
   category: physics
   description: Calculation with units

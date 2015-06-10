@@ -5,6 +5,10 @@ rvm:
   - 2.2.2
   - 2.1.6
 
+matrix:
+  allow_failures:
+    - rvm: ruby-head
+
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq gnuplot-nox libgsl0-dev libsqlite3-dev libatlas-base-dev

@@ -61,12 +61,6 @@ describe SciRuby do
     SciRuby.autoload_modules.each_value {|v| v.must_be_instance_of Array }
   end
 
-  it 'specifies no outdated gem versions' do
-    SciRuby.gems.each_value do |gem|
-      Gem::Dependency.new(gem[:name], *gem[:version]).matches_spec?(fetch_spec(gem)).must_equal true if gem[:version]
-    end
-  end
-
   it 'autoloads modules' do
     SciRuby.autoload_modules.must_include :Prime
 

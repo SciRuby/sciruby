@@ -16,14 +16,6 @@ html
       .fa-book { color: #191970 }
   body: .container: .row: .col-md-12
     h1 SciRuby gems
-    ul
-      li
-        | Last updated at #{Time.now.utc}
-        - if ENV['TRAVIS']
-          |  by <a href="https://travis-ci.org/SciRuby/sciruby/jobs/#{ENV['TRAVIS_JOB_ID']}">Travis-CI</a> from commit
-             <a href="https://github.com/SciRuby/sciruby/commit/#{ENV['TRAVIS_COMMIT']}">#{ENV['TRAVIS_COMMIT']}</a>.
-      li #{SciRuby.gems.size} gems listed that <a href="https://rubygems.org/gems/sciruby">sciruby</a> knows about.
-      li Excluded gems are not included in the <a href="https://rubygems.org/gems/sciruby-full">sciruby-full</a> installation.
     table.table data={ toggle:            'table',
                        search:            'true',
                        sortable:          'true',
@@ -31,7 +23,7 @@ html
                        show_columns:      'true',
                        mobile_responsive: 'true',
                        striped:           'true',
-		       height:            500 }
+                       height:            550 }
       thead: tr
         th data-sortable="true" Maintainer
         th data-sortable="true" Category
@@ -42,37 +34,32 @@ html
         th data-sortable="true" Description
         th data-sortable="true" Autoloaded modules
         th data-sortable="true" Status
-        /th Badges
       tbody
-        - Helper.sorted_gems.each do |gem|
-          - spec = Helper.fetch_spec(gem)
-          - github = Helper.github_name(spec)
+        - Helper.table_gems do |gem|
           tr
             td
               - if gem[:maintainer]
                 - maintainer_tag = { 'stdlib' => 'info', 'sciruby' => 'success' }
                 span.label class="label-#{maintainer_tag[gem[:maintainer]] || 'warning'}" = gem[:maintainer]
             td = gem[:category]
-            - if spec
-              td: a href=spec.homepage = gem[:name]
+            - if gem[:spec]
+              td: a href=gem[:spec].homepage = gem[:name]
               td
-                a<> href=spec.homepage : span.fa.fa-home
-                a<> href="http://www.rubydoc.info/gems/#{gem[:name]}/#{spec.version}": span.fa.fa-book
+                a<> href=gem[:spec].homepage : span.fa.fa-home
+                a<> href="http://www.rubydoc.info/gems/#{gem[:name]}/#{gem[:spec].version}": span.fa.fa-book
                 a<> href="https://rubygems.org/gems/#{gem[:name]}": span.fa.fa-diamond
-                - if github
-                  a<> href="https://github.com/#{github}": span.fa.fa-github
+                - if gem[:github]
+                  a<> href="https://github.com/#{gem[:github]}": span.fa.fa-github
             - else
               td = gem[:name]
               td
             td = gem[:version]
             td
-              - if spec
-                a href="https://rubygems.org/gems/#{gem[:name]}" #{spec.version} (#{spec.date.strftime '%Y-%m-%d'})
+              - if gem[:spec]
+                a href="https://rubygems.org/gems/#{gem[:name]}" #{gem[:spec].version} (#{gem[:date]})
             td = gem[:description]
             td = gem[:module].join(', ')
-            td
-              - Helper.gem_status(gem).each do |tag, msg|
-                  span.label<> class="label-#{tag}" = msg
+            td == gem[:status]
             /td
               - if github
                 a<> href="https://github.com/#{github}": img src="https://img.shields.io/github/stars/#{github}.svg"
@@ -80,3 +67,13 @@ html
                 a<> href="https://codeclimate.com/github/#{github}": img src="https://img.shields.io/codeclimate/github/#{github}.svg"
                 a<> href="https://travis-ci.org/#{github}": img src="https://img.shields.io/travis/#{github}.svg"
                 a<> href="https://versioneye.com/ruby/#{gem[:name]}": img src="https://img.shields.io/versioneye/d/ruby/#{gem[:name]}.svg"
+    ul.list-inline
+      li
+        | Last updated at #{Time.now.utc}
+        - if ENV['TRAVIS']
+          |  by <a href="https://travis-ci.org/SciRuby/sciruby/jobs/#{ENV['TRAVIS_JOB_ID']}">Travis-CI</a> from commit
+             <a href="https://github.com/SciRuby/sciruby/commit/#{ENV['TRAVIS_COMMIT']}">#{ENV['TRAVIS_COMMIT']}</a>.
+        - else
+          |  by #{`hostname -f`}.
+      li #{SciRuby.gems.size} gems registered in <a href="https://rubygems.org/gems/sciruby">sciruby</a>.
+      li Excluded gems are not included in the <a href="https://rubygems.org/gems/sciruby-full">sciruby-full</a> installation.

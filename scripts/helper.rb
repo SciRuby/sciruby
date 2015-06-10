@@ -57,24 +57,49 @@ module Helper
     gem[:maintainer] != 'stdlib' && Gem::SpecFetcher.fetcher.spec_for_dependency(Gem::Dependency.new(gem[:name])).flatten.first
   end
 
-  def gem_status(gem)
-    status = []
-    status << [:default, "Excluded: #{gem[:exclude]}"] if gem[:exclude]
-    if spec = fetch_spec(gem)
-      status << [Time.now - spec.date > 4*365*24*3600 ? :danger : :warning, "Last update #{spec.date.strftime '%Y-%m-%d'}"] if Time.now - spec.date > 2*365*24*3600
-      status << [:danger, 'Outdated version constraint'] if gem[:version] && !Gem::Dependency.new(gem[:name], *gem[:version]).matches_spec?(spec)
-    else
-      status << [:danger, 'Gem not found'] unless gem[:exclude] || gem[:maintainer] == 'stdlib'
-    end
-    status << [:success, 'OK'] if status.empty?
-    status.sort_by(&:first)
+  def label(tag, msg)
+    %{<span class="label label-#{tag}">#{msg}</span>}
   end
 
-  def sorted_gems
+  def gem_status(gem)
+    status = []
+    status << label(:default, "Excluded: #{gem[:exclude]}") if gem[:exclude]
+    if gem[:spec]
+      status << label(Time.now - gem[:spec].date > 4*365*24*3600 ? :danger : :warning, "Last update #{gem[:date]}") if Time.now - gem[:spec].date > 2*365*24*3600
+      status << label(:danger, 'Outdated version constraint') if gem[:version] && !Gem::Dependency.new(gem[:name], *gem[:version]).matches_spec?(gem[:spec])
+    else
+      status << label(:danger, 'Gem not found') unless gem[:exclude] || gem[:maintainer] == 'stdlib'
+    end
+    status << %{<a class="label label-warning" href="https://versioneye.com/ruby/#{gem[:name]}">Outdated dependencies</a>} if versioneye(gem[:name])
+    status << label(:success, 'OK') if status.empty?
+    status.sort_by {|label| label =~ /label-\w+/; $& }.join(' ')
+  end
+
+  def github_name(gem)
+    return gem[:spec].homepage if gem[:spec].homepage =~ %r{github.com/([^/]+/[^/]+)}
+    JSON.parse(Net::HTTP.get(URI("https://rubygems.org/api/v1/gems/#{gem[:name]}.json"))).each do |k,v|
+      return $1 if k =~ /_uri/ && v =~ %r{github.com/([^/]+/[^/]+)}
+    end
+    nil
+  end
+
+  def table_gems
     SciRuby.gems.each_value.
       stable_sort_by {|gem| gem[:name] }.
       stable_sort_by {|gem| gem[:category] }.
-      stable_sort_by {|gem| gem[:maintainer] == 'sciruby' ? 0 : (gem[:maintainer] ? 1 : 2) }
+      stable_sort_by {|gem| gem[:maintainer] == 'sciruby' ? 0 : (gem[:maintainer] ? 1 : 2) }.each do |gem|
+
+      gem = gem.dup
+
+      if spec = fetch_spec(gem)
+        gem[:spec] = spec
+        gem[:date] = spec.date.strftime('%Y-%m-%d')
+        gem[:github] = github_name(gem)
+      end
+      gem[:status] = gem_status(gem)
+
+      yield(gem)
+    end
   end
 
   def sciruby_gems(exclude)
@@ -83,12 +108,7 @@ module Helper
     end.reject {|gem| gem[:exclude] && exclude }
   end
 
-  def github_name(spec)
-    return nil unless spec
-    return spec.homepage if spec.homepage =~ %r{github.com/([^/]+/[^/]+)}
-    JSON.parse(Net::HTTP.get(URI("https://rubygems.org/api/v1/gems/#{spec.name}.json"))).each do |k,v|
-      return $1 if k =~ /_uri/ && v =~ %r{github.com/([^/]+/[^/]+)}
-    end
-    nil
+  def versioneye(name)
+    Net::HTTP.get(URI("https://www.versioneye.com/ruby/#{name}/badge")) =~ /out of date/
   end
 end

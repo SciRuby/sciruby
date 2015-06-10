@@ -32,19 +32,24 @@ html
         th data-sortable="true" Status
       tbody
         - Helper.sorted_gems.each do |gem|
-            tr
+          - spec = Helper.fetch_spec(gem)
+          tr
+            td
+              - if gem[:maintainer]
+                - maintainer_tag = { 'stdlib' => 'info', 'sciruby' => 'success' }
+                span.label class="label-#{maintainer_tag[gem[:maintainer]] || 'warning'}" = gem[:maintainer]
+            td = gem[:category]
+            - if spec
               td
-                - if gem[:maintainer]
-                  - maintainer_tag = { 'stdlib' => 'info', 'sciruby' => 'success' }
-                  span.label class="label-#{maintainer_tag[gem[:maintainer]] || 'warning'}" = gem[:maintainer]
-              td = gem[:category]
-              td: a href="https://rubygems.org/gems/#{gem[:name]}" = gem[:name]
-              td = gem[:version]
-              td
-                - if spec = Helper.fetch_spec(gem)
-                  | #{spec.version} (#{spec.date.strftime '%Y-%m-%d'})
-              td = gem[:description]
-              td = gem[:module].join(', ')
-              td
-                - Helper.gem_status(gem).each do |tag, msg|
-                    span.label<> class="label-#{tag}" = msg
+                a href=spec.homepage = gem[:name]
+            - else
+              td = gem[:name]
+            td = gem[:version]
+            td
+              - if spec
+                a href="https://rubygems.org/gems/#{gem[:name]}" #{spec.version} (#{spec.date.strftime '%Y-%m-%d'})
+            td = gem[:description]
+            td = gem[:module].join(', ')
+            td
+              - Helper.gem_status(gem).each do |tag, msg|
+                  span.label<> class="label-#{tag}" = msg

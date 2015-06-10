@@ -267,6 +267,10 @@ statsample-optimization:
   category: statistics
   description: Statistics
   exclude: GSL conflict
+statsample-sem:
+  category: statistics
+  description: Statistics
+  exclude: Outdated dependencies
 statsample-timeseries:
   category: statistics
   description: Statistics

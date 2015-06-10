@@ -59,11 +59,11 @@ module Helper
     status = []
     status << [:default, "Excluded: #{gem[:exclude]}"] if gem[:exclude]
     if spec = fetch_spec(gem)
-      status << [:warning, "Last update #{spec.date.strftime '%Y-%m-%d'}"] if Time.now - spec.date > 2*365*24*3600
-      status[:danger] << 'Outdated version constraint' unless Gem::Dependency.new(gem[:name], *gem[:version]).matches_spec?(spec)
+      status << [Time.now - spec.date > 4*365*24*3600 ? :danger : :warning, "Last update #{spec.date.strftime '%Y-%m-%d'}"] if Time.now - spec.date > 2*365*24*3600
+      status << [:danger, 'Outdated version constraint'] if gem[:version] && !Gem::Dependency.new(gem[:name], *gem[:version]).matches_spec?(spec)
     else
-      status << [:danger, 'Gem not found'] unless gem[:exclude]
-    end unless gem[:exclude] || gem[:maintainer] == 'stdlib'
+      status << [:danger, 'Gem not found'] unless gem[:exclude] || gem[:maintainer] == 'stdlib'
+    end
     status << [:success, 'OK'] if status.empty?
     status.sort_by(&:first)
   end

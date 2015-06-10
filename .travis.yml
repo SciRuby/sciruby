@@ -1,11 +1,11 @@
 language: ruby
 
 rvm:
-# - ruby-head
+  - ruby-head
   - 2.2.2
-# - 2.1.6
-# - 2.0.0
-# - 1.9.3
+  - 2.1.6
+  - 2.0.0
+  - 1.9.3
 
 before_install:
   - sudo apt-get update -qq

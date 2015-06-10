@@ -6,13 +6,14 @@ This guide covers way in which you can contribute.
 
 There are various ways in which you can improve SciRuby. Coding and documentation are the two primary possibilities and participate in the [mailing list][mailing-list] -- suggesting ideas and changes is very important!
 
-Apart from adding features and functionality, you can also create tests (we use RSpec), guides on how to do something using SciRuby, document the libraries and help find and fix bugs.
+Apart from adding features and functionality, you can also create tests, guides on how to do something using SciRuby, document the libraries and help find and fix bugs.
 
-Start by visiting our [issue tracker](https://github.com/SciRuby/sciruby/issues?state=open) if you want to start contributing, there's probably something with which you can help.
+Start by visiting our [issue tracker](https://github.com/SciRuby/sciruby/issues?state=open) and the
+[status list of the various gems](https://minad.github.io/sciruby-gems). If you want to start contributing, there's probably something with which you can help.
 
 ## Projects
 
-SciRuby is an umbrella for many other projects in Ruby. There's not much hierarchy or anything, but we believe that the most important one at the time is [NMatrix][nmatrix], as it's very hard to create some scientific library that doesn't need a good numerical linear algebra library to deal with vectors and matrices.
+SciRuby is an umbrella for many other projects in Ruby. The most important one at the time is [NMatrix][nmatrix], as it's very hard to create some scientific library that doesn't need a good numerical linear algebra library to deal with vectors and matrices.
 
 So, the SciRuby subprojects are, in no particular order:
 
@@ -21,6 +22,7 @@ So, the SciRuby subprojects are, in no particular order:
 - [Distribution][distribution]: Diverse statistical distributions. Uses C (statistics2/GSL) or Java extensions when available.
 - [Integration][integration]: Integration methods.
 - [Minimization][minimization]: Various minimization algorithms in pure Ruby.
+- [IRuby][iruby]: Ruby kernel for the IPython/Jupyter notebook
 
 ## Documentation
 
@@ -43,4 +45,5 @@ Before commiting any code, you *MUST* read our [Contributor Agreement](http://gi
 [distribution]: https://github.com/SciRuby/distribution
 [integration]: https://github.com/SciRuby/integration
 [minimization]: https://github.com/SciRuby/minimization
+[iruby]: https://github.com/SciRuby/iruby
 [rdoc]: http://rdoc.rubyforge.org/

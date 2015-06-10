@@ -4,32 +4,38 @@ Tools for Scientific Computing in Ruby
 
 * [Website](http://sciruby.com)
 * [NMatrix](http://github.com/SciRuby/nmatrix)
-* [List of gems](https://minad.github.io/sciruby-gems)
+* [List of scientific gems](https://minad.github.io/sciruby-gems)
 * [Travis-CI](https://travis-ci.org/SciRuby/sciruby)
 
 ## Description
 
-This gem acts as a meta gem which provides collects multiple scientific gems, including numeric and visualization libraries.
+This gem acts as a meta gem which provides collects multiple [scientific gems](https://minad.github.io/sciruby-gems), including numeric and visualization libraries.
 
 ## Getting started
 
 Installation:
 
-    gem install sciruby
-    gem install sciruby-full
+~~~
+gem install sciruby
+gem install sciruby-full
+~~~
 
 If you want to have a full-blown installation, install `sciruby-full`.
 
 Start a notebook server:
 
-    iruby notebook
+~~~
+iruby notebook
+~~~
 
 Enter commands:
 
-    require 'sciruby'
-    # Scientific gems are auto loaded, you can use them directly!
-    plot = Nyaplot::Plot.new
-    sc = plot.add(:scatter, [0,1,2,3,4], [-1,2,-3,4,-5])
+~~~ ruby
+require 'sciruby'
+# Scientific gems are auto loaded, you can use them directly!
+plot = Nyaplot::Plot.new
+sc = plot.add(:scatter, [0,1,2,3,4], [-1,2,-3,4,-5])
+~~~
 
 Take a look at [gems.yml](gems.yml) or the [list of gems](https://minad.github.io/sciruby-gems) for interesting gems which are included in `sciruby-full`.
 

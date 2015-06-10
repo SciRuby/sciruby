@@ -45,7 +45,7 @@ module Helper
     gem[:require].must_be_instance_of Array
     gem[:require].empty?.must_equal false
 
-    if gem[:exclude] || gem[:maintainer] == 'stdlib' || %w(sciruby sciruby-full).include?(gem[:name])
+    if gem[:exclude] || gem[:owner] == 'stdlib' || %w(sciruby sciruby-full).include?(gem[:name])
       gem[:version].must_be_nil
     else
       gem[:version].must_be_instance_of String
@@ -54,7 +54,7 @@ module Helper
 
   def fetch_spec(gem)
     #STDERR.puts "Fetching #{gem[:name]}..."
-    gem[:maintainer] != 'stdlib' && Gem::SpecFetcher.fetcher.spec_for_dependency(Gem::Dependency.new(gem[:name])).flatten.first
+    gem[:owner] != 'stdlib' && Gem::SpecFetcher.fetcher.spec_for_dependency(Gem::Dependency.new(gem[:name])).flatten.first
   end
 
   def label(tag, msg)
@@ -68,7 +68,7 @@ module Helper
       status << label(Time.now - gem[:spec].date > 4*365*24*3600 ? :danger : :warning, "Last update #{gem[:date]}") if Time.now - gem[:spec].date > 2*365*24*3600
       status << label(:danger, 'Outdated version constraint') if gem[:version] && !Gem::Dependency.new(gem[:name], *gem[:version]).matches_spec?(gem[:spec])
     else
-      status << label(:danger, 'Gem not found') unless gem[:exclude] || gem[:maintainer] == 'stdlib'
+      status << label(:danger, 'Gem not found') unless gem[:exclude] || gem[:owner] == 'stdlib'
     end
     status << %{<a class="label label-warning" href="https://versioneye.com/ruby/#{gem[:name]}">Outdated dependencies</a>} if versioneye(gem[:name])
     status << label(:success, 'OK') if status.empty?
@@ -87,7 +87,7 @@ module Helper
     SciRuby.gems.each_value.
       stable_sort_by {|gem| gem[:name] }.
       stable_sort_by {|gem| gem[:category] }.
-      stable_sort_by {|gem| gem[:maintainer] == 'sciruby' ? 0 : (gem[:maintainer] ? 1 : 2) }.each do |gem|
+      stable_sort_by {|gem| gem[:owner] == 'sciruby' ? 0 : (gem[:owner] ? 1 : 2) }.each do |gem|
 
       gem = gem.dup
 
@@ -104,7 +104,7 @@ module Helper
 
   def sciruby_gems(exclude)
     SciRuby.gems.each_value.sort_by {|gem| gem[:name] }.reject do |gem|
-      gem[:maintainer] == 'stdlib' || %w(sciruby sciruby-full).include?(gem[:name])
+      gem[:owner] == 'stdlib' || %w(sciruby sciruby-full).include?(gem[:name])
     end.reject {|gem| gem[:exclude] && exclude }
   end
 

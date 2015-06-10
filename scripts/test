@@ -20,7 +20,7 @@ describe 'gems.yml' do
 
   it 'contains no gratuitous keys' do
     YAML.load_file(SciRuby::GEMS_YML).each do |name, gem|
-      gem.each_key {|k| %w(category maintainer description exclude version module require).include?(k).must_equal true }
+      gem.each_key {|k| %w(category owner description exclude version module require).include?(k).must_equal true }
       gem['require'].wont_equal name if gem['require']
     end
   end

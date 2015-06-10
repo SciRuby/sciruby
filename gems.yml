@@ -33,7 +33,7 @@ classifier:
 cmath:
   category: algebra
   description: Stdlib cmath module
-  maintainer: stdlib
+  owner: stdlib
 daru:
   category: data
   description: Dataframe library
@@ -52,8 +52,8 @@ decisiontree:
 distribution:
   category: statistics
   description: Statistical distributions
-  maintainer: sciruby
   module: Distribution
+  owner: sciruby
   version: "~> 0.7"
 extendmatrix:
   category: algebra
@@ -87,8 +87,8 @@ histogram:
 integration:
   category: numerics
   description: Numerical integration
-  maintainer: sciruby
   module: Integration
+  owner: sciruby
   version: "~> 0.1"
 irtruby:
   category: artificial intelligence
@@ -98,8 +98,8 @@ irtruby:
 iruby:
   category: user interface
   description: Ruby kernel for Jupyter
-  maintainer: sciruby
   module: IRuby
+  owner: sciruby
   version: "~> 0.2"
 lpsolve:
   category: optimization
@@ -114,8 +114,8 @@ mathgl:
 matrix:
   category: algebra
   description: Stdlib matrix module
-  maintainer: stdlib
   module: Matrix
+  owner: stdlib
 measurable:
   category: artificial intelligence
   description: Distance measures for machine learning
@@ -129,8 +129,8 @@ mikon:
 minimization:
   category: numerics
   description: Numerical minimization
-  maintainer: sciruby
   module: Minimization
+  owner: sciruby
   version: "~> 0.2"
 modshogun:
   category: artificial intelligence
@@ -145,11 +145,11 @@ narray:
 nmatrix:
   category: numerics
   description: Numerics matrix library
-  maintainer: sciruby
   module:
   - N
   - NMatrix
   - NVector
+  owner: sciruby
   version: "~> 0.1"
 nyaplot:
   category: plotting
@@ -174,8 +174,8 @@ plotrb:
 prime:
   category: algebra
   description: Stdlib prime module
-  maintainer: stdlib
   module: Prime
+  owner: stdlib
 pry:
   category: user interface
   description: Ruby repl
@@ -263,16 +263,16 @@ rubyvis:
 sciruby:
   category: meta
   description: SciRuby meta gem
-  maintainer: sciruby
+  owner: sciruby
 sciruby-full:
   category: meta
   description: SciRuby meta gem (Full installation)
-  maintainer: sciruby
+  owner: sciruby
 statsample:
   category: statistics
   description: Statistics
-  maintainer: sciruby
   module: Statsample
+  owner: sciruby
   version: "~> 1.4"
 statsample-bivariate-extension:
   category: statistics
@@ -281,7 +281,7 @@ statsample-bivariate-extension:
 statsample-glm:
   category: statistics
   description: Statistics
-  maintainer: sciruby
+  owner: sciruby
   version: "~> 0.1"
 statsample-optimization:
   category: statistics

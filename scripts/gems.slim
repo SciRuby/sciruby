@@ -25,7 +25,7 @@ html
                        striped:           'true',
                        height:            550 }
       thead: tr
-        th data-sortable="true" Maintainer
+        th data-sortable="true" Owner
         th data-sortable="true" Category
         th data-sortable="true" Name
         th Links
@@ -38,9 +38,9 @@ html
         - Helper.table_gems do |gem|
           tr
             td
-              - if gem[:maintainer]
-                - maintainer_tag = { 'stdlib' => 'info', 'sciruby' => 'success' }
-                span.label class="label-#{maintainer_tag[gem[:maintainer]] || 'warning'}" = gem[:maintainer]
+              - if gem[:owner]
+                - owner_tag = { 'stdlib' => 'info', 'sciruby' => 'success' }
+                span.label class="label-#{owner_tag[gem[:owner]] || 'warning'}" = gem[:owner]
             td = gem[:category]
             - if gem[:spec]
               td: a href=gem[:spec].homepage = gem[:name]
@@ -75,5 +75,5 @@ html
              <a href="https://github.com/SciRuby/sciruby/commit/#{ENV['TRAVIS_COMMIT']}">#{ENV['TRAVIS_COMMIT']}</a>.
         - else
           |  by #{`hostname -f`}.
-      li #{SciRuby.gems.size} gems registered in <a href="https://rubygems.org/gems/sciruby">sciruby</a>.
+      li #{SciRuby.gems.size} gems registered in <a href="https://github.com/SciRuby/sciruby/blob/master/gems.yml">sciruby/gems.yml</a>.
       li Excluded gems are not included in the <a href="https://rubygems.org/gems/sciruby-full">sciruby-full</a> installation.

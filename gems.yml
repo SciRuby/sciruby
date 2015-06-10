@@ -74,6 +74,11 @@ gnuplot:
   description: Plotting library
   module: Gnuplot
   version: "~> 2.6"
+gruff:
+  category: plotting
+  description: Plotting library
+  module: Gruff
+  version: "~> 0.6"
 integration:
   category: numerics
   description: Numerical integration

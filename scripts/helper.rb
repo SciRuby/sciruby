@@ -98,14 +98,24 @@ module Helper
       elsif spec = fetch_spec(gem)
         gem[:spec] = spec
         gem[:date] = spec.date.strftime('%Y-%m-%d')
-        gem[:github] = github_name(gem)
         gem[:homepage] = spec.homepage
         gem[:docs] = "http://www.rubydoc.info/gems/#{gem[:name]}/#{spec.version}"
         gem[:module] = gem[:module].map {|mod| %{<a href="#{gem[:docs]}/#{mod.gsub('::', '/')}">#{mod}</a>} }
+        github_infos(gem)
       end
       gem[:status] = gem_status(gem)
 
       gem
+    end
+  end
+
+  def github_infos(gem)
+    if gem[:github] = github_name(gem)
+      data = JSON.parse(Net::HTTP.get(URI("https://api.github.com/repos/#{gem[:github]}?client_id=#{ENV['CLIENT_ID']}&client_secret=#{ENV['CLIENT_SECRET']}")))
+      gem[:issues] = data['open_issues_count']
+      gem[:forks] = data['forks_count']
+      gem[:stars] = data['stargazers_count']
+      gem[:watchers] = data['watchers_count']
     end
   end
 

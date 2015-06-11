@@ -10,7 +10,7 @@ html
     script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"
     script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.js"
     css:
-      td, th { white-space: nowrap }
+      td, th { white-space: nowrap; font-size: small; }
       .fa-diamond, .fa-close { color: #8B0000 }
       .fa-github { color: #000000 }
       .fa-book { color: #191970 }
@@ -33,29 +33,32 @@ html
                        striped:           'true',
                        height:            550 }
       thead: tr
-        th data-sortable="true" &nbsp;
+        th data-sortable="true": span.fa.fa-check
         th data-sortable="true" Owner
-        th data-sortable="true" Category
+        th data-sortable="true": span.fa.fa-folder-open-o title="Category"
         th data-sortable="true" Name
-        th Links
-        th data-sortable="true" Ver.
-        th data-sortable="true" Latest version
         th data-sortable="true" Description
+        th: span.fa.fa-external-link title="Links"
+        th data-sortable="true": span title="Version constraint" C
+        th data-sortable="true": span title="Version" V
+        th data-sortable="true": span.fa.fa-calendar title="Release date"
         th data-sortable="true" Autoload modules
+        th data-sortable="true": span.fa.fa-exclamation-circle title="Issues"
+        th data-sortable="true": span.fa.fa-star title="Stars"
+        th data-sortable="true": span.fa.fa-eye title="Watchers"
+        th data-sortable="true": span.fa.fa-code-fork title="Forks"
         th data-sortable="true" Status
       tbody
         - Helper.table_gems.each do |gem|
           tr class=(gem[:exclude] && 'exclude')
-            td: span.fa class=(gem[:exclude] ? 'fa-close' : 'fa-check')
-            td
-              - if gem[:owner]
-                - owner_tag = { 'stdlib' => 'info', 'sciruby' => 'success' }
-                span.label class="label-#{owner_tag[gem[:owner]] || 'warning'}" = gem[:owner]
+            td: span.fa class=(gem[:exclude] ? 'fa-close' : 'fa-check') title=(gem[:exclude] ? 'Excluded from sciruby-full' : 'Included in sciruby-full')
+            td = gem[:owner]
             td = gem[:category]
             - if gem[:homepage]
               td: a href=gem[:homepage] = gem[:name]
             - else
               td = gem[:name]
+            td = gem[:description]
             td
               - if gem[:homepage]
                 a<> href=gem[:homepage] : span.fa.fa-home
@@ -68,9 +71,15 @@ html
             td = gem[:version]
             td
               - if gem[:spec]
-                a href="https://rubygems.org/gems/#{gem[:name]}" #{gem[:spec].version} (#{gem[:date]})
-            td = gem[:description]
+                a href="https://rubygems.org/gems/#{gem[:name]}" = gem[:spec].version
+            td
+              - if gem[:spec]
+                = gem[:date]
             td == gem[:module].join(', ')
+            td = gem[:issues]
+            td = gem[:stars]
+            td = gem[:watchers]
+            td = gem[:forks]
             td == gem[:status]
     .footer
       ' Last updated at #{Time.now.utc}

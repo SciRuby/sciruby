@@ -17,6 +17,8 @@ before_install:
 env:
   global:
     - secure: "Wr93642ujssq2+lTxWiAR0u3Y50MkNfq0jcEjPn9g2A9QQw8UitXZvtGjWa7VK8Cw2iJM7NQdY0G/eE+SBqGQ2d/NyDRwBdLUrQHBILWHeJFHoQnHcfgcGWoXVg2ztxkL6mmo8B5XpKm+ZEh4uYlZYiwp41VegmpmcuxWE0R1N0="
+    - secure: "JXusYvgkICUl5+cMsB73dyi8n+Eo4XX+XGPydGa3ut8Znf6BG41u58afFfzQQBwWREQMT8ch0DKbytNJahR1ljFgW6T9iKLw7LRxisT0D/nv5GHnJS0GxNb+zoOlhkAKVIsqVXg482AThahaGB7El7MX4GtGuDXbNRQmpp778Sw="
+    - secure: "JGBNlzoawWbbwliHj4HfH38y6MDygEO68v2tYIuSrMavpjiKzOqU7IsQEtr8kxTrUDFQ2i9ptvCo7ApCihZazYfRCYIj9G2FYYYNOQQQcTBvkhh/4W1xcnOkoLcTkXNzXyiGcG3/nZVVcug7lJ2GicWpqMO/0mFIsEHX9cFAVd8="
 
 script: bundle exec rake test && bundle exec rake deploy
 

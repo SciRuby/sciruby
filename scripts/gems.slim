@@ -48,17 +48,19 @@ html
                 - owner_tag = { 'stdlib' => 'info', 'sciruby' => 'success' }
                 span.label class="label-#{owner_tag[gem[:owner]] || 'warning'}" = gem[:owner]
             td = gem[:category]
-            - if gem[:spec]
-              td: a href=gem[:spec].homepage = gem[:name]
-              td
-                a<> href=gem[:spec].homepage : span.fa.fa-home
-                a<> href="http://www.rubydoc.info/gems/#{gem[:name]}/#{gem[:spec].version}": span.fa.fa-book
-                a<> href="https://rubygems.org/gems/#{gem[:name]}": span.fa.fa-diamond
-                - if gem[:github]
-                  a<> href="https://github.com/#{gem[:github]}": span.fa.fa-github
+            - if gem[:homepage]
+              td: a href=gem[:homepage] = gem[:name]
             - else
               td = gem[:name]
-              td
+            td
+              - if gem[:homepage]
+                a<> href=gem[:homepage] : span.fa.fa-home
+              - if gem[:docs]
+                a<> href=gem[:docs] : span.fa.fa-book
+              - if gem[:spec]
+                a<> href="https://rubygems.org/gems/#{gem[:name]}": span.fa.fa-diamond
+              - if gem[:github]
+                a<> href="https://github.com/#{gem[:github]}": span.fa.fa-github
             td = gem[:version]
             td
               - if gem[:spec]
@@ -66,13 +68,6 @@ html
             td = gem[:description]
             td = gem[:module].join(', ')
             td == gem[:status]
-            /td
-              - if github
-                a<> href="https://github.com/#{github}": img src="https://img.shields.io/github/stars/#{github}.svg"
-                a<> href="https://github.com/#{github}/issues": img src="https://img.shields.io/github/issues-raw/#{github}.svg"
-                a<> href="https://codeclimate.com/github/#{github}": img src="https://img.shields.io/codeclimate/github/#{github}.svg"
-                a<> href="https://travis-ci.org/#{github}": img src="https://img.shields.io/travis/#{github}.svg"
-                a<> href="https://versioneye.com/ruby/#{gem[:name]}": img src="https://img.shields.io/versioneye/d/ruby/#{gem[:name]}.svg"
     ul.list-inline
       li
         | Last updated at #{Time.now.utc}

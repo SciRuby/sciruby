@@ -54,12 +54,11 @@ module Helper
 
   def fetch_spec(gem)
     #STDERR.puts "Fetching #{gem[:name]}..."
-    return nil if gem[:owner] == 'stdlib'
     dep = Gem::Dependency.new(gem[:name])
-    spec = Gem::SpecFetcher.fetcher.spec_for_dependency(dep).flatten.first
+    spec = Gem::SpecFetcher.fetcher.spec_for_dependency(dep, false).flatten.first
     return spec if spec
     dep.prerelease = true
-    Gem::SpecFetcher.fetcher.spec_for_dependency(dep).flatten.first
+    Gem::SpecFetcher.fetcher.spec_for_dependency(dep, false).flatten.first
   end
 
   def label(tag, msg)
@@ -81,7 +80,7 @@ module Helper
   end
 
   def github_name(gem)
-    return gem[:spec].homepage if gem[:spec].homepage =~ %r{github.com/([^/]+/[^/]+)}
+    return $1 if gem[:spec].homepage =~ %r{github.com/([^/]+/[^/]+)}
     JSON.parse(Net::HTTP.get(URI("https://rubygems.org/api/v1/gems/#{gem[:name]}.json"))).each do |k,v|
       return $1 if k =~ /_uri/ && v =~ %r{github.com/([^/]+/[^/]+)}
     end
@@ -96,10 +95,15 @@ module Helper
 
       gem = gem.dup
 
-      if spec = fetch_spec(gem)
+      if gem[:owner] == 'stdlib'
+        gem[:homepage] = gem[:docs] = "http://ruby-doc.org/stdlib/libdoc/#{gem[:name]}/rdoc/"
+        gem[:github] = "ruby/ruby/blob/trunk/lib/#{gem[:name]}.rb"
+      elsif spec = fetch_spec(gem)
         gem[:spec] = spec
         gem[:date] = spec.date.strftime('%Y-%m-%d')
         gem[:github] = github_name(gem)
+        gem[:homepage] = spec.homepage
+        gem[:docs] = "http://www.rubydoc.info/gems/#{gem[:name]}/#{spec.version}"
       end
       gem[:status] = gem_status(gem)
 

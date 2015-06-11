@@ -33,6 +33,7 @@ classifier:
 cmath:
   category: algebra
   description: Stdlib cmath module
+  module: CMath
   owner: stdlib
 daru:
   category: data
@@ -120,8 +121,15 @@ mathgl:
 matrix:
   category: algebra
   description: Stdlib matrix module
-  module: Matrix
+  module:
+  - Matrix
+  - Vector
   owner: stdlib
+mdarray:
+  category: numerics
+  description: Numerical matrix library
+  exclude: Requires JRuby
+  module: MDArray
 measurable:
   category: ai
   description: Distance measures for machine learning
@@ -172,6 +180,17 @@ omoikane:
   description: Machine learning
   module: Omoikane
   version: "~> 0.0"
+parallel:
+  category: utilties
+  description: Parallel processing
+  module: Parallel
+  version: "~> 1.6"
+phys-units:
+  category: physics
+  description: Calculation with units
+  module: Phys
+  require: phys/units
+  version: "~> 0.9"
 plotrb:
   category: plotting
   description: Plotting library
@@ -204,6 +223,11 @@ rb-libsvm:
   module: Libsvm
   require: libsvm
   version: "~> 1.3"
+rbmetis:
+  category: graph
+  description: Graph partitioning
+  exclude: Native dependencies
+  module: RbMetis
 rinruby:
   category: statistics
   description: R interpreter

@@ -8,9 +8,6 @@ $: << File.join(File.dirname(__FILE__), '..', 'lib')
 require 'sciruby'
 require 'date'
 require 'rubygems'
-require 'net/http'
-require 'json'
-require 'parallel'
 
 module Enumerable
   def stable_sort_by
@@ -80,15 +77,11 @@ module Helper
     status.sort_by {|label| label =~ /label-\w+/; $& }.join(' ')
   end
 
-  def github_name(gem)
-    return $1 if gem[:spec].homepage =~ %r{github.com/([^/]+/[^/]+)}
-    JSON.parse(Net::HTTP.get(URI("https://rubygems.org/api/v1/gems/#{gem[:name]}.json"))).each do |k,v|
-      return $1 if k =~ /_uri/ && v =~ %r{github.com/([^/]+/[^/]+)}
-    end
-    nil
-  end
-
   def table_gems
+    require 'parallel'
+    require 'net/http'
+    require 'json'
+
     gems = SciRuby.gems.each_value.
            stable_sort_by {|gem| gem[:name] }.
            stable_sort_by {|gem| gem[:category] }.
@@ -115,13 +108,21 @@ module Helper
     end
   end
 
-  def sciruby_gems(exclude)
-    SciRuby.gems.each_value.sort_by {|gem| gem[:name] }.reject do |gem|
-      gem[:owner] == 'stdlib' || %w(sciruby sciruby-full).include?(gem[:name])
-    end.reject {|gem| gem[:exclude] && exclude }
+  def github_name(gem)
+    return $1 if gem[:spec].homepage =~ %r{github.com/([^/]+/[^/]+)}
+    JSON.parse(Net::HTTP.get(URI("https://rubygems.org/api/v1/gems/#{gem[:name]}.json"))).each do |k,v|
+      return $1 if k =~ /_uri/ && v =~ %r{github.com/([^/]+/[^/]+)}
+    end
+    nil
   end
 
   def versioneye(name)
     Net::HTTP.get(URI("https://www.versioneye.com/ruby/#{name}/badge")) =~ /out of date/
+  end
+
+  def sciruby_gems(exclude)
+    SciRuby.gems.each_value.sort_by {|gem| gem[:name] }.reject do |gem|
+      gem[:owner] == 'stdlib' || %w(sciruby sciruby-full).include?(gem[:name])
+    end.reject {|gem| gem[:exclude] && exclude }
   end
 end

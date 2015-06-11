@@ -9,7 +9,7 @@ There are various ways in which you can improve SciRuby. Coding and documentatio
 Apart from adding features and functionality, you can also create tests, guides on how to do something using SciRuby, document the libraries and help find and fix bugs.
 
 Start by visiting our [issue tracker](https://github.com/SciRuby/sciruby/issues?state=open) and the
-[status list of the various gems](https://minad.github.io/sciruby-gems). If you want to start contributing, there's probably something with which you can help.
+[status list of the various gems](http://gems.sciruby.com). If you want to start contributing, there's probably something with which you can help.
 
 ## Projects
 

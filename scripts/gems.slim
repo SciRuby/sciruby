@@ -67,13 +67,12 @@ html
             td = gem[:description]
             td == gem[:module].join(', ')
             td == gem[:status]
-    ul.list-inline
-      li
-        | Last updated at #{Time.now.utc}
-        - if ENV['TRAVIS']
-          |  by <a href="https://travis-ci.org/SciRuby/sciruby/jobs/#{ENV['TRAVIS_JOB_ID']}">Travis CI</a> from commit
-             <a href="https://github.com/SciRuby/sciruby/commit/#{ENV['TRAVIS_COMMIT']}">#{ENV['TRAVIS_COMMIT']}</a>.
-        - else
-          |  by #{`hostname -f`.chomp}.
-      li #{SciRuby.gems.size} gems registered in <a href="https://github.com/SciRuby/sciruby/blob/master/gems.yml">sciruby/gems.yml</a>.
-      li Excluded gems are not included in the <a href="https://rubygems.org/gems/sciruby-full">sciruby-full</a> installation.
+    .footer
+      ' Last updated at #{Time.now.utc}
+      - if ENV['TRAVIS']
+        ' by <a href="https://travis-ci.org/SciRuby/sciruby/jobs/#{ENV['TRAVIS_JOB_ID']}">Travis CI</a> from commit
+           <a href="https://github.com/SciRuby/sciruby/commit/#{ENV['TRAVIS_COMMIT']}">#{ENV['TRAVIS_COMMIT']}</a>.
+      - else
+        ' by #{`hostname -f`.chomp}.
+      | #{SciRuby.gems.size} gems registered in <a href="https://github.com/SciRuby/sciruby/blob/master/gems.yml">sciruby/gems.yml</a>.
+        Excluded gems are not included in the <a href="https://rubygems.org/gems/sciruby-full">sciruby-full</a> installation.

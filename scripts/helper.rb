@@ -10,6 +10,7 @@ require 'date'
 require 'rubygems'
 require 'net/http'
 require 'json'
+require 'parallel'
 
 module Enumerable
   def stable_sort_by
@@ -55,10 +56,10 @@ module Helper
   def fetch_spec(gem)
     #STDERR.puts "Fetching #{gem[:name]}..."
     dep = Gem::Dependency.new(gem[:name])
-    spec = Gem::SpecFetcher.fetcher.spec_for_dependency(dep, false).flatten.first
+    spec = Gem::SpecFetcher.fetcher.spec_for_dependency(dep, false).flatten[-2]
     return spec if spec
     dep.prerelease = true
-    Gem::SpecFetcher.fetcher.spec_for_dependency(dep, false).flatten.first
+    Gem::SpecFetcher.fetcher.spec_for_dependency(dep, false).flatten[-2]
   end
 
   def label(tag, msg)
@@ -88,11 +89,12 @@ module Helper
   end
 
   def table_gems
-    SciRuby.gems.each_value.
-      stable_sort_by {|gem| gem[:name] }.
-      stable_sort_by {|gem| gem[:category] }.
-      stable_sort_by {|gem| gem[:owner] == 'sciruby' ? 0 : (gem[:owner] ? 1 : 2) }.each do |gem|
+    gems = SciRuby.gems.each_value.
+           stable_sort_by {|gem| gem[:name] }.
+           stable_sort_by {|gem| gem[:category] }.
+           stable_sort_by {|gem| gem[:owner] == 'sciruby' ? 0 : (gem[:owner] ? 1 : 2) }
 
+    Parallel.map(gems, in_processes: 8) do |gem|
       gem = gem.dup
 
       if gem[:owner] == 'stdlib'
@@ -109,7 +111,7 @@ module Helper
       end
       gem[:status] = gem_status(gem)
 
-      yield(gem)
+      gem
     end
   end
 

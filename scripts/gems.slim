@@ -41,7 +41,7 @@ html
         th data-sortable="true" Autoload modules
         th data-sortable="true" Status
       tbody
-        - Helper.table_gems do |gem|
+        - Helper.table_gems.each do |gem|
           tr
             td
               - if gem[:owner]

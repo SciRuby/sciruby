@@ -1,9 +1,7 @@
 require File.expand_path(File.join(__FILE__, '..', 'scripts', 'helper.rb'))
 
-SCIRUBY_FULL = false unless defined?(SCIRUBY_FULL)
-
 Gem::Specification.new do |s|
-  s.name        = SCIRUBY_FULL ? 'sciruby-full' : 'sciruby'
+  s.name        = __FILE__.sub('.gemspec', '')
   s.date        = Date.today.to_s
   s.version     = SciRuby::VERSION
   s.authors     = ['SciRuby Development Team']
@@ -11,9 +9,9 @@ Gem::Specification.new do |s|
   s.license     = 'BSD'
   s.homepage    = 'http://sciruby.com'
   s.summary     =
-  s.description = "Scientific gems for Ruby#{SCIRUBY_FULL ? ' (Full installation)' : ''}"
+  s.description = "Scientific gems for Ruby#{__FILE__ =~ /full/ ? ' (Full installation)' : ''}"
 
-  if SCIRUBY_FULL
+  if __FILE__ =~ /full/
     s.files = %w(CHANGES CONTRIBUTING.md README.md LICENSE sciruby-full.gemspec)
 
     s.add_runtime_dependency 'sciruby', "= #{SciRuby::VERSION}"

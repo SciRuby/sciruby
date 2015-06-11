@@ -59,6 +59,7 @@ distribution:
 extendmatrix:
   category: algebra
   description: Helper methods for Matrix
+  owner: sciruby
   version: "~> 0.4"
 gga4r:
   category: optimization

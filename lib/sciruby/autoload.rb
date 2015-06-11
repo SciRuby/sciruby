@@ -10,7 +10,7 @@ class Module
   private
 
   def sciruby_autoload(name)
-    return unless paths = SciRuby.autoload_modules.delete(name.to_sym)
+    return unless paths = SciRuby.autoload_modules.delete(name.to_s)
     paths.each {|path| require path }
     const_get(name)
   end

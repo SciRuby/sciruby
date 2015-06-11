@@ -33,11 +33,11 @@ module SciRuby
       gem = Hash[gem.map {|k,v| [k.to_sym, v] }]
       gem[:name] = name
       gem[:require] = [*(gem[:require] || name)]
-      gem[:module] = [*gem[:module]].map(&:to_sym)
+      gem[:module] = [*gem[:module]]
       gem[:module].each do |mod|
-        parts = mod.to_s.split('::')
+        parts = mod.split('::')
         parts.size.times do |i|
-          m = parts[0..i].join('::').to_sym
+          m = parts[0..i].join('::')
           autoload_modules[m] = (i < parts.size - 1 && autoload_modules[m]) || gem[:require]
         end
       end

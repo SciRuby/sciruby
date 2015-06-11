@@ -94,14 +94,14 @@ module Helper
       if gem[:owner] == 'stdlib'
         gem[:homepage] = gem[:docs] = "http://ruby-doc.org/stdlib/libdoc/#{gem[:name]}/rdoc/"
         gem[:github] = "ruby/ruby/blob/trunk/lib/#{gem[:name]}.rb"
-        gem[:module] = gem[:module].map {|mod| %{<a href="#{gem[:docs]}#{mod.to_s.gsub('::', '/')}.html">#{mod}</a>} }
+        gem[:module] = gem[:module].map {|mod| %{<a href="#{gem[:docs]}#{mod.gsub('::', '/')}.html">#{mod}</a>} }
       elsif spec = fetch_spec(gem)
         gem[:spec] = spec
         gem[:date] = spec.date.strftime('%Y-%m-%d')
         gem[:github] = github_name(gem)
         gem[:homepage] = spec.homepage
         gem[:docs] = "http://www.rubydoc.info/gems/#{gem[:name]}/#{spec.version}"
-        gem[:module] = gem[:module].map {|mod| %{<a href="#{gem[:docs]}/#{mod.to_s.gsub('::', '/')}">#{mod}</a>} }
+        gem[:module] = gem[:module].map {|mod| %{<a href="#{gem[:docs]}/#{mod.gsub('::', '/')}">#{mod}</a>} }
       end
       gem[:status] = gem_status(gem)
 

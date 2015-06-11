@@ -46,17 +46,17 @@ describe SciRuby do
 
   it 'provides list of modules' do
     SciRuby.modules.must_be_instance_of Array
-    SciRuby.modules.each {|m| m.must_be_instance_of Symbol }
+    SciRuby.modules.each {|m| m.must_be_instance_of String }
   end
 
   it 'provides list of installed modules' do
     SciRuby.installed_modules.must_be_instance_of Array
-    SciRuby.installed_modules.each {|m| m.must_be_instance_of Symbol }
+    SciRuby.installed_modules.each {|m| m.must_be_instance_of String }
   end
 
   it 'provides list of autoloadable modules' do
     SciRuby.autoload_modules.must_be_instance_of Hash
-    SciRuby.autoload_modules.each_key {|k| k.must_be_instance_of Symbol }
+    SciRuby.autoload_modules.each_key {|k| k.must_be_instance_of String }
     SciRuby.autoload_modules.each_value {|v| v.must_be_instance_of Array }
   end
 
@@ -66,17 +66,17 @@ describe SciRuby do
   end
 
   it 'autoloads modules' do
-    SciRuby.autoload_modules.must_include :Prime
+    SciRuby.autoload_modules.must_include 'Prime'
 
-    Object.const_defined?(:Prime).must_equal false
+    Object.const_defined?('Prime').must_equal false
     Prime.must_be_instance_of Class
-    Object.const_defined?(:Prime).must_equal true
+    Object.const_defined?('Prime').must_equal true
 
-    SciRuby.autoload_modules.wont_include :Prime
+    SciRuby.autoload_modules.wont_include 'Prime'
 
     SciRuby.installed_gems.each_value.map {|gem| gem[:module] }.flatten.each do |mod|
-      next if mod == :R || mod == :RinRuby # FIXME, don't test RinRuby for now since it requires an installaion of R
-      eval(mod.to_s).wont_equal nil
+      next if mod == 'R' || mod == 'RinRuby' # FIXME, don't test RinRuby for now since it requires an installaion of R
+      eval(mod).wont_equal nil
     end
   end
 end

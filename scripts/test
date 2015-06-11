@@ -60,6 +60,11 @@ describe SciRuby do
     SciRuby.autoload_modules.each_value {|v| v.must_be_instance_of Array }
   end
 
+  it 'has unique modules' do
+    mods = SciRuby.gems.each_value.map {|gem| gem[:module] }.flatten
+    mods.uniq.must_equal mods
+  end
+
   it 'autoloads modules' do
     SciRuby.autoload_modules.must_include :Prime
 

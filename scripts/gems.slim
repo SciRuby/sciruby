@@ -76,7 +76,7 @@ html
       ' Last updated at #{Time.now.utc}
       - if ENV['TRAVIS']
         ' by <a href="https://travis-ci.org/SciRuby/sciruby/jobs/#{ENV['TRAVIS_JOB_ID']}">Travis CI</a> from commit
-          <a href="https://github.com/SciRuby/sciruby/commit/#{ENV['TRAVIS_COMMIT']}">#{ENV['TRAVIS_COMMIT']}</a>.
+          <a href="https://github.com/SciRuby/sciruby/commit/#{ENV['TRAVIS_COMMIT']}">#{ENV['TRAVIS_COMMIT'].to_s[0,8]}</a>.
       - else
         ' by #{`hostname -f`.chomp}.
       | #{SciRuby.gems.size} gems registered in <a href="https://github.com/SciRuby/sciruby/blob/master/gems.yml">sciruby/gems.yml</a>.

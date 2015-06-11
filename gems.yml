@@ -200,7 +200,9 @@ parallel:
 phys-units:
   category: physics
   description: Calculation with units
-  module: Phys
+  module:
+  - Phys::Unit
+  - Phys::Quantity
   require: phys/units
   version: "~> 0.9"
 plotrb:
@@ -266,6 +268,7 @@ ruby-dcl:
   category: plotting
   description: Plotting
   exclude: Requires narray
+  module: NumRu::DCL
 ruby-fann:
   category: ai
   description: Neural networks
@@ -286,6 +289,7 @@ ruby-netcdf:
   category: data
   description: Data file
   exclude: Requires narray
+  module: NumRu::NetCDF
 ruby-opencv:
   category: ai
   description: Computer vision

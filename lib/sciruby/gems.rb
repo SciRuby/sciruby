@@ -34,7 +34,13 @@ module SciRuby
       gem[:name] = name
       gem[:require] = [*(gem[:require] || name)]
       gem[:module] = [*gem[:module]].map(&:to_sym)
-      gem[:module].each {|mod| autoload_modules[mod] = gem[:require] }
+      gem[:module].each do |mod|
+        parts = mod.to_s.split('::')
+        parts.size.times do |i|
+          m = parts[0..i].join('::').to_sym
+          autoload_modules[m] = (i < parts.size - 1 && autoload_modules[m]) || gem[:require]
+        end
+      end
       gems[name] = gem
     end
   end

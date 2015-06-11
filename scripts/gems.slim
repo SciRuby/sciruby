@@ -65,7 +65,7 @@ html
               - if gem[:spec]
                 a href="https://rubygems.org/gems/#{gem[:name]}" #{gem[:spec].version} (#{gem[:date]})
             td = gem[:description]
-            td = gem[:module].join(', ')
+            td == gem[:module].join(', ')
             td == gem[:status]
     ul.list-inline
       li

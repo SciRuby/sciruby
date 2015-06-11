@@ -65,6 +65,7 @@ module Helper
     if gem[:spec]
       warnings << "Last update #{gem[:date]}" if Time.now - gem[:spec].date > 2*365*24*3600
       warnings << 'Outdated version constraint' if gem[:version] && !Gem::Dependency.new(gem[:name], *gem[:version]).matches_spec?(gem[:spec])
+      warnings << 'Github repository unknown' unless gem[:github]
     else
       warnings << 'Gem not found' unless gem[:exclude] || gem[:owner] == 'stdlib'
     end
@@ -77,13 +78,19 @@ module Helper
     require 'net/http'
     require 'json'
 
-    gems = SciRuby.gems.each_value.
-           stable_sort_by {|gem| gem[:name] }.
-           stable_sort_by {|gem| gem[:category] }.
-           stable_sort_by {|gem| gem[:owner] == 'sciruby' ? 0 : (gem[:owner] ? 1 : 2) }.
-           stable_sort_by {|gem| gem[:exclude] ? 1 : 0 }
+    owner_order = {
+      'sciruby' => 0,
+      'stdlib'  => 1
+    }
+    owner_order.default = 2
 
-    Parallel.map(gems, in_processes: 8) do |gem|
+    status_order = {
+      'ok'       => 0,
+      'warnings' => 1,
+      'exclude'  => 2
+    }
+
+    Parallel.map(SciRuby.gems.values, in_processes: 8) do |gem|
       gem = gem.dup
 
       if gem[:owner] == 'stdlib'
@@ -100,8 +107,19 @@ module Helper
       end
       gem[:warnings] = gem_warnings(gem)
 
+      if gem[:exclude]
+        gem[:status] = 'exclude'
+      elsif gem[:warnings].empty?
+        gem[:status] = 'ok'
+      else
+        gem[:status] = 'warnings'
+      end
+
       gem
-    end
+    end.stable_sort_by {|gem| gem[:name] }.
+      stable_sort_by {|gem| gem[:category] }.
+      stable_sort_by {|gem| owner_order[gem[:owner]] }.
+      stable_sort_by {|gem| status_order[gem[:status]] }
   end
 
   def github_infos(gem)

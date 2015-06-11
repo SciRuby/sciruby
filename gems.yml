@@ -323,6 +323,7 @@ statsample-bivariate-extension:
 statsample-glm:
   category: statistics
   description: Statistics
+  module: Statsample::GLM
   owner: sciruby
   version: "~> 0.1"
 statsample-optimization:
@@ -333,10 +334,12 @@ statsample-sem:
   category: statistics
   description: Statistics
   exclude: Outdated dependencies
+  module: Statsample::SEM
 statsample-timeseries:
   category: statistics
   description: Statistics
   exclude: activesupport version conflict
+  module: Statsample::Timeseries
 stuff-classifier:
   category: ai
   description: Machine learning

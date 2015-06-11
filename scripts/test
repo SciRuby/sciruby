@@ -76,7 +76,7 @@ describe SciRuby do
 
     SciRuby.installed_gems.each_value.map {|gem| gem[:module] }.flatten.each do |mod|
       next if mod == :R || mod == :RinRuby # FIXME, don't test RinRuby for now since it requires an installaion of R
-      Object.const_get(mod).wont_equal nil
+      eval(mod.to_s).wont_equal nil
     end
   end
 end

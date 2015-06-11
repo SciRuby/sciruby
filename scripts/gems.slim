@@ -11,13 +11,15 @@ html
     script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.js"
     css:
       td, th { white-space: nowrap }
-      .fa-diamond { color: #8B0000 }
+      .fa-diamond, .fa-close { color: #8B0000 }
       .fa-github { color: #000000 }
       .fa-book { color: #191970 }
-      .fa-home { color: #006400 }
+      .fa-home, .fa-check { color: #006400 }
       h1 { margin-bottom: -1em; }
       a { color: #8B0000 }
       a:hover { color: #F00 }
+      .exclude { background: #EEE !important; color: #555 !important }
+      .exclude a { color: #555 !important }
   body: .container: .row: .col-md-12
     h1
       img width="50" src="http://upload.wikimedia.org/wikipedia/commons/7/73/Ruby_logo.svg"
@@ -31,6 +33,7 @@ html
                        striped:           'true',
                        height:            550 }
       thead: tr
+        th data-sortable="true" &nbsp;
         th data-sortable="true" Owner
         th data-sortable="true" Category
         th data-sortable="true" Name
@@ -42,7 +45,8 @@ html
         th data-sortable="true" Status
       tbody
         - Helper.table_gems.each do |gem|
-          tr
+          tr class=(gem[:exclude] && 'exclude')
+            td: span.fa class=(gem[:exclude] ? 'fa-close' : 'fa-check')
             td
               - if gem[:owner]
                 - owner_tag = { 'stdlib' => 'info', 'sciruby' => 'success' }
@@ -72,8 +76,9 @@ html
       ' Last updated at #{Time.now.utc}
       - if ENV['TRAVIS']
         ' by <a href="https://travis-ci.org/SciRuby/sciruby/jobs/#{ENV['TRAVIS_JOB_ID']}">Travis CI</a> from commit
-           <a href="https://github.com/SciRuby/sciruby/commit/#{ENV['TRAVIS_COMMIT']}">#{ENV['TRAVIS_COMMIT']}</a>.
+          <a href="https://github.com/SciRuby/sciruby/commit/#{ENV['TRAVIS_COMMIT']}">#{ENV['TRAVIS_COMMIT']}</a>.
       - else
         ' by #{`hostname -f`.chomp}.
       | #{SciRuby.gems.size} gems registered in <a href="https://github.com/SciRuby/sciruby/blob/master/gems.yml">sciruby/gems.yml</a>.
-        Excluded gems are not included in the <a href="https://rubygems.org/gems/sciruby-full">sciruby-full</a> installation.
+        #{SciRuby.gems.each_value.count {|gem| !gem[:exclude] }} included in <a href="https://rubygems.org/gems/sciruby-full">sciruby-full</a>,
+        #{SciRuby.gems.each_value.count {|gem| gem[:exclude] }} excluded.

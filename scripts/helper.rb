@@ -85,7 +85,8 @@ module Helper
     gems = SciRuby.gems.each_value.
            stable_sort_by {|gem| gem[:name] }.
            stable_sort_by {|gem| gem[:category] }.
-           stable_sort_by {|gem| gem[:owner] == 'sciruby' ? 0 : (gem[:owner] ? 1 : 2) }
+           stable_sort_by {|gem| gem[:owner] == 'sciruby' ? 0 : (gem[:owner] ? 1 : 2) }.
+           stable_sort_by {|gem| gem[:exclude] ? 1 : 0 }
 
     Parallel.map(gems, in_processes: 8) do |gem|
       gem = gem.dup

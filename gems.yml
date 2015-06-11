@@ -15,6 +15,17 @@ awesome_print:
   category: utilities
   description: Pretty object printing
   version: "~> 1.6"
+bibsync:
+  category: publishing
+  description: Bibliography synchronization
+  module: BibSync
+  version: "~> 0.0"
+bibtex-ruby:
+  category: publishing
+  description: BibTeX parser
+  module: BibTeX
+  require: bibtex
+  version: "~> 4.0"
 bio:
   category: biology
   description: Bioinformatics suite
@@ -307,7 +318,7 @@ statsample:
   version: "~> 1.4"
 statsample-bivariate-extension:
   category: statistics
-  description: Statistics
+  description: Statsample extension (Autoloaded)
   version: "~> 1.1"
 statsample-glm:
   category: statistics
@@ -316,7 +327,7 @@ statsample-glm:
   version: "~> 0.1"
 statsample-optimization:
   category: statistics
-  description: Statistics
+  description: Statsample extension (Autoloaded)
   exclude: GSL conflict
 statsample-sem:
   category: statistics

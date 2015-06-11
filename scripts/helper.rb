@@ -59,22 +59,17 @@ module Helper
     Gem::SpecFetcher.fetcher.spec_for_dependency(dep, false).flatten[-2]
   end
 
-  def label(tag, msg)
-    %{<span class="label label-#{tag}">#{msg}</span>}
-  end
-
-  def gem_status(gem)
-    status = []
-    status << label(:default, "Excluded: #{gem[:exclude]}") if gem[:exclude]
+  def gem_warnings(gem)
+    warnings = []
+    warnings << "Excluded: #{gem[:exclude]}" if gem[:exclude]
     if gem[:spec]
-      status << label(Time.now - gem[:spec].date > 4*365*24*3600 ? :danger : :warning, "Last update #{gem[:date]}") if Time.now - gem[:spec].date > 2*365*24*3600
-      status << label(:danger, 'Outdated version constraint') if gem[:version] && !Gem::Dependency.new(gem[:name], *gem[:version]).matches_spec?(gem[:spec])
+      warnings << "Last update #{gem[:date]}" if Time.now - gem[:spec].date > 2*365*24*3600
+      warnings << 'Outdated version constraint' if gem[:version] && !Gem::Dependency.new(gem[:name], *gem[:version]).matches_spec?(gem[:spec])
     else
-      status << label(:danger, 'Gem not found') unless gem[:exclude] || gem[:owner] == 'stdlib'
+      warnings << 'Gem not found' unless gem[:exclude] || gem[:owner] == 'stdlib'
     end
-    status << %{<a class="label label-warning" href="https://versioneye.com/ruby/#{gem[:name]}">Outdated dependencies</a>} if versioneye(gem[:name])
-    status << label(:success, 'OK') if status.empty?
-    status.sort_by {|label| label =~ /label-\w+/; $& }.join(' ')
+    warnings << %{<a href="https://versioneye.com/ruby/#{gem[:name]}">Outdated dependencies</a>} if versioneye(gem[:name])
+    warnings
   end
 
   def table_gems
@@ -103,7 +98,7 @@ module Helper
         gem[:module] = gem[:module].map {|mod| %{<a href="#{gem[:docs]}/#{mod.gsub('::', '/')}">#{mod}</a>} }
         github_infos(gem)
       end
-      gem[:status] = gem_status(gem)
+      gem[:warnings] = gem_warnings(gem)
 
       gem
     end

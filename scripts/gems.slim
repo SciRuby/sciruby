@@ -15,6 +15,7 @@ html
       .fa-github { color: #000000 }
       .fa-book { color: #191970 }
       .fa-home, .fa-check { color: #006400 }
+      .fa-warning { color: #FF8C00 }
       h1 { margin-bottom: -1em; }
       a { color: #8B0000 }
       a:hover { color: #F00 }
@@ -33,7 +34,7 @@ html
                        striped:           'true',
                        height:            550 }
       thead: tr
-        th data-sortable="true": span.fa.fa-check
+        th data-sortable="true": span title="Status" S
         th data-sortable="true" Owner
         th data-sortable="true": span.fa.fa-folder-open-o title="Category"
         th data-sortable="true" Name
@@ -47,11 +48,19 @@ html
         th data-sortable="true": span.fa.fa-star title="Stars"
         th data-sortable="true": span.fa.fa-eye title="Watchers"
         th data-sortable="true": span.fa.fa-code-fork title="Forks"
-        th data-sortable="true" Status
+        th data-sortable="true"
+          span.fa.fa-warning
+          | Warnings
       tbody
         - Helper.table_gems.each do |gem|
           tr class=(gem[:exclude] && 'exclude')
-            td: span.fa class=(gem[:exclude] ? 'fa-close' : 'fa-check') title=(gem[:exclude] ? 'Excluded from sciruby-full' : 'Included in sciruby-full')
+            td
+              - if gem[:exclude]
+                span.fa.fa-close title="Excluded from sciruby-full"
+              - elsif gem[:warnings].empty?
+                span.fa.fa-check title="Ok, included in sciruby-full"
+              - else
+                span.fa.fa-warning title="#{gem[:warnings].size} warnings, included in sciruby-full"
             td = gem[:owner]
             td = gem[:category]
             - if gem[:homepage]
@@ -80,7 +89,7 @@ html
             td = gem[:stars]
             td = gem[:watchers]
             td = gem[:forks]
-            td == gem[:status]
+            td == gem[:warnings].join(', ')
     .footer
       ' Last updated at #{Time.now.utc}
       - if ENV['TRAVIS']

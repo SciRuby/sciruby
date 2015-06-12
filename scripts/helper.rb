@@ -128,7 +128,7 @@ module Helper
       gem[:issues] = data['open_issues_count']
       gem[:forks] = data['forks_count']
       gem[:stars] = data['stargazers_count']
-      gem[:watchers] = data['watchers_count']
+      gem[:watchers] = data['subscribers_count']
     end
   end
 

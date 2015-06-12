@@ -49,7 +49,7 @@ html
         th data-sortable="true": span.fa.fa-eye title="Watchers"
         th data-sortable="true": span.fa.fa-code-fork title="Forks"
         th data-sortable="true"
-          span.fa.fa-warning
+          span.fa.fa-warning>
           | Warnings
       tbody
         - Helper.table_gems.each do |gem|
@@ -85,10 +85,16 @@ html
               - if gem[:spec]
                 = gem[:date]
             td == gem[:module].join(', ')
-            td = gem[:issues]
-            td = gem[:stars]
-            td = gem[:watchers]
-            td = gem[:forks]
+            - if gem[:github]
+              td: a href="https://github.com/#{gem[:github]}/issues" = gem[:issues]
+              td: a href="https://github.com/#{gem[:github]}/stargazers" = gem[:stars]
+              td: a href="https://github.com/#{gem[:github]}/watchers" = gem[:watchers]
+              td: a href="https://github.com/#{gem[:github]}/network" = gem[:forks]
+            - else
+              td
+              td
+              td
+              td
             td == gem[:warnings].join(', ')
     .footer
       ' Last updated at #{Time.now.utc}
@@ -97,6 +103,6 @@ html
           <a href="https://github.com/SciRuby/sciruby/commit/#{ENV['TRAVIS_COMMIT']}">#{ENV['TRAVIS_COMMIT'].to_s[0,8]}</a>.
       - else
         ' by #{`hostname -f`.chomp}.
-      | #{SciRuby.gems.size} gems registered in <a href="https://github.com/SciRuby/sciruby/blob/master/gems.yml">sciruby/gems.yml</a>.
+      | #{SciRuby.gems.size} gems registered in <a href="https://github.com/SciRuby/sciruby/blob/master/gems.yml">sciruby/gems.yml</a>,
         #{SciRuby.gems.each_value.count {|gem| !gem[:exclude] }} included in <a href="https://rubygems.org/gems/sciruby-full">sciruby-full</a>,
         #{SciRuby.gems.each_value.count {|gem| gem[:exclude] }} excluded.

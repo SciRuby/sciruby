@@ -1,4 +1,4 @@
-master
+0.2.5 (2015-06-13)
 
   * More gems added
   * Support for autoloading qualified modules A::B

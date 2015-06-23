@@ -290,11 +290,19 @@ ruby-netcdf:
   description: Data file
   exclude: Requires narray
   module: NumRu::NetCDF
+ruby-octave:
+  category: numerics
+  description: Interface to Octave
+  module: Octave
+  require: octave
+  version: "~> 2.0"
+  exclude: Native dependencies
 ruby-opencv:
   category: ai
   description: Computer vision
   exclude: Native dependencies
   module: OpenCV
+  require: opencv
 ruby-pgplot:
   category: plotting
   description: Plotting

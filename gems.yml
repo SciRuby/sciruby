@@ -182,6 +182,12 @@ nyaplot:
   description: Plotting library
   module: Nyaplot
   version: "~> 0.1"
+octave-ruby:
+  category: numerics
+  description: Interface to Octave
+  exclude: Native dependencies
+  module: Octave
+  require: octave
 ode:
   category: numerics
   description: Ordinary differential equations
@@ -290,12 +296,6 @@ ruby-netcdf:
   description: Data file
   exclude: Requires narray
   module: NumRu::NetCDF
-ruby-octave:
-  category: numerics
-  description: Interface to Octave
-  exclude: Native dependencies
-  module: Octave
-  require: octave
 ruby-opencv:
   category: ai
   description: Computer vision

@@ -293,10 +293,9 @@ ruby-netcdf:
 ruby-octave:
   category: numerics
   description: Interface to Octave
+  exclude: Native dependencies
   module: Octave
   require: octave
-  version: "~> 2.0"
-  exclude: Native dependencies
 ruby-opencv:
   category: ai
   description: Computer vision

@@ -1,4 +1,4 @@
-# SciRuby meta gem
+# SciRuby meta gem [![Build Status](https://travis-ci.org/SciRuby/sciruby.svg?branch=master)](https://travis-ci.org/SciRuby/sciruby)
 
 Tools for Scientific Computing in Ruby
 

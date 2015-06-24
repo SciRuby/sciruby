@@ -362,6 +362,11 @@ symbolic:
   description: Symbolic math
   exclude: Outdated gem
   module: Symbolic
+tioga:
+  category: plotting
+  description: Scientific plots with PDF and TeX
+  module: Tioga
+  version: "~> 1.19"
 treat:
   category: linguistics
   description: Natural language processing

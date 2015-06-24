@@ -93,7 +93,7 @@ gnuplot:
   version: "~> 2.6"
 gphys:
   category: physics
-  descriptions: Grided physical data
+  description: Grided physical data
   exclude: narray dependency
   module: GPhys
 gruff:
@@ -384,8 +384,6 @@ symbolic:
 tioga:
   category: plotting
   description: Scientific plots with PDF and TeX
-  module: Tioga
-  require: Tioga
   version: "~> 1.19"
 treat:
   category: linguistics

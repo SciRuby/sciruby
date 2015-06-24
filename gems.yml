@@ -251,10 +251,10 @@ rbmetis:
 rinruby:
   category: statistics
   description: R interpreter
+  exclude: Outdated gem
   module:
   - R
   - RinRuby
-  version: "~> 2.0"
 rserve-client:
   category: statistics
   description: R interpreter
@@ -330,7 +330,7 @@ statsample:
 statsample-bivariate-extension:
   category: statistics
   description: Statsample extension (Autoloaded)
-  version: "~> 1.1"
+  exclude: Outdated gem
 statsample-glm:
   category: statistics
   description: Statistics
@@ -354,8 +354,13 @@ statsample-timeseries:
 stuff-classifier:
   category: ai
   description: Machine learning
+  exclude: Outdated gem
   module: StuffClassifier
-  version: "~> 0.5"
+symbolic:
+  category: algebra
+  description: Symbolic math
+  exclude: Outdated gem
+  module: Symbolic
 treat:
   category: linguistics
   description: Natural language processing

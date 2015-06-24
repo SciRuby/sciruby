@@ -236,6 +236,7 @@ rb-gsl:
   description: Bindings for the GNU scientific library
   exclude: Requires narray
   module: GSL
+  owner: sciruby
   require: gsl
 rb-libsvm:
   category: ai

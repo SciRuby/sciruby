@@ -371,6 +371,7 @@ tioga:
   category: plotting
   description: Scientific plots with PDF and TeX
   module: Tioga
+  require: Tioga
   version: "~> 1.19"
 treat:
   category: linguistics

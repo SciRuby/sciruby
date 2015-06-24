@@ -216,6 +216,11 @@ plotrb:
   description: Plotting library
   module: Plotrb
   version: "~> 0.0"
+plplot:
+  category: plotting
+  description: PLplot bindings
+  exclude: Outdated gem
+  module: PLplot
 prime:
   category: algebra
   description: Stdlib prime module

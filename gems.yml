@@ -46,6 +46,10 @@ cmath:
   description: Stdlib cmath module
   module: CMath
   owner: stdlib
+ctioga2:
+  category: plotting
+  description: Command line tool for tioga
+  version: "~> 0.1"
 daru:
   category: data
   description: Dataframe library
@@ -87,6 +91,11 @@ gnuplot:
   description: Plotting library
   module: Gnuplot
   version: "~> 2.6"
+gphys:
+  category: physics
+  descriptions: Grided physical data
+  exclude: narray dependency
+  module: GPhys
 gruff:
   category: plotting
   description: Plotting library
@@ -261,6 +270,11 @@ rinruby:
   module:
   - R
   - RinRuby
+rsemantic:
+  category: ai
+  description: Machine learning
+  exclude: GSL dependency
+  module: RSemantic
 rserve-client:
   category: statistics
   description: R interpreter

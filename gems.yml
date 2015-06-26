@@ -346,7 +346,7 @@ statsample:
   description: Statistics
   module: Statsample
   owner: sciruby
-  version: "~> 1.4"
+  version: "~> 2.0"
 statsample-bivariate-extension:
   category: statistics
   description: Statsample extension (Autoloaded)

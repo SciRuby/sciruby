@@ -66,10 +66,12 @@ module Helper
       warnings << "Last update #{gem[:date]}" if Time.now - gem[:spec].date > 2*365*24*3600
       warnings << 'Outdated version constraint' if gem[:version] && !Gem::Dependency.new(gem[:name], *gem[:version]).matches_spec?(gem[:spec])
       warnings << 'Github repository unknown' unless gem[:github]
+      vname = "#{gem[:name]}/#{gem[:spec].version}"
     else
       warnings << 'Gem not found' unless gem[:exclude] || gem[:owner] == 'stdlib'
+      vname = gem[:name]
     end
-    warnings << %{<a href="https://versioneye.com/ruby/#{gem[:name]}">Outdated dependencies</a>} if versioneye(gem[:name])
+    warnings << %{<a href="https://versioneye.com/ruby/#{vname}">Outdated dependencies</a>} if versioneye(vname)
     warnings
   end
 

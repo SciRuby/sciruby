@@ -57,7 +57,7 @@ daru:
   version: "~> 0.0"
 darwinning:
   category: optimization
-  description: Generic algorithms
+  description: Genetic algorithms
   module: Darwinning
   version: "~> 0.0"
 decisiontree:
@@ -78,7 +78,7 @@ extendmatrix:
   version: "~> 0.4"
 gga4r:
   category: optimization
-  description: Generic algorithms
+  description: Genetic algorithms
   module: GeneticAlgorithm
   version: "~> 0.9"
 gimuby:

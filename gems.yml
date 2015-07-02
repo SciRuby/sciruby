@@ -354,9 +354,9 @@ statsample-bivariate-extension:
 statsample-glm:
   category: statistics
   description: Statistics
-  exclude: Outdated dependencies
   module: Statsample::GLM
   owner: sciruby
+  version: "~> 2.0"
 statsample-optimization:
   category: statistics
   description: Statsample extension (Autoloaded)

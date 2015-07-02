@@ -248,10 +248,10 @@ publisci:
 rb-gsl:
   category: numerics
   description: Bindings for the GNU scientific library
-  exclude: Requires narray
   module: GSL
   owner: sciruby
   require: gsl
+  version: "~> 1.16.0"
 rb-libsvm:
   category: ai
   description: Support vector machines (machine learning)

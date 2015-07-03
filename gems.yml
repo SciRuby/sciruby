@@ -245,12 +245,11 @@ publisci:
   description: Publishing toolkit
   module: PubliSci
   version: "~> 0.1"
-rb-gsl:
+gsl:
   category: numerics
   description: Bindings for the GNU scientific library
   module: GSL
   owner: sciruby
-  require: gsl
   version: "~> 1.16.0"
 rb-libsvm:
   category: ai

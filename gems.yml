@@ -101,6 +101,12 @@ gruff:
   description: Plotting library
   module: Gruff
   version: "~> 0.6"
+gsl:
+  category: numerics
+  description: Bindings for the GNU scientific library
+  module: GSL
+  owner: sciruby
+  version: "~> 1.16.0"
 histogram:
   category: statistics
   description: Histogram method
@@ -245,12 +251,6 @@ publisci:
   description: Publishing toolkit
   module: PubliSci
   version: "~> 0.1"
-gsl:
-  category: numerics
-  description: Bindings for the GNU scientific library
-  module: GSL
-  owner: sciruby
-  version: "~> 1.16.0"
 rb-libsvm:
   category: ai
   description: Support vector machines (machine learning)

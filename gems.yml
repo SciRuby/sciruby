@@ -91,6 +91,11 @@ gnuplot:
   description: Plotting library
   module: Gnuplot
   version: "~> 2.6"
+gnuplotrb:
+  category: plotting
+  description: Plotting library
+  module: GnuplotRB
+  version: "~> 0.2"
 gphys:
   category: physics
   description: Grided physical data
@@ -107,6 +112,12 @@ gsl:
   module: GSL
   owner: sciruby
   version: "~> 1.16.0"
+hamster:
+  category: utilities
+  description: Efficient persistent data structures
+  module:
+  - Hamster
+  version: "~> 1.0"
 histogram:
   category: statistics
   description: Histogram method

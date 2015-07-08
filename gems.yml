@@ -366,7 +366,7 @@ statsample-glm:
   description: Statistics
   module: Statsample::GLM
   owner: sciruby
-  version: "~> 0.2.0"
+  version: "~> 0.2"
 statsample-optimization:
   category: statistics
   description: Statsample extension (Autoloaded)

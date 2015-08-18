@@ -184,6 +184,11 @@ minimization:
   module: Minimization
   owner: sciruby
   version: "~> 0.2"
+mixed_models:
+  category: statistics
+  description: Fit statistical models
+  module: MixedModels
+  version: "~> 0.1"
 modshogun:
   category: ai
   description: Machine learning

@@ -384,7 +384,7 @@ statsample-sem:
 statsample-timeseries:
   category: statistics
   description: Statistics
-  module: Statsample::Timeseries
+  module: Statsample::TimeSeries
   version: "~> 0.3"
 stuff-classifier:
   category: ai

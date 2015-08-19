@@ -365,7 +365,7 @@ statsample:
 statsample-bivariate-extension:
   category: statistics
   description: Statsample extension (Autoloaded)
-  exclude: Outdated gem
+  version: "~> 1.2"
 statsample-glm:
   category: statistics
   description: Statistics

@@ -384,8 +384,8 @@ statsample-sem:
 statsample-timeseries:
   category: statistics
   description: Statistics
-  exclude: activesupport version conflict
   module: Statsample::Timeseries
+  version: "~> 0.3"
 stuff-classifier:
   category: ai
   description: Machine learning

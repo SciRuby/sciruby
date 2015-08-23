@@ -396,6 +396,11 @@ symbolic:
   description: Symbolic math
   exclude: Outdated gem
   module: Symbolic
+symengine:
+  category: algebra
+  description: Symbolic math
+  module: SymEngine
+  version: "~> 0.0"
 tioga:
   category: plotting
   description: Scientific plots with PDF and TeX

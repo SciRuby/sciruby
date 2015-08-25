@@ -135,9 +135,9 @@ module Helper
   end
 
   def github_name(gem)
-    return $1 if gem[:spec].homepage =~ %r{github.com/([^/]+/[^/]+?)(\.git)?}
+    return $1.sub(/\.git$/, '') if gem[:spec].homepage =~ %r{github.com/([^/]+/[^/]+)}
     JSON.parse(Net::HTTP.get(URI("https://rubygems.org/api/v1/gems/#{gem[:name]}.json"))).each do |k,v|
-      return $1 if k =~ /_uri/ && v =~ %r{github.com/([^/]+/[^/]+?)(\.git)?}
+      return $1.sub(/\.git$/, '') if k =~ /_uri/ && v =~ %r{github.com/([^/]+/[^/]+)}
     end
     nil
   end

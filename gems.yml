@@ -365,7 +365,7 @@ statsample:
 statsample-bivariate-extension:
   category: statistics
   description: Statsample extension (Autoloaded)
-  exclude: Outdated gem
+  version: "~> 1.2"
 statsample-glm:
   category: statistics
   description: Statistics
@@ -384,8 +384,8 @@ statsample-sem:
 statsample-timeseries:
   category: statistics
   description: Statistics
-  exclude: activesupport version conflict
-  module: Statsample::Timeseries
+  module: Statsample::TimeSeries
+  version: "~> 0.3"
 stuff-classifier:
   category: ai
   description: Machine learning
@@ -396,6 +396,11 @@ symbolic:
   description: Symbolic math
   exclude: Outdated gem
   module: Symbolic
+symengine:
+  category: algebra
+  description: Symbolic math
+  exclude: Gem is broken
+  module: SymEngine
 tioga:
   category: plotting
   description: Scientific plots with PDF and TeX

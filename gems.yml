@@ -265,8 +265,8 @@ pry:
 publisci:
   category: publishing
   description: Publishing toolkit
-  module: PubliSci
   exclude: Installation fails
+  module: PubliSci
 rb-libsvm:
   category: ai
   description: Support vector machines (machine learning)

@@ -266,7 +266,7 @@ publisci:
   category: publishing
   description: Publishing toolkit
   module: PubliSci
-  version: "~> 0.1"
+  exclude: Installation fails
 rb-libsvm:
   category: ai
   description: Support vector machines (machine learning)

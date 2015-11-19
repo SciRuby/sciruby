@@ -36,11 +36,11 @@ cassowary:
   description: Incremental constraint solver
   exclude: Native dependencies
   module: Cassowary
-classifier:
+classifier-reborn:
   category: ai
   description: Machine learning
-  module: Classifier
-  version: "~> 1.3"
+  module: ClassifierReborn
+  version: "~> 2.0"
 cmath:
   category: algebra
   description: Stdlib cmath module

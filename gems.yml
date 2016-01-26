@@ -399,8 +399,8 @@ symbolic:
 symengine:
   category: algebra
   description: Symbolic math
-  exclude: Gem is broken
   module: SymEngine
+  version: '~> 0.0'
 tioga:
   category: plotting
   description: Scientific plots with PDF and TeX

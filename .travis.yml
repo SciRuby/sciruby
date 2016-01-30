@@ -10,9 +10,11 @@ matrix:
     - rvm: ruby-head
 
 before_install:
+  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
   - sudo apt-get update -qq
-  - sudo apt-get install -qq gnuplot-nox libgsl0-dev libsqlite3-dev libatlas-base-dev libmagickcore-dev
+  - sudo apt-get install -qq gnuplot-nox libgsl0-dev libsqlite3-dev libatlas-base-dev libmagickcore-dev cmake libgmp-dev g++-4.7
   - sudo ln -s /usr/lib/libtoolize /usr/lib/libtool
+  - source scripts/install_symengine.sh
 
 env:
   global:

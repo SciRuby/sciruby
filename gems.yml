@@ -207,7 +207,7 @@ nmatrix:
   - NMatrix
   - NVector
   owner: sciruby
-  version: "~> 0.1"
+  version: "~> 0.2"
 nyaplot:
   category: plotting
   description: Plotting library

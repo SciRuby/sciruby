@@ -111,13 +111,13 @@ gsl:
   description: Bindings for the GNU scientific library
   module: GSL
   owner: sciruby
-  version: "~> 1.16.0"
+  version: "~> 2.1"
 hamster:
   category: utilities
   description: Efficient persistent data structures
   module:
   - Hamster
-  version: "~> 1.0"
+  version: "~> 3.0"
 histogram:
   category: statistics
   description: Histogram method
@@ -145,7 +145,7 @@ liblinear-ruby:
   description: Linear classifier
   module: Liblinear
   require: liblinear
-  version: "~> 0.0"
+  version: "~> 1.0"
 lpsolve:
   category: optimization
   description: Linear solver

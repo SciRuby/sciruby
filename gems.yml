@@ -228,7 +228,7 @@ omoikane:
   category: ai
   description: Machine learning
   module: Omoikane
-  version: "~> 0.0"
+  exclude: Outdated nmatrix dependency
 parallel:
   category: utilties
   description: Parallel processing

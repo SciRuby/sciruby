@@ -187,8 +187,8 @@ minimization:
 mixed_models:
   category: statistics
   description: Fit statistical models
-  module: MixedModels
   exclude: Bad version constraints on daru
+  module: MixedModels
 modshogun:
   category: ai
   description: Machine learning
@@ -227,8 +227,8 @@ ode:
 omoikane:
   category: ai
   description: Machine learning
-  module: Omoikane
   exclude: Outdated nmatrix dependency
+  module: Omoikane
 parallel:
   category: utilties
   description: Parallel processing

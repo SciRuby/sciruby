@@ -15,13 +15,13 @@ Gem::Specification.new do |s|
     s.files = %w(CHANGES CONTRIBUTING.md README.md LICENSE sciruby-full.gemspec)
 
     s.add_runtime_dependency 'sciruby', "= #{SciRuby::VERSION}"
-    Helper.sciruby_gems(true).each {|gem| s.add_runtime_dependency gem[:name], *gem[:version] }
+    Helper.installed_gems.each {|gem| s.add_runtime_dependency gem[:name], *gem[:version] }
   else
     s.files = `git ls-files`.split($/)
     s.files.delete 'sciruby-full.gemspec'
 
     m = "Please consider installing 'sciruby-full' or the following gems:\n"
-    Helper.sciruby_gems(false).each {|gem| m << "  * #{gem[:name]} - #{gem[:description]}\n" }
+    Helper.all_gems.each {|gem| m << "  * #{gem[:name]} - #{gem[:description]}\n" }
     s.post_install_message = m << "\n"
   end
 end

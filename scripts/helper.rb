@@ -146,8 +146,20 @@ module Helper
     Net::HTTP.get(URI("https://www.versioneye.com/ruby/#{name}/badge")) =~ /out of date/
   end
 
-  def sciruby_gems(exclude)
-    SciRuby.gems.each_value.sort_by {|gem| gem[:name] }.reject do |gem|
+  def installable_gems
+    filter_gems(SciRuby.gems, true)
+  end
+
+  def installed_gems
+    filter_gems(SciRuby.installed_gems, true)
+  end
+
+  def all_gems
+    filter_gems(SciRuby.gems, false)
+  end
+
+  def filter_gems(gems, exclude)
+    gems.each_value.sort_by {|gem| gem[:name] }.reject do |gem|
       gem[:owner] == 'stdlib' || %w(sciruby sciruby-full).include?(gem[:name])
     end.reject {|gem| gem[:exclude] && exclude }
   end

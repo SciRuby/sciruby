@@ -188,7 +188,7 @@ mixed_models:
   category: statistics
   description: Fit statistical models
   module: MixedModels
-  version: "~> 0.1"
+  exclude: Bad version constraints on daru
 modshogun:
   category: ai
   description: Machine learning

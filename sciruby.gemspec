@@ -9,13 +9,13 @@ Gem::Specification.new do |s|
   s.license     = 'BSD'
   s.homepage    = 'http://sciruby.com'
   s.summary     =
-  s.description = "Scientific gems for Ruby#{__FILE__ =~ /full/ ? ' (Full installation)' : ''}"
+  s.description = "Scientific gems for Ruby. #{__FILE__ =~ /full/ ? 'This is the full installation with rigid version constraints.' : 'See the sciruby-full gem for a full installation of many compatible scientific gems.'}"
 
   if __FILE__ =~ /full/
     s.files = %w(CHANGES CONTRIBUTING.md README.md LICENSE sciruby-full.gemspec)
 
     s.add_runtime_dependency 'sciruby', "= #{SciRuby::VERSION}"
-    Helper.installed_gems.each {|gem| s.add_runtime_dependency gem[:name], *gem[:version] }
+    Helper.installed_gems.each {|gem| s.add_runtime_dependency gem[:name], "= #{gem[:installed_version]}" }
   else
     s.files = `git ls-files`.split($/)
     s.files.delete 'sciruby-full.gemspec'

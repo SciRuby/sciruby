@@ -9,7 +9,7 @@ Tools for Scientific Computing in Ruby
 
 ## Description
 
-This gem acts as a meta gem which provides collects multiple [scientific gems](http://gems.sciruby.com), including numeric and visualization libraries.
+This gem acts as a meta gem which collects and provides multiple [scientific gems](http://gems.sciruby.com), including numeric and visualization libraries.
 
 ## Getting started
 

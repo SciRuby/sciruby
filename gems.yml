@@ -111,7 +111,7 @@ gsl:
   description: Bindings for the GNU scientific library
   module: GSL
   owner: sciruby
-  version: "~> 2.1"
+  version: ">= 2.1.0.3"
 hamster:
   category: utilities
   description: Efficient persistent data structures
